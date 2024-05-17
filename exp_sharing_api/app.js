@@ -6,8 +6,6 @@ const logger = require('morgan');
 const fs = require('fs');
 const dayjs = require('dayjs');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const apiRouter = require('./routes/api');
 
 // conectamos con la base de datos
@@ -34,8 +32,6 @@ app.use((req, res, next) => {
   });
 });
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
 
