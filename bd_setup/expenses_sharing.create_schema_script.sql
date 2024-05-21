@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `expenses_sharing`.`users` (
   `password` VARCHAR(20) NULL,
   `firstname` VARCHAR(45) NULL,
   `lastname` VARCHAR(65) NULL,
-  `phone` VARCHAR(12) NULL,
+  `phone` VARCHAR(20) NULL,
   `image` VARCHAR(100) NULL,
   `active` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expenses_sharing`.`group_categories` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `description` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(75) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expenses_sharing`.`groups` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `description` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(75) NOT NULL,
   `category_id` INT UNSIGNED NOT NULL,
   `creator_user_id` INT UNSIGNED NOT NULL,
   `active` TINYINT NOT NULL DEFAULT 1,
@@ -99,7 +99,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `expenses_sharing`.`expenses` (
   `id` INT UNSIGNED NOT NULL,
   `group_id` INT UNSIGNED NOT NULL,
-  `description` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(75) NOT NULL,
   `amount` DOUBLE NOT NULL,
   `date` DATETIME NOT NULL,
   `payer_user_id` INT UNSIGNED NOT NULL,
