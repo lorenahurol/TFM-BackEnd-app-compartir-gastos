@@ -97,7 +97,7 @@ ENGINE = InnoDB;
 -- Table `expenses_sharing`.`expenses`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expenses_sharing`.`expenses` (
-  `id` INT UNSIGNED NOT NULL,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `group_id` INT UNSIGNED NOT NULL,
   `description` VARCHAR(75) NOT NULL,
   `amount` DOUBLE NOT NULL,
