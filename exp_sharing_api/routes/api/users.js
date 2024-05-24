@@ -1,25 +1,24 @@
 const router = require('express').Router();
 const { getAll, getById, create, update, deleteById } = require('../../models/user.model');
 
-router.get('/', (req, res) => {
-    getAll()
-        .then((data) => {
-            res.json(data[0]);
-        })
-        .catch((err) => {
-            res.json(err);
-        });
+router.get('/', async(req, res) => {
+    try {
+        const [result] = await getAll();
+        res.json(result);
+    } catch (error) {
+        res.json(error);
+}
 });
 
 
-router.get('/:userId', (req, res) => {
-    getById(req.params.userId)
-        .then((data) => {
-            res.json(data[0]);
-        })
-        .catch((err) => {
-            res.json(err);
-        });
+router.get("/:userId", async (req, res) => {
+  try {
+    const [[result]] = await getById(req.params.userId);
+    if (!result) return res.status (404).json({error:"Selected Id does not exist"})
+    res.json(result);
+  } catch (error) {
+    res.json(error);
+  }
 });
 
 router.post('/', async (req, res) => {
