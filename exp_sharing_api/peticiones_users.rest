@@ -1,6 +1,15 @@
-GET http://localhost:3000/api/users
+@PORT = 3000
 
-###
+@HOST = http://127.0.0.1:{{PORT}}
+
+### GetAll
+GET {{HOST}}/api/users
+
+### GetById
+GET {{HOST}}/api/users/20
+
+
+### 
 
 POST http://localhost:3000/api/users
 Content-Type: application/json
