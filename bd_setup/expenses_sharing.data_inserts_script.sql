@@ -1,3 +1,6 @@
+use expenses_sharing;
+
+-- user inserts
 insert into users (id, mail, username, password, firstname, lastname, phone, image, active) values (1, 'fmiddle0@odnoklassniki.ru', 'fmiddle0', 'eG3@!7,0XeqJT', 'Francoise', 'Middle', '+351 108 294 4965', 'http://dummyimage.com/225x100.png/ff4444/ffffff', true);
 insert into users (id, mail, username, password, firstname, lastname, phone, image, active) values (2, 'ndafter1@w3.org', 'ndafter1', 'sB0\|lY\>IW5p)n', 'Noella', 'Dafter', '+55 443 143 8835', 'http://dummyimage.com/161x100.png/ff4444/ffffff', true);
 insert into users (id, mail, username, password, firstname, lastname, phone, image, active) values (3, 'chuggin2@youku.com', 'chuggin2', 'tB5,,!J=%vcW(e', 'Cinnamon', 'Huggin', '+86 763 347 1345', 'http://dummyimage.com/193x100.png/dddddd/000000', true);
@@ -98,3 +101,143 @@ insert into users (id, mail, username, password, firstname, lastname, phone, ima
 insert into users (id, mail, username, password, firstname, lastname, phone, image, active) values (98, 'rferrand2p@wordpress.com', 'rferrand2p', 'aL7`kQ{D~uE?MK)/', 'Rafi', 'Ferrand', '+48 514 714 9576', 'http://dummyimage.com/141x100.png/ff4444/ffffff', true);
 insert into users (id, mail, username, password, firstname, lastname, phone, image, active) values (99, 'eoldman2q@gnu.org', 'eoldman2q', 'fI8%l!H,\cl_a%''', 'Elinore', 'Oldman', '+51 116 330 3305', 'http://dummyimage.com/210x100.png/cc0000/ffffff', true);
 insert into users (id, mail, username, password, firstname, lastname, phone, image, active) values (100, 'cworsom2r@bing.com', 'cworsom2r', 'zB1+f">6%}9|r`K', 'Charlot', 'Worsom', '+234 708 631 7606', 'http://dummyimage.com/204x100.png/cc0000/ffffff', true);
+
+-- group_categories inserts
+insert into group_categories (id, description) values (1, 'Viaje');
+insert into group_categories (id, description) values (2, 'Restaurante');
+insert into group_categories (id, description) values (3, 'Gastos de casa');
+insert into group_categories (id, description) values (4, 'Evento');
+insert into group_categories (id, description) values (5, 'Regalo');
+insert into group_categories (id, description) values (6, 'Hijos');
+insert into group_categories (id, description) values (7, 'Animales');
+
+-- groups_app inserts
+insert into groups_app (id, description, category_id, creator_user_id, active) values (1, 'Jornadas Full Stack', 4, 1, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (2, 'Vacaciones Menorca', 1, 1, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (3, 'Cena en el Daria', 2, 1, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (4, 'Regalo Jubilacion Pepe', 5, 2, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (5, 'Auri y Hielo', 7, 4, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (6, 'Gastos Piso Uni', 3, 5, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (7, 'Comida La Solana', 2, 5, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (8, 'Colegio y extraescolares', 6, 9, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (9, 'Viaje NY', 1, 3, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (10, 'Navidades 2023', 5, 10, true);
+insert into groups_app (id, description, category_id, creator_user_id, active) values (11, 'III Global Game Jam Nakama', 4, 11, true);
+
+-- group_members inserts
+insert into group_members (group_id, user_id, percent, equitable) values (1, 49, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (1, 60, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (1, 56, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (1, 71, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (2, 59, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (2, 49, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (2, 95, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (3, 95, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (3, 23, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (3, 51, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (3, 12, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (3, 77, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 31, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 80, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 77, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 52, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 23, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 22, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 38, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (5, 10, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (6, 86, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (6, 23, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (6, 55, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (6, 9, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 73, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 78, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 37, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 71, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 20, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 99, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 31, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 77, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (8, 17, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (9, 82, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (9, 79, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (9, 1, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (9, 99, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (10, 3, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (10, 41, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (10, 96, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (10, 72, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 2, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 69, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 95, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 39, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 32, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 84, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 28, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 31, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 8, 0, true);
+-- Inserto los admin de los grupos
+insert into group_members (group_id, user_id, percent, equitable) values (1, 1, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (2, 1, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (3, 1, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (4, 2, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (5, 4, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (6, 5, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (7, 5, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (8, 9, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (9, 3, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (10, 10, 0, true);
+insert into group_members (group_id, user_id, percent, equitable) values (11, 11, 0, true);
+
+
+-- expenses inserts
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (1, 1, 'felis donec semper sapien a libero nam', 75.33, '2023-11-13 11:35:31', 49, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (2, 1, 'neque sapien placerat ante nulla justo aliquam quis turpis', 254.86, '2024-05-02 12:45:21', 60, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (3, 1, 'diam id ornare imperdiet sapien', 972.58, '2023-11-09 05:03:07', 56, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (4, 1, 'suspendisse potenti nullam porttitor lacus', 352.02, '2023-12-28 20:32:06', 71, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (5, 1, 'faucibus orci luctus et ultrices posuere cubilia curae duis', 480.47, '2024-02-18 10:48:12', 1, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (6, 2, 'ullamcorper augue a suscipit nulla elit ac', 393.35, '2024-02-03 10:02:45', 49, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (7, 2, 'in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit', 105.19, '2024-02-13 22:41:56', 59, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (8, 2, 'ipsum primis in faucibus orci luctus et ultrices posuere cubilia', 843.92, '2024-03-09 11:52:44', 95, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (9, 2, 'odio donec vitae nisi nam ultrices libero non', 854.36, '2023-11-19 07:54:38', 59, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (10, 3, 'libero non mattis pulvinar nulla pede ullamcorper', 50.73, '2023-05-23 07:38:08', 77, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (11, 3, 'ipsum ac tellus semper interdum mauris ullamcorper purus', 555.83, '2023-06-26 10:42:41', 23, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (12, 3, 'ut blandit non interdum in ante vestibulum', 591.0, '2024-02-03 15:20:33', 12, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (13, 3, 'sapien quis libero nullam sit amet turpis elementum', 526.4, '2024-01-13 13:22:05', 12, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (14, 3, 'non lectus aliquam sit amet', 488.57, '2024-01-07 22:51:30', 23, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (15, 4, 'feugiat non pretium quis lectus suspendisse potenti in eleifend quam', 476.66, '2023-06-23 16:53:39', 80, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (16, 4, 'velit eu est congue elementum in hac habitasse platea', 944.85, '2024-01-02 20:20:40', 22, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (17, 5, 'bibendum imperdiet nullam orci pede venenatis non sodales', 866.15, '2023-10-19 21:00:18', 10, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (18, 5, 'dui nec nisi volutpat eleifend donec ut dolor', 807.92, '2023-05-30 12:13:13', 4, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (19, 5, 'in faucibus orci', 390.74, '2024-03-14 17:27:45', 10, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (20, 5, 'volutpat in congue etiam justo etiam pretium iaculis justo', 195.94, '2024-01-19 23:05:03', 4, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (21, 6, 'eros elementum pellentesque', 367.24, '2024-04-29 02:17:58', 86, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (22, 6, 'mauris lacinia sapien quis libero', 949.88, '2023-09-14 06:34:02', 5, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (23, 6, 'consectetuer adipiscing elit proin risus praesent lectus vestibulum', 354.16, '2023-12-04 15:57:47', 55, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (24, 6, 'eros vestibulum ac est lacinia nisi venenatis tristique fusce', 779.68, '2023-11-06 13:21:21', 23, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (25, 6, 'donec vitae nisi nam', 664.38, '2023-08-15 17:28:52', 9, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (26, 6, 'quis turpis eget elit sodales scelerisque mauris sit amet', 96.9, '2023-12-19 08:32:23', 86, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (27, 6, 'turpis a pede posuere nonummy integer non velit', 395.59, '2024-03-31 03:22:57', 55, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (28, 7, 'libero nam dui proin leo odio porttitor id', 514.82, '2024-03-01 13:18:17', 5, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (29, 7, 'sociis natoque penatibus et', 283.6, '2023-05-28 22:14:14', 99, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (30, 7, 'non velit donec diam', 412.39, '2023-08-09 03:40:49', 77, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (31, 7, 'congue diam id ornare imperdiet sapien urna pretium nisl ut', 496.51, '2024-01-13 04:24:01', 99, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (32, 7, 'molestie hendrerit at vulputate vitae nisl aenean lectus', 410.34, '2023-12-06 07:27:31', 37, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (33, 7, 'neque libero convallis eget eleifend luctus ultricies eu', 746.81, '2024-01-25 14:31:00', 71, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (34, 7, 'sed lacus morbi sem mauris laoreet ut', 895.01, '2023-11-10 06:18:01', 20, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (35, 7, 'volutpat in congue etiam justo etiam pretium iaculis justo', 230.16, '2024-04-02 22:16:41', 99, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (36, 8, 'enim blandit mi in porttitor pede justo eu massa donec', 998.34, '2023-10-06 18:55:17', 17, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (37, 8, 'nunc donec quis orci eget orci vehicula', 878.83, '2023-06-29 10:36:30', 9, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (38, 9, 'ipsum primis in faucibus orci', 179.87, '2024-02-02 12:26:40', 82, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (39, 9, 'pede lobortis ligula sit', 373.59, '2023-08-14 16:31:29', 79, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (40, 9, 'etiam pretium iaculis justo', 452.55, '2023-12-02 20:17:16', 1, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (41, 9, 'odio cras mi pede malesuada in imperdiet et', 363.26, '2023-12-11 05:47:31', 99, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (42, 9, 'felis sed interdum venenatis turpis enim blandit mi in', 489.95, '2024-04-15 15:21:33', 79, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (43, 9, 'dui luctus rutrum nulla tellus in sagittis', 82.0, '2024-05-16 15:32:01', 1, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (44, 9, 'ornare consequat lectus in est risus', 72.24, '2023-12-12 08:19:12', 3, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (45, 10, 'posuere nonummy integer non velit donec diam', 920.82, '2023-09-11 14:36:12', 10, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (46, 10, 'nunc donec quis orci eget orci vehicula', 685.01, '2024-03-23 15:49:51', 10, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (47, 11, 'id nisl venenatis lacinia', 726.75, '2024-02-15 10:49:58', 2, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (48, 11, 'id nisl venenatis lacinia aenean sit', 514.94, '2023-07-18 08:56:50', 95, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (49, 11, 'quam fringilla rhoncus mauris', 705.79, '2023-11-25 16:54:46', 84, true);
+insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (50, 11, 'eu nibh quisque id justo sit amet', 650.89, '2023-12-21 17:07:31', 31, true);
+

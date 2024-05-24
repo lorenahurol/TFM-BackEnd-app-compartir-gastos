@@ -43,9 +43,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `expenses_sharing`.`groups`
+-- Table `expenses_sharing`.`groups_app`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `expenses_sharing`.`groups` (
+CREATE TABLE IF NOT EXISTS `expenses_sharing`.`groups_app` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(75) NOT NULL,
   `category_id` INT UNSIGNED NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `expenses_sharing`.`invitations` (
   INDEX `fk_invitations_users_idx` (`user_id` ASC) INVISIBLE,
   CONSTRAINT `fk_invitations_groups`
     FOREIGN KEY (`group_id`)
-    REFERENCES `expenses_sharing`.`groups` (`id`)
+    REFERENCES `expenses_sharing`.`groups_app` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_invitations_users`
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `expenses_sharing`.`expenses` (
   INDEX `fk_expenses_users_idx` (`payer_user_id` ASC) INVISIBLE,
   CONSTRAINT `fk_expenses_groups`
     FOREIGN KEY (`group_id`)
-    REFERENCES `expenses_sharing`.`groups` (`id`)
+    REFERENCES `expenses_sharing`.`groups_app` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_expenses_users`
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `expenses_sharing`.`group_members` (
   INDEX `fk_group_members_groups_idx` (`group_id` ASC) INVISIBLE,
   CONSTRAINT `fk_group_members_users`
     FOREIGN KEY (`group_id`)
-    REFERENCES `expenses_sharing`.`groups` (`id`)
+    REFERENCES `expenses_sharing`.`groups_app` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_group_members_groups`
