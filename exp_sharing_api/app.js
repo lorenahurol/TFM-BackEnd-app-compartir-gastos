@@ -4,6 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 const fs = require('fs');
 const dayjs = require('dayjs');
+const cors = require('cors');
 
 const apiRouter = require('./routes/api');
 
@@ -22,11 +23,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware de CORS
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 
 // Middleware de registro de peticiones
 app.use((req, res, next) => {
