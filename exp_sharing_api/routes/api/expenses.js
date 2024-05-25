@@ -45,7 +45,9 @@ router.get('/bygroup/byuser/actives/:groupId/:userId', (req, res) => {
 router.get('/:id', (req, res) => {
     getById(req.params.id)
         .then((data) => {
-            res.json(data[0]);
+            const [expense] = data[0];
+            expense.date = new Date(expense.date).toISOString().split('T')[0];
+            res.json(expense);
         })
         .catch((err) => {
             res.json(err);
