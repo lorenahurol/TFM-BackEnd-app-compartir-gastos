@@ -1,6 +1,10 @@
 GET http://localhost:3000/api/users
 
 ###
+## Obtiene todos los usuarios activos de un grupo
+GET http://localhost:3000/api/users/bygroup/11
+
+###
 
 POST http://localhost:3000/api/users
 Content-Type: application/json

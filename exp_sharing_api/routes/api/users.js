@@ -1,8 +1,19 @@
 const router = require('express').Router();
-const { getAll, getById, create, update, deleteById } = require('../../models/user.model');
+const { getAll, getAllbyGroup, getById, create, update, deleteById } = require('../../models/user.model');
 
 router.get('/', (req, res) => {
     getAll()
+        .then((data) => {
+            res.json(data[0]);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+});
+
+
+router.get('/bygroup/:groupId', (req, res) => {
+    getAllbyGroup(req.params.groupId)
         .then((data) => {
             res.json(data[0]);
         })
