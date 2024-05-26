@@ -2,6 +2,8 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE4MDMwMzQxMTAsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3MTY5MTB9.fx34HwIQ1d8OskDcgf5i289faz9okLq6hzbDC02bHaA
+
 ### Login
 POST {{HOST}}/api/users/login
 Content-Type: application/json

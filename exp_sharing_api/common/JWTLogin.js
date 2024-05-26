@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const createToken = (user) => {
   const payload = {
-    exp: dayjs().add(process.env.TOKEN_EXPIR, 'day'),
+    exp: dayjs().add(process.env.TOKEN_EXPIR, 'day').unix(),
     id: user.id,
     username: user.username,
     name: user.firstname
