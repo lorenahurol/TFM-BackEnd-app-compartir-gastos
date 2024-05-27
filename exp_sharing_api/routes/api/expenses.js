@@ -1,9 +1,11 @@
 const router = require('express').Router();
-const { getAll, getAllOfGroup, getAllOfGroupActives, getAllOfUserofGroupActives,
-    create, update, deleteById} = require('../../models/expense.model');
+const { getById, getAll, getAllOfGroup, getAllOfGroupActives, getAllOfUserofGroupActives,
+    create, update, deleteById, getAllPaymentOfGroup} = require('../../models/expense.model');
 
+// Operaciones por grupo --------------------------------------------------------------------
 
-router.get('/all/:groupId', (req, res) => {
+//Obtener todos los gastos por grupo
+router.get('/bygroup/all/:groupId', (req, res) => {
     getAllOfGroup(req.params.groupId)
         .then((data) => {
             res.json(data[0]);
@@ -13,7 +15,8 @@ router.get('/all/:groupId', (req, res) => {
         });
 });
 
-router.get('/:groupId', (req, res) => {
+//Obtener todos los gastos Activos por grupo
+router.get('/bygroup/actives/:groupId', (req, res) => {
     getAllOfGroupActives(req.params.groupId)
         .then((data) => {
             res.json(data[0]);
@@ -23,8 +26,8 @@ router.get('/:groupId', (req, res) => {
         });
 });
 
-
-router.get('/:groupId/:userId', (req, res) => {
+//Obtener todos los gastos Activos por grupo y por usuario
+router.get('/bygroup/byuser/actives/:groupId/:userId', (req, res) => {
     getAllOfUserofGroupActives(req.params.groupId, req.params.userId)
         .then((data) => {
             res.json(data[0]);
@@ -34,7 +37,24 @@ router.get('/:groupId/:userId', (req, res) => {
         });
 });
 
+// ------------------------------------------------------------------------------------------
 
+// Obtener, crear, editar y borrar gasto individual -----------------------------------------
+
+// Consultar por id
+router.get('/:id', (req, res) => {
+    getById(req.params.id)
+        .then((data) => {
+            const [expense] = data[0];
+            expense.date = new Date(expense.date).toISOString().split('T')[0];
+            res.json(expense);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+});
+
+// Creacion nuevo gasto
 router.post('/', async (req, res) => {
     try {
         const [result] = await create(req.body);
@@ -44,7 +64,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-
+// edicion por id
 router.put('/:id', async (req, res) => {
     try {
         const [result] = await update(req.params.id, req.body);
@@ -54,7 +74,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-
+// delete por id
 router.delete('/:id', async (req, res) => {
     try {
         const [result] = await deleteById(req.params.id);
@@ -63,6 +83,19 @@ router.delete('/:id', async (req, res) => {
         res.json(err);
     }
 });
+//--------------------------------------------------------------------------------------
 
+// Pagos -------------------------------------------------------------------------------
+router.get('/payments/:groupId', (req, res) => {
+    getAllPaymentOfGroup(req.params.groupId)
+        .then((data) => {
+            res.json(data[0]);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+});
+
+// --------------------------------------------------------------------------------------
 
 module.exports = router;

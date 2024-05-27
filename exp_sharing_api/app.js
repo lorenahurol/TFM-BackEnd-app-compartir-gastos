@@ -1,10 +1,10 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fs = require('fs');
 const dayjs = require('dayjs');
+const cors = require('cors');
 
 const apiRouter = require('./routes/api');
 
@@ -20,8 +20,13 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware de CORS
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 
 // Middleware de registro de peticiones
 app.use((req, res, next) => {

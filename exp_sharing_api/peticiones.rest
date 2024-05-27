@@ -1,6 +1,10 @@
 GET http://localhost:3000/api/users
 
 ###
+## Obtiene todos los usuarios activos de un grupo
+GET http://localhost:3000/api/users/bygroup/11
+
+###
 
 POST http://localhost:3000/api/users
 Content-Type: application/json
@@ -41,17 +45,21 @@ DELETE http://localhost:3000/api/users/4
 
 ## Buscar todos los gastos de un usuario en un grupo ordenados por fecha y que esten activos
 ## param1:idGroup, param2: idUser
-GET http://localhost:3000/api/expenses/11/2
+GET http://localhost:3000/api/expenses/bygroup/byuser/actives/11/2
 
 ###
 ## Buscar todos los gastos Activos de un grupo
 ## param1: idGroup
-GET http://localhost:3000/api/expenses/11
+GET http://localhost:3000/api/expenses/bygroup/actives/11
 
 ###
 ## Buscar todos los gastos Activos y no activos de un grupo
 ## param1: idGroup
-GET http://localhost:3000/api/expenses/all/11
+GET http://localhost:3000/api/expenses/bygroup/all/11
+
+###
+## Buscar gasto por id
+GET http://localhost:3000/api/expenses/3
 
 ###
 ## Crear gasto asociado a un grupo y un pagador
@@ -62,7 +70,7 @@ Content-Type: application/json
     "group_id": "11",
     "description": "Gasto de prueba",
     "amount": "13.33",
-    "date": "2033-12-31 11:11:11",
+    "date": "2033-12-31",
     "payer_user_id": "2",
     "active": "1"
 }
@@ -74,9 +82,9 @@ Content-Type: application/json
 
 {
     "group_id": "11",
-    "description": "Gasto de prueba MODIFICADO",
+    "description": "Gasto de prueba MODIFICADO nuevamente",
     "amount": "13.33",
-    "date": "2033-12-31 11:11:11",
+    "date": "2033-12-31",
     "payer_user_id": "2",
     "active": "1"
 }
@@ -87,3 +95,9 @@ Content-Type: application/json
 ###
 ## Eliminar un gasto
 DELETE  http://localhost:3000/api/expenses/52
+
+
+
+### Pagos: en progreso
+###
+GET http://localhost:3000/api/expenses/payments/1
