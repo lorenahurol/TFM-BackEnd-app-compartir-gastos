@@ -8,6 +8,7 @@
 
 ### Expenses ##################################################################################################
 
+<<<<<<< HEAD
 ## Buscar todos los gastos de un usuario en un grupo ordenados por fecha y que esten activos
 ## param1:idGroup, param2: idUser
 GET {{HOST}}/api/expenses/11/2
@@ -23,6 +24,13 @@ Authorization : {{TOKEN}}
 ## Buscar todos los gastos Activos y no activos de un grupo
 ## param1: idGroup
 GET {{HOST}}/api/expenses/all/11
+=======
+
+###
+## Buscar expense por id
+## param1: idexpense
+GET {{HOST}}/api/expenses/54
+>>>>>>> update_expenses_backend
 Authorization : {{TOKEN}}
 
 ###
@@ -42,7 +50,11 @@ Content-Type: application/json
 
 ###
 ## Editar un gasto
+<<<<<<< HEAD
 PUT {{HOST}}/api/expenses/52
+=======
+PUT {{HOST}}/api/expenses/53
+>>>>>>> update_expenses_backend
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
@@ -60,5 +72,30 @@ Content-Type: application/json
 
 ###
 ## Eliminar un gasto
+<<<<<<< HEAD
 DELETE  {{HOST}}/api/expenses/52
 Authorization : {{TOKEN}}
+=======
+DELETE  {{HOST}}/api/expenses/53
+Authorization : {{TOKEN}}
+
+
+### Peticiones relacionadas por grupos
+
+## Buscar todos los gastos de un usuario en un grupo ordenados por fecha y que esten activos
+## param1:idGroup, param2: idUser
+GET {{HOST}}/api/expenses/bygroup/byuser/actives/11/2
+Authorization : {{TOKEN}}
+
+###
+## Buscar todos los gastos Activos de un grupo
+## param1: idGroup
+GET {{HOST}}/api/expenses/bygroup/actives/11
+Authorization : {{TOKEN}}
+
+###
+## Buscar todos los gastos Activos y no activos de un grupo
+## param1: idGroup
+GET {{HOST}}/api/expenses/bygroup/all/11
+Authorization : {{TOKEN}}
+>>>>>>> update_expenses_backend
