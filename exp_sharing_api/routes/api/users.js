@@ -70,29 +70,35 @@ router.get("/:userId", async (req, res) => {
 });
 
 
-/**
- * POST /
- * 
- * Endpoint to create a new user.
- * Encrypts the user's password, saves the user in the database, and returns the created user.
- * 
- * @param {string} req.body.password - User's password to be encrypted.
- * @returns {Promise<void>} - Returns a JSON response with the new user or an error in case of failure.
- * 
- * @async
- */
-router.post('/', async (req, res) => {
-    // Password encryption
-    req.body.password = bcrypt.hashSync(req.body.password)
-    try {
-        const [result] = await create(req.body);
-        const newUserId = result.insertId
-        const [[newUser]] = await getById  (newUserId)
-        res.json(newUser);
-    } catch (err) { 
-        res.json(err);
-    }
-});
+// /**
+//  * POST /
+//  * 
+//  * Endpoint to create a new user.
+//  * Encrypts the user's password, saves the user in the database, and returns the created user.
+//  * 
+//  * @param {string} req.body.password - User's password to be encrypted.
+//  * @returns {Promise<void>} - Returns a JSON response with the new user or an error in case of failure.
+//  * 
+//  * @async
+//  */
+// router.post('/', async (req, res) => {
+//     // Password encryption
+//     req.body.password = bcrypt.hashSync(req.body.password)
+//     try {
+//       const [result] = await create(req.body);
+//       const newUserId = result.insertId
+//       const [[newUser]] = await getById(newUserId)
+
+//       let rememberMe = false
+//       res.json({
+//         success: "Registration successfull",
+//         token: createToken(newUser, rememberMe),
+//       });
+
+//     } catch (err) { 
+//         res.json(err);
+//     }
+// });
 
 router.put('/:id', async (req, res) => {
     try {
