@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs')
 
 const { getAll, getAllbyGroup, getById, create, update, deleteById, getByMail } = require('../../models/user.model');
 
