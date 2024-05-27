@@ -1,4 +1,6 @@
 
+@PORT = 3000
+
 @HOST = http://127.0.0.1:{{PORT}}
 
 @TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
@@ -22,7 +24,7 @@ GET {{HOST}}/api/users/20
 Authorization : {{TOKEN}}
 
 ### 
-POST {{HOST}}/api/users
+POST {{HOST}}/api/register
 Content-Type: application/json
 
 //mail, username, password, firstname, lastname, phone, image
