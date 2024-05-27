@@ -1,32 +1,32 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs')
 
-const {createToken} = require ('../../common/JWTLogin')
+// const {createToken} = require ('../../common/JWTLogin')
 
 const { getAll, getById, create, update, deleteById, getByMail } = require('../../models/user.model');
 
-router.post('/login', async (req, res) => {
-    try {
-        const { mail, password } = req.body
-        if (!mail || !password) throw new Error ()
+// router.post('/login', async (req, res) => {
+//     try {
+//         const { mail, password } = req.body
+//         if (!mail || !password) throw new Error ()
         
-        // Checks if selected mail exists
-        const [[user]] = await getByMail(mail)
-        if (!user) throw new Error();
+//         // Checks if selected mail exists
+//         const [[user]] = await getByMail(mail)
+//         if (!user) throw new Error();
 
-        // Checks if the password is correct
-        const validPassword = bcrypt.compareSync(password, user.password);
-        if (!validPassword) throw new Error();
-        const token = 
-        res.json({
-            success: "Login successfull",
-            token: createToken(user)
-        });
+//         // Checks if the password is correct
+//         const validPassword = bcrypt.compareSync(password, user.password);
+//         if (!validPassword) throw new Error();
+//         const token = 
+//         res.json({
+//             success: "Login successfull",
+//             token: createToken(user)
+//         });
 
-    } catch (error) {
-        res.status(401).json({ error: "Incorrect email, or password" });
-    }; 
-})
+//     } catch (error) {
+//         res.status(401).json({ error: "Incorrect email, or password" });
+//     }; 
+// })
 
 /**
  * GET /
