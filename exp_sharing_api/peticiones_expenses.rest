@@ -5,58 +5,60 @@
 
 @TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
 
-### Login
-POST {{HOST}}/api/login
+
+### Expenses ##################################################################################################
+
+## Buscar todos los gastos de un usuario en un grupo ordenados por fecha y que esten activos
+## param1:idGroup, param2: idUser
+GET {{HOST}}/api/expenses/11/2
+Authorization : {{TOKEN}}
+
+###
+## Buscar todos los gastos Activos de un grupo
+## param1: idGroup
+GET {{HOST}}/api/expenses/11
+Authorization : {{TOKEN}}
+
+###
+## Buscar todos los gastos Activos y no activos de un grupo
+## param1: idGroup
+GET {{HOST}}/api/expenses/all/11
+Authorization : {{TOKEN}}
+
+###
+## Crear gasto asociado a un grupo y un pagador
+POST {{HOST}}/api/expenses/
+Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "mail": "miguelon_1547@pigeonmail.com",
-    "password" : "123456",
-    "rememberMe" : true
-}
-
-### GetAll
-GET {{HOST}}/api/users
-Authorization : {{TOKEN}}
-
-### GetById
-GET {{HOST}}/api/users/20
-Authorization : {{TOKEN}}
-
-### Create (register)
-POST {{HOST}}/api/register
-Content-Type: application/json
-
-//mail, username, password, firstname, lastname, phone, image
-{
-    "mail": "miguelon_1547@pigeonmail.com",
-    "username": "mik_cervantes",
-    "password": "123456",
-    "firstname": "Miguel",
-    "lastname": "De Cervantes Saavedra",
-    "phone": "123456789",
-    "image": ""
+    "group_id": "11",
+    "description": "Gasto de prueba",
+    "amount": "13.33",
+    "date": "2033-12-31 11:11:11",
+    "payer_user_id": "2",
+    "active": "1"
 }
 
 ###
-
-PUT {{HOST}}/api/users/4
+## Editar un gasto
+PUT {{HOST}}/api/expenses/52
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
-//mail, username, password, firstname, lastname, phone, image
 {
-    "mail": "john.doe@mail.com",
-    "username": "john.doe",
-    "password": "000000",
-    "firstname": "John",
-    "lastname": "Doe",
-    "phone": "123 456 789",
-    "image": ""
+    "group_id": "11",
+    "description": "Gasto de prueba MODIFICADO",
+    "amount": "13.33",
+    "date": "2033-12-31 11:11:11",
+    "payer_user_id": "2",
+    "active": "1"
 }
 
 ###
+## Desactivar un gasto
 
-DELETE {{HOST}}/api/users/4
+###
+## Eliminar un gasto
+DELETE  {{HOST}}/api/expenses/52
 Authorization : {{TOKEN}}
-
