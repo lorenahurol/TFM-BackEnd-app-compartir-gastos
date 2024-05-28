@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
     }
 }) 
 
-router.update("/:group_id", async (req, res) => {
+router.put("/:group_id", async (req, res) => {
     try {
         const { name, description, category } = req.body;
 
