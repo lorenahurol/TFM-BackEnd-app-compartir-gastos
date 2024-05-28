@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const Jwt = require("jsonwebtoken");
 
 const { getByMail } = require("../../models/user.model");
-const {createToken} = require('../../common/JWTLogin')
+const { createToken } = require('../../common/JWTLogin');
 
 /**
  * POST /
@@ -38,6 +39,17 @@ router.post("/", async (req, res) => {
     res.status(401).json({ error: "Incorrect email, or password" });
   }
 });
+
+router.get("/:token", (req, res) => {
+  const { token } = req.params
+  let payload;
+  try {
+    payload = Jwt.verify(token, process.env.PRIVATE_KEY);
+  } catch (error) {
+    return res.json({ error: error });
+  }
+  res.json (payload)
+})
 
 
 module.exports = router;
