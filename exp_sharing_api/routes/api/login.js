@@ -40,6 +40,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+/**
+ * Verifies a JWT token and returns its payload.
+ * 
+ * @param {Request} req - The incoming HTTP request object.
+ * @param {Response} res - The outgoing HTTP response object.
+ * @returns {void} - If the verification is correct, returns an object with the payload:
+ * {"exp": expiration date (unix), 
+ *  "id": logged user id, 
+ *  "username": logged username, 
+ *  "name": name of logged user, 
+ *  "iat": emission date (unix)}
+ * @throws {Error} - If token verification fails (e.g., invalid signature, expired token).
+ */
 router.get("/:token", (req, res) => {
   const { token } = req.params
   let payload;
