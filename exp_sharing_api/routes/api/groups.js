@@ -45,6 +45,7 @@ router.post("/", async (req, res, next) => {
         // Res: New group data
         const [[newGroup]] = await Group.getById(result.insertId);
         res.json(newGroup);
+        console.log(process.env.PRIVATE_KEY)
     } catch (error) {
         next(error)
     }

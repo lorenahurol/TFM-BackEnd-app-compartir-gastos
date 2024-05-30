@@ -1,11 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs')
 
-<<<<<<< HEAD
-const { create , getById } = require("../../models/user.model");
-=======
-const { create , getById, getByUsername} = require("../../models/user.model");
->>>>>>> develop
+const { create , getById, getByUsername } = require("../../models/user.model");
 const {createToken} = require('../../common/JWTLogin')
 
 /**
