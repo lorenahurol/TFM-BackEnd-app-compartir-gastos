@@ -47,7 +47,12 @@ router.get("/bygroup/:groupId", (req, res) => {
 router.get("/:userId", async (req, res) => {
   try {
     const [[result]] = await getById(req.params.userId);
-    if (!result) return res.status (404).json({error:"Selected Id does not exist"})
+    if (!result) return res.status(404).json({ error: "Selected Id does not exist" })
+    // modifico el valordel teléfono para separar el código internacional
+    const {phone} = result
+    const separatorIndex = phone.indexOf(" ");
+    result.countryCode = phone.substring(0, separatorIndex);
+    result.phone = phone.substring(separatorIndex+1)
     res.json(result);
   } catch (error) {
     res.json(error);
