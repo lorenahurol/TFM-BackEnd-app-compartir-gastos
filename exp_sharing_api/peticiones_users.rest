@@ -3,7 +3,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8a
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
 
 ### Login
 POST {{HOST}}/api/login
@@ -24,7 +24,7 @@ GET {{HOST}}/api/users
 Authorization : {{TOKEN}}
 
 ### GetById
-GET {{HOST}}/api/users/20
+GET {{HOST}}/api/users/98
 Authorization : {{TOKEN}}
 
 ### Create (register)
@@ -50,9 +50,9 @@ Content-Type: application/json
 
 //mail, username, password, firstname, lastname, phone, image
 {
-    "mail": "john.doe@mail.com",
+    "mail": "freddie@mail.com",
     "username": "john.doe",
-    "password": "000000",
+    "password": "12345",
     "firstname": "John",
     "lastname": "Doe",
     "phone": "123 456 789",

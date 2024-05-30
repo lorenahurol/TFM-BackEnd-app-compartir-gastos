@@ -24,7 +24,7 @@ const create = ({mail, username, password, firstname, lastname, phone, image}) =
     [mail, username, password, firstname, lastname, phone, image]);
 }
 
-const update = (userId, {mail, username, password, firstname, lastname, phone, image}) => {
+const updateById = (userId, {mail, username, password, firstname, lastname, phone, image}) => {
     return db.query('update users set mail = ?, username = ?, password = ?, firstname = ?, lastname = ?, phone = ?, image = ? where id = ?',
     [mail, username, password, firstname, lastname, phone, image, userId]);
 
@@ -35,5 +35,5 @@ const deleteById = (userId) => {
 }
 
 module.exports = {
-    getAll, getAllbyGroup, getById, getByMail, getByUsername, create, update, deleteById
+    getAll, getAllbyGroup, getById, getByMail, getByUsername, create, updateById, deleteById
 }
