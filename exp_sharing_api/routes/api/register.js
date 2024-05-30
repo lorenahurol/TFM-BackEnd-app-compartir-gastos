@@ -1,8 +1,33 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs')
 
+<<<<<<< HEAD
 const { create , getById } = require("../../models/user.model");
+=======
+const { create , getById, getByUsername} = require("../../models/user.model");
+>>>>>>> develop
 const {createToken} = require('../../common/JWTLogin')
+
+/**
+ * GET /checkUsername/:username
+ * 
+ * Endpoint to check if a username already exists.
+ * Fetches the username from the database and returns whether it exists.
+ * 
+ * @param {string} req.params.username - The username to be checked.
+ * @returns {Promise<void>} - Returns a JSON response indicating whether the username exists or an error if the request fails.
+ * 
+ */
+router.get("/checkUsername/:username", async (req, res) => {
+  const username = req.params.username
+try {
+    const [result] = await getByUsername(username)
+    return (result.length !== 0) ? res.json({ exists: true }) : res.json({exists: false})
+} catch (err) {
+    res.json({err})
+}
+}
+)
 
 /**
  * POST /

@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const Jwt = require("jsonwebtoken");
 
 const { getByMail } = require("../../models/user.model");
-const {createToken} = require('../../common/JWTLogin')
+const { createToken } = require('../../common/JWTLogin');
 
 /**
  * POST /
@@ -38,6 +39,30 @@ router.post("/", async (req, res) => {
     res.status(401).json({ error: "Incorrect email, or password" });
   }
 });
+
+/**
+ * Verifies a JWT token and returns its payload.
+ * 
+ * @param {Request} req - The incoming HTTP request object.
+ * @param {Response} res - The outgoing HTTP response object.
+ * @returns {void} - If the verification is correct, returns an object with the payload:
+ * {"exp": expiration date (unix), 
+ *  "id": logged user id, 
+ *  "username": logged username, 
+ *  "name": name of logged user, 
+ *  "iat": emission date (unix)}
+ * @throws {Error} - If token verification fails (e.g., invalid signature, expired token).
+ */
+router.get("/:token", (req, res) => {
+  const { token } = req.params
+  let payload;
+  try {
+    payload = Jwt.verify(token, process.env.PRIVATE_KEY);
+  } catch (error) {
+    return res.json({ error: error });
+  }
+  res.json (payload)
+})
 
 
 module.exports = router;

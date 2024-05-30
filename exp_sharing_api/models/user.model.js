@@ -14,6 +14,10 @@ const getByMail = (userMail) => {
     return db.query('select * from users where mail = ? ',[userMail]);
 }
 
+const getByUsername = (username) => {
+    return db.query('select * from users where username = ? ',[username]);
+}
+
 
 const create = ({mail, username, password, firstname, lastname, phone, image}) => {
     return db.query('insert into users (mail, username, password, firstname, lastname, phone, image) values (?, ?, ?, ?, ?, ?, ?)',
@@ -31,5 +35,5 @@ const deleteById = (userId) => {
 }
 
 module.exports = {
-    getAll, getAllbyGroup, getById, getByMail, create, update, deleteById
+    getAll, getAllbyGroup, getById, getByMail, getByUsername, create, update, deleteById
 }

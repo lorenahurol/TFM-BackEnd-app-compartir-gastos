@@ -8,6 +8,11 @@ const getById = (groupId) => {
     return db.query("SELECT * FROM groups_app WHERE id = ?", [groupId]);
 }
 
+/**
+const getByName = (groupName) => {
+    
+} **/
+
 const insert = ({ name, description, category }) => {
     return db.query("INSERT INTO groups_app (name, description, category) VALUES (?, ?, ?)", [name, description, category]);
 }
