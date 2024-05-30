@@ -78,7 +78,7 @@ router.put('/:userId', async (req, res) => {
     const currentPassword = currentUser.password
     const newPassword = req.body.password
     if (currentPassword !== newPassword)
-      bcrypt.hashSync(newPassword)
+      req.body.password = bcrypt.hashSync(newPassword);
 
     const [result] = await updateById(userId, req.body);
         
