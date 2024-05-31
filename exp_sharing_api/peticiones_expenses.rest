@@ -8,22 +8,6 @@
 
 ### Expenses ##################################################################################################
 
-## Buscar todos los gastos de un usuario en un grupo ordenados por fecha y que esten activos
-## param1:idGroup, param2: idUser
-GET {{HOST}}/api/expenses/11/2
-Authorization : {{TOKEN}}
-
-###
-## Buscar todos los gastos Activos de un grupo
-## param1: idGroup
-GET {{HOST}}/api/expenses/11
-Authorization : {{TOKEN}}
-
-###
-## Buscar todos los gastos Activos y no activos de un grupo
-## param1: idGroup
-GET {{HOST}}/api/expenses/all/11
-
 ###
 ## Buscar expense por id
 ## param1: idexpense
