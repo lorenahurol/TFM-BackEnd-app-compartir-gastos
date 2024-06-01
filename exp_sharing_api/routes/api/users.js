@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require ('bcryptjs')
 
-const { getAll, getAllbyGroup, getById, updateById, deleteById, getByMail } = require('../../models/user.model');
+const { getAll, getAllbyGroup, getById, updateById, deleteById } = require('../../models/user.model');
 
 /**
  * GET /
