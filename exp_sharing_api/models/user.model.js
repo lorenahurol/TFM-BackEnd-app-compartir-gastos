@@ -24,10 +24,17 @@ const create = ({mail, username, password, firstname, lastname, phone, image}) =
     [mail, username, password, firstname, lastname, phone, image]);
 }
 
-const updateById = (userId, {mail, username, password, firstname, lastname, phone, image}) => {
-    return db.query('update users set mail = ?, username = ?, password = ?, firstname = ?, lastname = ?, phone = ?, image = ? where id = ?',
-    [mail, username, password, firstname, lastname, phone, image, userId]);
+const updateById = (userId, {mail, username, firstname, lastname, phone, image}) => {
+    return db.query('update users set mail = ?, username = ?, firstname = ?, lastname = ?, phone = ?, image = ? where id = ?',
+    [mail, username, firstname, lastname, phone, image, userId]);
 
+}
+
+const updatePassword = (userId, newPassword) => {
+    return db.query(
+      "update users set password = ? where id = ?",
+      [newPassword, userId]
+    );
 }
 
 const deleteById = (userId) => {
@@ -35,5 +42,5 @@ const deleteById = (userId) => {
 }
 
 module.exports = {
-    getAll, getAllbyGroup, getById, getByMail, getByUsername, create, updateById, deleteById
+    getAll, getAllbyGroup, getById, getByMail, getByUsername, create, updateById, updatePassword, deleteById
 }
