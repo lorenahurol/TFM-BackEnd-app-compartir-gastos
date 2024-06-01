@@ -8,6 +8,9 @@ const cors = require('cors');
 
 const apiRouter = require('./routes/api');
 
+// Configuramos las variables de entorno
+require('dotenv').config();
+
 // conectamos con la base de datos
 require('./dbconfig');
 

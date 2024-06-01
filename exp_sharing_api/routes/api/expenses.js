@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const dayjs = require('dayjs');
 const Expenses = require('../../models/expense.model');
 
 // Operaciones por grupo --------------------------------------------------------------------
@@ -57,7 +58,7 @@ router.get("/:id", async (req, res) => {
         {
             return res.status (404).json({error:"Selected Id does not exist"});
         }
-        result.date = new Date(result.date).toISOString().split('T')[0];
+        result.date = dayjs(result.date).format('YYYY-MM-DD');
         res.json(result);
     } catch (error) {
       res.json(error);
