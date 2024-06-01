@@ -1,15 +1,16 @@
 const router = require('express').Router();
 const dayjs = require('dayjs');
 const Expenses = require('../../models/expense.model');
+const { checkBelongsToGroup, checkIsAdmin, checkIsAdminIdExpense } = require('../../common/middlewares');
 
 // Operaciones por grupo --------------------------------------------------------------------
 
-router.get('/bygroup/all/:groupId', async(req, res) => {
+router.get('/bygroup/all/:groupId', checkBelongsToGroup, async(req, res) => {
     try {
         const [result] = await Expenses.getAllOfGroup(req.params.groupId);
         if (!result[0]) 
         {
-                return res.status (404).json({error:"Selected Id does not exist"});
+            return res.status (404).json({error:"Selected Id does not exist"});
         }
         res.json(result);
     } catch (error) {
@@ -19,12 +20,12 @@ router.get('/bygroup/all/:groupId', async(req, res) => {
 
 
 //Obtener todos los gastos Activos por grupo
-router.get('/bygroup/actives/:groupId', async(req, res) => {
+router.get('/bygroup/actives/:groupId', checkBelongsToGroup, async(req, res) => {
     try {
         const [result] = await Expenses.getAllOfGroupActives(req.params.groupId);
-        if (!result[0]) 
+        if (!result) 
         {
-                return res.status (404).json({error:"Selected Id does not exist"});
+            return res.status (404).json({error:"Selected Id does not exist"});
         }
         res.json(result);
     } catch (error) {
@@ -33,12 +34,12 @@ router.get('/bygroup/actives/:groupId', async(req, res) => {
 });
 
 //Obtener todos los gastos Activos por grupo y por usuario
-router.get('/bygroup/byuser/actives/:groupId/:userId', async(req, res) => {
+router.get('/bygroup/byuser/actives/:groupId/:userId', checkBelongsToGroup, async(req, res) => {
     try {
         const [result] = await Expenses.getAllOfUserofGroupActives(req.params.groupId, req.params.userId);
         if (!result[0]) 
         {
-                return res.status (404).json({error:"Any selected Ids do not exist"});
+            return res.status (404).json({error:"Any selected Ids do not exist"});
         }
         res.json(result);
     } catch (error) {
@@ -67,7 +68,7 @@ router.get("/:id", async (req, res) => {
 
 
 // Creacion nuevo gasto
-router.post('/', async (req, res) => {
+router.post('/', checkIsAdmin, async (req, res) => {
     try {
         const [result] = await Expenses.create(req.body);
         res.json(result);
@@ -77,7 +78,7 @@ router.post('/', async (req, res) => {
 });
 
 // edicion por id
-router.put('/:id', async (req, res) => {
+router.put('/:id', checkIsAdmin, async (req, res) => {
     try {
         const [result] = await Expenses.update(req.params.id, req.body);
         res.json(result);
@@ -87,7 +88,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete por id
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', checkIsAdminIdExpense, async (req, res) => {
     try {
         const [result] = await Expenses.deleteById(req.params.id);
         res.json(result);
