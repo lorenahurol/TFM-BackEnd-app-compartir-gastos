@@ -18,5 +18,20 @@ const userIsAdminIdExpense = (expenseId, userId) => {
         and gro.creator_user_id = ?`, [expenseId, userId]);
 }
 
-module.exports = { userBelongsToGroup, userIsAdmin, userIsAdminIdExpense };
+const getAllUserGroupsAsMember = (userId) => {
+    return db.query('select group_id from group_members where user_id = ?', [userId]);
+}
+
+const getAllUserGroupsAsAdmin = (userId) => {
+    return db.query('select id from groups_app where creator_user_id = ?', [userId]);
+}
+
+
+module.exports = { 
+    userBelongsToGroup, 
+    userIsAdmin, 
+    userIsAdminIdExpense, 
+    getAllUserGroupsAsMember, 
+    getAllUserGroupsAsAdmin 
+};
 

@@ -3,7 +3,13 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg0NjM5NDgsImlkIjoxMDIsInVzZXJuYW1lIjoicGVwaXRvcGVyZXoiLCJuYW1lIjoiUGVwaXRvIiwiaWF0IjoxNzE3MjU0MzQ4fQ.uQ7tZ9HA5ztHn30j5RbQ9xPuMnxNTbOscVY3dMaJ87U
 
 
 ### Groups ##################################################################################################
+
+###
+## Obtiene los roles de todos los grupos del usuario con idUser (1 en este caso)
+## param1: idUser
+GET {{HOST}}/api/groups/roles/1
+Authorization : {{TOKEN}}
