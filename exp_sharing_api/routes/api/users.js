@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require ('bcryptjs')
 
-const { getAll, getAllbyGroup, getById, updateById, deleteById } = require('../../models/user.model');
+const { getAll, getAllbyGroup, getById, updateById, deleteById, updatePassword } = require('../../models/user.model');
 
 /**
  * GET /
@@ -16,9 +16,9 @@ const { getAll, getAllbyGroup, getById, updateById, deleteById } = require('../.
 router.get('/', async(req, res) => {
     try {
         const [result] = await getAll();
-        res.json(result);
+        return res.json(result);
     } catch (error) {
-        res.json(error);
+        return res.json(error);
 }
 });
 
@@ -26,10 +26,10 @@ router.get('/', async(req, res) => {
 router.get("/bygroup/:groupId", (req, res) => {
   getAllbyGroup(req.params.groupId)
     .then((data) => {
-      res.json(data[0]);
+      return res.json(data[0]);
     })
     .catch((err) => {
-      res.json(err);
+      return res.json(err);
     });
 });
 
@@ -54,9 +54,9 @@ router.get("/:userId", async (req, res) => {
     const separatorIndex = phone.indexOf(" ");
     result.countryCode = phone.substring(0, separatorIndex);
     result.phone = phone.substring(separatorIndex+1)
-    res.json(result);
+    return res.json(result);
   } catch (error) {
-    res.json(error);
+    return res.json(error);
   }
 });
 
@@ -70,24 +70,41 @@ router.get("/:userId", async (req, res) => {
  * @throws {Error} - If an error occurs during user update or password hashing.
  *
  */
-router.put('/:userId', async (req, res) => {
+router.put('/update', async (req, res) => {
   try {
-    // verifico si la contraseña se ha modificado. Si ha cambiado la encripto antes de guardarla
-    const userId = req.params.userId;
-    const [[currentUser]] = await getById(userId)
-    const currentPassword = currentUser.password
-    const newPassword = req.body.password
-    if (currentPassword !== newPassword)
-      req.body.password = bcrypt.hashSync(newPassword);
+    const userId = req.user.id;
 
     const [result] = await updateById(userId, req.body);
-        
+
     if (!result)
       return res.status(404).json({ error: "Selected Id does not exist" });
 
-    res.json ({success: true})
+    return res.json ({success: true})
   } catch (error) {
-    res.json(error);
+    return res.json(error);
+  }
+});
+
+/**
+ * Updates a user's password.
+ *
+ * @returns {void} - Returns a json object with a boolean {success : true}  
+ * @throws {Error} - If an error occurs during password hashing or user update.
+ */
+router.put("/updatePwd", async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const newPassword = req.body.password
+    const hashPassword = bcrypt.hashSync(newPassword, 10);
+
+    const result = await updatePassword(userId, hashPassword);
+
+    if (!result)
+      return res.status(404).json({ error: "Selected Id does not exist" });
+
+    return res.json({ success: true });
+  } catch (error) {
+    return res.json(error);
   }
 });
 
