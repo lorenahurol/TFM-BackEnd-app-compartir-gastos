@@ -3,14 +3,14 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgyOTg5OTYsImlkIjoxMDIsInVzZXJuYW1lIjoicGVwaXRvcGVyZXoiLCJuYW1lIjoiUGVwaXRvIiwiaWF0IjoxNzE3MDg5Mzk2fQ.gy8JYt1cHytgXOEfC-6WRkf8pl3ghC4-1Vztib7NSU4
 
 ### Login
 POST {{HOST}}/api/login
 Content-Type: application/json
 
 {
-    "mail": "miguelon_1547@pigeonmail.com",
+    "mail": "pepito.perez@gmail.com",
     "password" : "123456",
     "rememberMe" : true
 }
@@ -63,7 +63,3 @@ Content-Type: application/json
 
 DELETE {{HOST}}/api/users/4
 Authorization : {{TOKEN}}
-<<<<<<< HEAD
-
-=======
->>>>>>> update_expenses_backend
