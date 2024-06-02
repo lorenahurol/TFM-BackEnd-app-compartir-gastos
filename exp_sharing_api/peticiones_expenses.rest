@@ -66,11 +66,17 @@ Authorization : {{TOKEN}}
 ###
 ## Buscar todos los gastos Activos de un grupo
 ## param1: idGroup
-GET {{HOST}}/api/expenses/bygroup/actives/11
+GET {{HOST}}/api/expenses/bygroup/actives/3
 Authorization : {{TOKEN}}
 
 ###
 ## Buscar todos los gastos Activos y no activos de un grupo
 ## param1: idGroup
 GET {{HOST}}/api/expenses/bygroup/all/11
+Authorization : {{TOKEN}}
+
+###
+## Buscar el total de los gastos Activos de un grupo por usuario
+## param1: idGroup
+GET {{HOST}}/api/expenses/bygroup/actives/totalexpensesbyuser/3
 Authorization : {{TOKEN}}

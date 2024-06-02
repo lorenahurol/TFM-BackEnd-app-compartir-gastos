@@ -59,17 +59,13 @@ const desactiveByGroupId = (group_id) => {
 }
 
 
-// Calcular todos los pagos de un grupo en progreso
-const getAllPaymentOfGroup = (groupId) => {
+// Calcular el total de los gastos del grupo ordenador por usuario pagador
+const getTotalExpensesOfGroupByUser = (group_id) => {
 
-    return db.query('SELECT  *   FROM expenses WHERE group_id = ? and active = 1 ORDER BY date asc', [groupId]);
-
-    // return db.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-    //     if (err) throw err;
-    //     console.log('The solution is: ', rows[0].solution);
-    //   });
-
+    return db.query('select payer_user_id, sum(amount) as total_expenses  from expenses where group_id = ? and active = 1 group by payer_user_id', [group_id]);
 }
+
+
 
 module.exports = {
     getAll,
@@ -84,5 +80,5 @@ module.exports = {
     deleteById,
     desactiveById,
     desactiveByGroupId,
-    getAllPaymentOfGroup
+    getTotalExpensesOfGroupByUser
 }

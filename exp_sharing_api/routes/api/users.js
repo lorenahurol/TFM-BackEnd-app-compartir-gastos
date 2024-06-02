@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require ('bcryptjs')
 
-const { getAll, getAllbyGroup, getById, updateById, deleteById, getByMail } = require('../../models/user.model');
+const { getAll, getAllbyGroup, getById, updateById, deleteById, getByMail, getAllMemberbyGroup } = require('../../models/user.model');
 
 /**
  * GET /
@@ -25,6 +25,16 @@ router.get('/', async(req, res) => {
 
 router.get("/bygroup/:groupId", (req, res) => {
   getAllbyGroup(req.params.groupId)
+    .then((data) => {
+      res.json(data[0]);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+router.get("/members/bygroup/:groupId", (req, res) => {
+  getAllMemberbyGroup(req.params.groupId)
     .then((data) => {
       res.json(data[0]);
     })

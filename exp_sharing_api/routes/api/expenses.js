@@ -46,6 +46,22 @@ router.get('/bygroup/byuser/actives/:groupId/:userId', async(req, res) => {
     }
 });
 
+//Obtener el total de los gastos del grupo ordenador por usuario pagador
+router.get('/bygroup/actives/totalexpensesbyuser/:groupId', async(req, res) => {
+    try {
+        const [result] = await Expenses.getTotalExpensesOfGroupByUser(req.params.groupId);
+        if (!result[0]) 
+        {
+                return res.status (404).json({error:"Selected Id does not exist"});
+        }
+        res.json(result);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+
+
 
 // ------------------------------------------------------------------------------------------
 
