@@ -3,14 +3,14 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8a
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg0NDUxMTUsImlkIjoxMjcsInVzZXJuYW1lIjoiU2lyYTE2IiwibmFtZSI6IlNpcmEiLCJpYXQiOjE3MTcyMzU1MTV9.plw8Va-1VIrirT-S-fZ3AmDDNzwMLv-24VTuqAzHsdc
 
 ### Login
 POST {{HOST}}/api/login
 Content-Type: application/json
 
 {
-    "mail": "miguelon_1547@pigeonmail.com",
+    "mail": "sira@masprats.com",
     "password" : "123456",
     "rememberMe" : true
 }
@@ -24,7 +24,7 @@ GET {{HOST}}/api/users
 Authorization : {{TOKEN}}
 
 ### GetById
-GET {{HOST}}/api/users/20
+GET {{HOST}}/api/users/98
 Authorization : {{TOKEN}}
 
 ### Create (register)
@@ -42,21 +42,32 @@ Content-Type: application/json
     "image": ""
 }
 
-###
+### Update user
 
-PUT {{HOST}}/api/users/4
+PUT {{HOST}}/api/users/update
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 //mail, username, password, firstname, lastname, phone, image
 {
-    "mail": "john.doe@mail.com",
+    "mail": "bart_simpson@springfieldmail.com",
     "username": "john.doe",
-    "password": "000000",
+    "password": "12345",
     "firstname": "John",
     "lastname": "Doe",
     "phone": "123 456 789",
     "image": ""
+}
+
+### Update password
+
+PUT {{HOST}}/api/users/updatePwd
+Authorization : {{TOKEN}}
+Content-Type: application/json
+
+//password
+{
+    "password": "12345"
 }
 
 ###

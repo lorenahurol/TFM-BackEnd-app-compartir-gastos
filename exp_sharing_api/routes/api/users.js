@@ -1,6 +1,7 @@
 const router = require('express').Router();
+const bcrypt = require ('bcryptjs')
 
-const { getAll, getAllbyGroup, getById, create, update, deleteById, getByMail } = require('../../models/user.model');
+const { getAll, getAllbyGroup, getById, updateById, deleteById, updatePassword } = require('../../models/user.model');
 
 /**
  * GET /
@@ -15,9 +16,9 @@ const { getAll, getAllbyGroup, getById, create, update, deleteById, getByMail } 
 router.get('/', async(req, res) => {
     try {
         const [result] = await getAll();
-        res.json(result);
+        return res.json(result);
     } catch (error) {
-        res.json(error);
+        return res.json(error);
 }
 });
 
@@ -25,10 +26,10 @@ router.get('/', async(req, res) => {
 router.get("/bygroup/:groupId", (req, res) => {
   getAllbyGroup(req.params.groupId)
     .then((data) => {
-      res.json(data[0]);
+      return res.json(data[0]);
     })
     .catch((err) => {
-      res.json(err);
+      return res.json(err);
     });
 });
 
@@ -47,20 +48,64 @@ router.get("/bygroup/:groupId", (req, res) => {
 router.get("/:userId", async (req, res) => {
   try {
     const [[result]] = await getById(req.params.userId);
-    if (!result) return res.status (404).json({error:"Selected Id does not exist"})
-    res.json(result);
+    if (!result) return res.status(404).json({ error: "Selected Id does not exist" })
+    // modifico el valordel teléfono para separar el código internacional
+    const {phone} = result
+    const separatorIndex = phone.indexOf(" ");
+    result.countryCode = phone.substring(0, separatorIndex);
+    result.phone = phone.substring(separatorIndex+1)
+    return res.json(result);
   } catch (error) {
-    res.json(error);
+    return res.json(error);
   }
 });
 
-router.put('/:id', async (req, res) => {
-    try {
-        const [result] = await update(req.params.id, req.body);
-        res.json(result);
-    } catch (err) {
-        res.json(err);
-    }
+/**
+ * Updates a user by their ID.
+ *
+ * @param {Request} req - The incoming HTTP request object.
+ * @param {Response} res - The outgoing HTTP response object.
+ * @returns {success:boolean} - Returns a json withsuccess response (boolean).
+ *
+ * @throws {Error} - If an error occurs during user update or password hashing.
+ *
+ */
+router.put('/update', async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const [result] = await updateById(userId, req.body);
+
+    if (!result)
+      return res.status(404).json({ error: "Selected Id does not exist" });
+
+    return res.json ({success: true})
+  } catch (error) {
+    return res.json(error);
+  }
+});
+
+/**
+ * Updates a user's password.
+ *
+ * @returns {void} - Returns a json object with a boolean {success : true}  
+ * @throws {Error} - If an error occurs during password hashing or user update.
+ */
+router.put("/updatePwd", async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const newPassword = req.body.password
+    const hashPassword = bcrypt.hashSync(newPassword, 10);
+
+    const result = await updatePassword(userId, hashPassword);
+
+    if (!result)
+      return res.status(404).json({ error: "Selected Id does not exist" });
+
+    return res.json({ success: true });
+  } catch (error) {
+    return res.json(error);
+  }
 });
 
 router.delete('/:id', async (req, res) => {
