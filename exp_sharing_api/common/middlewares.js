@@ -13,7 +13,7 @@ const checkToken = (req, res, next) => {
     return res.json ({error: error})
   }
 
-  req.user = { id: 106, username: "mik_cervantes", name: "Miguel" };
+  req.user = { id: payload.id, username: payload.username, name: payload.name };
 
   next();
 };

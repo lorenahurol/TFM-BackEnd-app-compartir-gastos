@@ -28,42 +28,47 @@ router.get("/:group_id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
     try {
-        const { name, description, category } = req.body;
+        const { description, category_id } = req.body;
+        const userId = req.user.id;
 
         // Check all the fields are filled in:
-        if (!name || !description || !category) {
-            throw new Error();
+        if (!description || !category_id) {
+            return res.status(400).json({ error: "All fields are required" });
         }
 
-        // Checks if the group already exists:
-        const [groupExists] = await Group.getByName(name);
+        // Check if the group already exists for the logged user:
+        const [[groupExists]] = await Group.getByDesCatUser(description, category_id, userId);
         if (groupExists) {
-            return res.status(409).json({ error: "This group already exists" });
+            return res.status(409).json({ error: "Group already exists for this user" });
         }
 
-        const [result] = await Group.insert(req.body);
+        const groupData = { description, category_id, creator_user_id: userId };
+
+        const [result] = await Group.insert(groupData);
         // Res: New group data
         const [[newGroup]] = await Group.getById(result.insertId);
         res.json(newGroup);
         console.log(process.env.PRIVATE_KEY)
     } catch (error) {
-        next(error)
+        next(error);
     }
-}) 
+})
+ 
 
 router.put("/:group_id", async (req, res, next) => {
     try {
-        const { name, description, category } = req.body;
+        const { description, category_id } = req.body;
+        const groupId = req.params.group_id;
 
-        const [result] = await Group.updateById( name, description, category, req.params.group_id);
+        const [result] = await Group.updateById(groupId, { description, category_id });
         if (result.affectedRows === 0) {
             return res.json({ error: "Group could not be updated" });
         }
-        res.json({ message: "Group succesfully updated" });
+        res.json({ message: "Group successfully updated" });
     } catch (error) {
        next(error);
     }
-})
+});
 
 router.delete("/:group_id", async (req, res, next) => {
     try {
