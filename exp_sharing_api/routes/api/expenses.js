@@ -60,7 +60,15 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', async(req, res) => {
     }
 });
 
-
+// Desactivar todos los gastos de un grupo
+router.delete('/bygroup/desactive/:group_id', async (req, res) => {
+    try {
+        const [result] = await Expenses.desactiveByGroupId(req.params.group_id);
+        res.json(result);
+    } catch (err) {
+        res.json(err);
+    }
+});
 
 
 // ------------------------------------------------------------------------------------------

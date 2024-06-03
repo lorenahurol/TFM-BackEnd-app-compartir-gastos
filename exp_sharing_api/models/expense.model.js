@@ -66,7 +66,6 @@ const getTotalExpensesOfGroupByUser = (group_id) => {
 }
 
 
-
 module.exports = {
     getAll,
     getAllOfGroup,
