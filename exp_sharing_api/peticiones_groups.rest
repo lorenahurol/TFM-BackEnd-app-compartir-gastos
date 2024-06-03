@@ -2,7 +2,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg2MzI3NDksImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc0MjMxNDl9.tqf_iSwfqBV8BKN4jUe1X0sdbAzXCGU_ZCtGIKMkbcQ
 
 
 ### PETICIONES GROUPS:
@@ -12,7 +12,7 @@ GET {{HOST}}/api/groups
 Authorization : {{TOKEN}}
 
 ### GET BY ID:
-GET {{HOST}}/api/groups/11
+GET {{HOST}}/api/groups/12
 Authorization : {{TOKEN}}
 
 ### CREATE NEW GROUP
@@ -21,21 +21,21 @@ Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "name" : "Fiesta de fin de año",
-    "description": "Cena de fin de año en 'Restaurante El Buen Sabor'",
-    "category": 1
+     
+    "description": "Cine de verano",
+    "category_id": 3
 }
 
 ### UPDATE GROUP
-PUT {{HOST}}/api/groups/11
+PUT {{HOST}}/api/groups/12
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "name" : "Viaje de fin de curso",
-    "category": 2
+    "description": "Viaje de fin de curso",
+    "category_id": 2
 }
 
 ### DELETE GROUP
-DELETE {{HOST}}/api/groups/11
+DELETE {{HOST}}/api/groups/12
 Authorization : {{TOKEN}}
