@@ -23,11 +23,11 @@ router.post('/',  (req, res) => {
         from: 'explitapp@gmail.com',
         to: 'explitapp@gmail.com',
         subject: 'Explit email subject',
-        text: 'Hi from your nodemailer project #2'
+        html :string  = 'Hi from your nodemailer project #2'
     };
     mailOptions.to = req.body.to;
     mailOptions.subject = req.body.subject;
-    mailOptions.text = req.body.text;
+    mailOptions.html = req.body.html;
 
     transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
