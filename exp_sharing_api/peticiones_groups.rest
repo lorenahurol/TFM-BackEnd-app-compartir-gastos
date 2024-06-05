@@ -22,8 +22,8 @@ Content-Type: application/json
 
 {
      
-    "description": "Cine de verano",
-    "category_id": 3
+    "description": "Cena en la playa",
+    "category_id": 2
 }
 
 ### UPDATE GROUP
