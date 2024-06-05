@@ -11,5 +11,5 @@
 ###
 ## Obtiene los roles de todos los grupos del usuario con idUser (1 en este caso)
 ## param1: idUser
-GET {{HOST}}/api/groups/roles/1
+GET {{HOST}}/api/groups/roles
 Authorization : {{TOKEN}}
