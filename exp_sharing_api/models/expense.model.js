@@ -22,7 +22,7 @@ const getAllOfUserofGroupActives = (groupId, userId) => {
     return db.query('SELECT  *   FROM expenses WHERE group_id = ? and active = 1 and payer_user_id = ? and active = 1 ORDER BY date asc', [groupId, userId]);
 }
 
-//Buscar todos los gastos de un usuario en un grupo ordenados por fecha y que esten nO activos
+//Buscar todos los gastos de un usuario en un grupo ordenados por fecha y que esten no activos
 const getAllOfUserofGroupNoActives = (groupId, userId) => {
     return db.query('SELECT  *   FROM expenses WHERE group_id = ? and active = 1 and payer_user_id = ? and active = 0 ORDER BY date asc', [groupId, userId]);
 }
