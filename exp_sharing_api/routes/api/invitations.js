@@ -15,23 +15,15 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+
 // Create an invitation (By Group Admin):
-router.post("/create", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     try {
-        const { group_id, user_id } = req.body;
-
-        const newInvitation = new Invitation({
-            group_id,
-            user_id,
-            accepted: 0,
-            active: 1
-        })
-
-        const [result] = await newInvitation.insert();
+        const [result] = await Invitation.insert(req.body);
         res.json(result);
     } catch (error) {
         next(error);
-    }
+    } 
 })
 
 // Accept an invitation (By invited user): URL: /api/invitation/invitationId/accept
