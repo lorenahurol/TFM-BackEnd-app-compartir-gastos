@@ -1,0 +1,49 @@
+@PORT = 3000
+
+@HOST = http://127.0.0.1:{{PORT}}
+
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg2MzI3NDksImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc0MjMxNDl9.tqf_iSwfqBV8BKN4jUe1X0sdbAzXCGU_ZCtGIKMkbcQ
+
+
+### PETICIONES INVITATIONS:
+
+### GET ALL:
+GET {{HOST}}/api/invitations
+Authorization : {{TOKEN}}
+
+### GET BY ID:
+GET {{HOST}}/api/invitations/12
+Authorization : {{TOKEN}}
+
+### CREATE INVITATION
+POST {{HOST}}/api/invitations
+Authorization : {{TOKEN}}
+Content-Type: application/json
+
+{
+    "username": "'cworsom2r'"
+}
+
+### ACCEPT INVITATION:
+PUT {{HOST}}/api/invitations/2/accept
+Authorization : {{TOKEN}}
+Content-Type: application/json
+
+{
+    "username": "cworsom2r",
+    "accepted": 1
+}
+
+### REJECT INVITATION:
+PUT {{HOST}}/api/invitations/1/reject
+Authorization : {{TOKEN}}
+Content-Type: application/json
+
+{
+    "username": "cworsom2r",
+    "accepted": 0
+}
+
+### DELETE INVITATION:
+DELETE {{HOST}}/api/invitation/3
+Authorization : {{TOKEN}}

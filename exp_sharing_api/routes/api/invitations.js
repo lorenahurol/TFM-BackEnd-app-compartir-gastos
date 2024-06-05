@@ -15,46 +15,68 @@ router.get("/", async (req, res, next) => {
     }
 })
 
-// Create an invitation:
-router.post("/", async (req, res, next) => {
+// Create an invitation (By Group Admin):
+router.post("/create", async (req, res, next) => {
     try {
-        const { email } = req.body;
-        const groupId = req.groupId // Gestionar en front
+        const { group_id, user_id } = req.body;
 
-        // Check that the fields are filled in:
-        if (!email) {
-            return res.status(400).json({ error: "Email is required" });
-        }
-
-        // Find the user_id through their email:
-        const [user] = await User.getByMail(email);
-        // Check they are registered:
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        // Check if the invitation exists:
-        const [invitationExists] = await Invitation.getByGroupAndUser(groupId, user.id);
-        if (invitationExists && (invitationExists.accepted || invitationExists.active)) {
-            return res.status(409).json({ error: "The user has already been invited" });
-        }
-
-        // Create the invitation:
-        const invitationData = {
-            groupId,
-            userId: user.id, // Usuario invitado
+        const newInvitation = new Invitation({
+            group_id,
+            user_id,
             accepted: 0,
             active: 1
-        }
+        })
 
-        const [result] = await Invitation.insert(invitationData);
+        const [result] = await newInvitation.insert();
         res.json(result);
+    } catch (error) {
+        next(error);
+    }
+})
+
+// Accept an invitation (By invited user): URL: /api/invitation/invitationId/accept
+router.put("/:invitationId/accept", async (req, res, next) => {
+    try {
+        const { invitationId } = req.params;
+        const [result] = await Invitation.updateStatus(invitationId, 1); // 1 === accepted
+            if (result.affectedRows === 0) {
+                return res.json({ error: "Pending invitation not found" });
+            }
+        res.json({ message: "Invitation accepted" });
 
     } catch (error) {
         next(error);
     }
 })
 
+// Reject an invitation (By invited user): URL: /api/invitation/invitationId/reject
+router.put("/:invitationId/reject", async (req, res, next) => {
+    try {
+        const { invitationId } = req.params;
+        const [result] = await Invitation.updateStatus(invitationId, 0); // 0 === rejected
+            if (result.affectedRows === 0) {
+                return res.json({ error: "Pending invitation not found" });
+            }
+        res.json({ message: "Invitation rejected" });
+
+    } catch (error) {
+        next(error);
+    }
+})
+
+// Cancel an invitation (By Group Admin):
+router.delete("/:invitationId", async (req, res, next) => {
+    try {
+        const { invitationId } = req.params;
+        const [result] = await Invitation.deleteById(invitationId);
+            if (result.affectedRows === 0) {
+                return res.json({ error: "Invitation not found" });
+        }
+        res.json({ message: "Invitation deleted successfully" })
+    } catch (error) {
+        next(error);
+    }
+})
 
 
 module.exports = router;

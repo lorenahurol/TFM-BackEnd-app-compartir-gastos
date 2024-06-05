@@ -53,7 +53,7 @@ router.post("/", async (req, res, next) => {
         next(error);
     }
 })
- 
+
 
 router.put("/:group_id", async (req, res, next) => {
     try {
