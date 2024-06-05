@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `expenses_sharing`.`invitations` (
   `user_id` INT UNSIGNED NOT NULL,
   `accepted` TINYINT NOT NULL DEFAULT 0,
   `active` TINYINT NOT NULL DEFAULT 1,
+  `menssage` TEXT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_invitations_groups_idx` (`group_id` ASC) INVISIBLE,
   INDEX `fk_invitations_users_idx` (`user_id` ASC) INVISIBLE,

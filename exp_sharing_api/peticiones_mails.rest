@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
     "to": "anuarkhan@gmail.com",
-    "subject": "Email de registro",
-    "html": "<h2>Hola caracola</h2> <p>Esto es un <strong>parrafo</strong></p>"
+    "subject": "Email de registro test2",
+    "html": "<h2>Buenas noches</h2> <p>Esto es un <strong>parrafo</strong></p>"
 }
 
