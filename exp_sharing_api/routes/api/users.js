@@ -22,7 +22,18 @@ router.get('/', async(req, res) => {
 }
 });
 
-
+/**
+ * GET /bygroup/:groupId
+ * 
+ * Endpoint to retrieve the active users belonging to a specific group.
+ * Fetches the user from the `users` table who is an active member (active = 1) of the group identified by the provided group ID.
+ * The user data is retrieved using a join between the `users` and `group_members` tables.
+ * 
+ * @param {string} req.params.groupId - ID of the group to retrieve the first active user from.
+ * @returns {Promise<object>} - Returns a JSON response containing the user data (if found) or an empty object if no active user exists for the group.
+ * 
+ * @async
+ */
 router.get("/bygroup/:groupId", (req, res) => {
   getAllbyGroup(req.params.groupId)
     .then((data) => {
@@ -33,6 +44,17 @@ router.get("/bygroup/:groupId", (req, res) => {
     });
 });
 
+/**
+ * GET /members/bygroup/:groupId
+ * 
+ * Endpoint to retrieve members belonging to a specific group.
+ * Fetches a list of members associated with the provided group ID and returns their data.
+ * 
+ * @param {string} req.params.groupId - ID of the group to retrieve members from.
+ * @returns {Promise<void>} - Returns a JSON response containing an array of member data or an error message if unsuccessful.
+ * 
+ * @async
+ */
 router.get("/members/bygroup/:groupId", (req, res) => {
   getAllMemberbyGroup(req.params.groupId)
     .then((data) => {
@@ -40,16 +62,6 @@ router.get("/members/bygroup/:groupId", (req, res) => {
     })
     .catch((err) => {
       return res.json(err);
-    });
-});
-
-router.get("/members/bygroup/:groupId", (req, res) => {
-  getAllMemberbyGroup(req.params.groupId)
-    .then((data) => {
-      res.json(data[0]);
-    })
-    .catch((err) => {
-      res.json(err);
     });
 });
 
@@ -80,7 +92,17 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-// get by username:
+/**
+ * GET /byusername/:username
+ * 
+ * Endpoint to retrieve a user by their username.
+ * Fetches user data from the database based on the provided username.
+ * 
+ * @param {string} req.params.username - Username of the user to be retrieved.
+ * @returns {Promise<object>} - Returns a JSON response containing the user data (if found) or a 404 "Not Found" error message if the user doesn't exist.
+ * 
+ * @async
+ */
 router.get("/byusername/:username", async (req, res) => {
   try {
     const [[result]] = await getByUsername(req.params.username);
