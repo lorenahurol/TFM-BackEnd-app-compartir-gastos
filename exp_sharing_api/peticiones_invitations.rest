@@ -2,7 +2,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg2MzI3NDksImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc0MjMxNDl9.tqf_iSwfqBV8BKN4jUe1X0sdbAzXCGU_ZCtGIKMkbcQ
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg4ODM5MTEsImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc2NzQzMTF9.BhaWIPn5Cn7_Rsh0lTMLsF8_NV9NvnnxRCgj0Bli0lI
 
 
 ### PETICIONES INVITATIONS:
@@ -15,39 +15,42 @@ Authorization : {{TOKEN}}
 GET {{HOST}}/api/invitations/12
 Authorization : {{TOKEN}}
 
+### GET PENDING INVITATIONS BY GROUP AND USER:
+GET {{HOST}}/api/invitations/bygroupanduser/2/3
+Authorization : {{TOKEN}}
+
 ### CREATE INVITATION
 POST {{HOST}}/api/invitations
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "group_id": 1,
-    "user_id": 2,
-    "accepted": 0,
-    "active": 1
+    "group_id": 9,
+    "user_id": 20,
+    "message": "Hola, acepta mi invitacion"
 
 }
 
 ### ACCEPT INVITATION:
-PUT {{HOST}}/api/invitations/2/accept
+PUT {{HOST}}/api/invitations/13/accept
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "username": "cworsom2r",
+    "user_id": 10,
     "accepted": 1
 }
 
 ### REJECT INVITATION:
-PUT {{HOST}}/api/invitations/1/reject
+PUT {{HOST}}/api/invitations/13/reject
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "username": "cworsom2r",
+    "user_id": 10,
     "accepted": 0
 }
 
 ### DELETE INVITATION:
-DELETE {{HOST}}/api/invitation/3
+DELETE {{HOST}}/api/invitations/13
 Authorization : {{TOKEN}}

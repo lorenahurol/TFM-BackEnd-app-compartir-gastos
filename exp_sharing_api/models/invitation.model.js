@@ -3,6 +3,10 @@ const getAll = () => {
     return db.query("SELECT * FROM invitations WHERE active = 1 AND accepted = 0");
 }
 
+const getById = (invitationId) => {
+    return db.query("SELECT * FROM invitations WHERE id = ?", [invitationId]);
+}
+
 const getByUser = (userId) => {
     return db.query("SELECT * FROM invitations WHERE user_id = ? AND (active = 1 OR accepted = 1)", [userId]);
 }
@@ -12,9 +16,10 @@ const getByGroupAndUser = (groupId, userId) => {
     return db.query("SELECT * FROM invitations WHERE group_id = ? AND user_id = ? AND active = 1 AND accepted = 0", [groupId, userId]);
 }
 
-const insert = ({ group_id, user_id, accepted, active }) => {
+
+const insert = ({ group_id, user_id, message }) => {
     return db.query(
-        "INSERT INTO invitations (group_id, user_id, accepted, active) VALUES (?, ?, ?, ?)", [group_id, user_id, accepted, active]
+        "INSERT INTO invitations (group_id, user_id, message) VALUES (?, ?, ?)", [group_id, user_id, message]
     );
 }
 
@@ -30,5 +35,5 @@ const deleteById = (invitationId) => {
 }
 
 module.exports = {
-    getAll, getByUser, getByGroupAndUser, insert, updateStatus, deleteById
+    getAll, getById, getByUser, getByGroupAndUser, insert, updateStatus, deleteById
 }
