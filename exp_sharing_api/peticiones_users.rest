@@ -27,6 +27,10 @@ Authorization : {{TOKEN}}
 GET {{HOST}}/api/users/98
 Authorization : {{TOKEN}}
 
+### GetByUsername
+GET {{HOST}}/api/users/byusername/blavens2o
+Authorization : {{TOKEN}}
+
 ### Create (register)
 POST {{HOST}}/api/register
 Content-Type: application/json

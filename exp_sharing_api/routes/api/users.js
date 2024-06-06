@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require ('bcryptjs')
 
-const { getAll, getAllbyGroup, getById, updateById, deleteById, updatePassword, getAllMemberbyGroup } = require('../../models/user.model');
+const { getAll, getAllbyGroup, getById, getByUsername, updateById, deleteById, updatePassword, getAllMemberbyGroup } = require('../../models/user.model');
 
 /**
  * GET /
@@ -74,6 +74,17 @@ router.get("/:userId", async (req, res) => {
     const separatorIndex = phone.indexOf(" ");
     result.countryCode = phone.substring(0, separatorIndex);
     result.phone = phone.substring(separatorIndex+1)
+    return res.json(result);
+  } catch (error) {
+    return res.json(error);
+  }
+});
+
+// get by username:
+router.get("/byusername/:username", async (req, res) => {
+  try {
+    const [[result]] = await getByUsername(req.params.username);
+    if (!result) return res.status(404).json({ error: "Selected username does not exist" })
     return res.json(result);
   } catch (error) {
     return res.json(error);
