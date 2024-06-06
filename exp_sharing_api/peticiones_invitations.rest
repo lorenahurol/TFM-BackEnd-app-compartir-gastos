@@ -15,14 +15,18 @@ Authorization : {{TOKEN}}
 GET {{HOST}}/api/invitations/12
 Authorization : {{TOKEN}}
 
+### GET PENDING INVITATIONS BY GROUP AND USER:
+GET {{HOST}}/api/invitations/bygroupanduser/2/3
+Authorization : {{TOKEN}}
+
 ### CREATE INVITATION
 POST {{HOST}}/api/invitations
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "group_id": 4,
-    "user_id": 10,
+    "group_id": 9,
+    "user_id": 20,
     "message": "Hola, acepta mi invitacion"
 
 }

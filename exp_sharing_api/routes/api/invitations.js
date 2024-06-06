@@ -14,6 +14,29 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+// Get by Id:
+router.get("/:invitationId", async (req, res, next) => {
+    try {
+        const { invitationId } = req.params;
+        const [result] = await Invitation.getById(invitationId);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+})
+
+// Get by Group and User:
+router.get("/bygroupanduser/:groupId/:userId", async (req, res, next) => {
+  try {
+      const { groupId, userId } = req.params;
+      console.log(req.params);
+    const [result] = await Invitation.getByGroupAndUser(groupId, userId);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+})
+
 
 // Create an invitation (By Group Admin):
 router.post("/", async (req, res, next) => {
@@ -27,6 +50,7 @@ router.post("/", async (req, res, next) => {
         }
 
         // Check if the invitation for the user already exists:
+        console.log(`group_id: ${group_id}, user_id: ${user_id}`);
         const pendingInvitation = await Invitation.getByGroupAndUser(group_id, user_id);
             if (pendingInvitation[0].length > 0) {
                 return res.json({ error: "La invitación ya existe" });
