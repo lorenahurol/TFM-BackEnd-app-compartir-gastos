@@ -2,6 +2,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
+
 @TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg2MzI3NDksImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc0MjMxNDl9.tqf_iSwfqBV8BKN4jUe1X0sdbAzXCGU_ZCtGIKMkbcQ
 
 
@@ -39,3 +40,12 @@ Content-Type: application/json
 ### DELETE GROUP
 DELETE {{HOST}}/api/groups/12
 Authorization : {{TOKEN}}
+
+
+
+###
+## Obtiene los roles de todos los grupos del usuario con idUser (1 en este caso)
+## param1: idUser
+GET {{HOST}}/api/groups/roles
+Authorization : {{TOKEN}}
+
