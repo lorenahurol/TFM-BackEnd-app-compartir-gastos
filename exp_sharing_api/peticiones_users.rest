@@ -74,7 +74,8 @@ Content-Type: application/json
 
 DELETE {{HOST}}/api/users/4
 Authorization : {{TOKEN}}
-<<<<<<< HEAD
 
-=======
->>>>>>> update_expenses_backend
+
+###
+GET {{HOST}}/api/users/members/bygroup/3
+Authorization : {{TOKEN}}

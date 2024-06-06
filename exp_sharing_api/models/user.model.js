@@ -6,6 +6,11 @@ const getAllbyGroup = (groupId) => {
     return db.query('select u.* from users u inner join group_members gm on gm.user_id = u.id where gm.group_id = ? and u.active = 1', [groupId]);
 }
 
+const getAllMemberbyGroup = (groupId) => {
+    return db.query('select * from group_members where group_id = ?', [groupId]);
+}
+
+
 const getById = (userId) => {
     return db.query('select * from users where id = ? ',[userId]);
 }
@@ -42,5 +47,5 @@ const deleteById = (userId) => {
 }
 
 module.exports = {
-    getAll, getAllbyGroup, getById, getByMail, getByUsername, create, updateById, updatePassword, deleteById
+    getAll, getAllbyGroup, getAllMemberbyGroup, getById, getByMail, getByUsername, create, updateById, updatePassword, deleteById
 }

@@ -5,6 +5,7 @@ const logger = require('morgan');
 const fs = require('fs');
 const dayjs = require('dayjs');
 const cors = require('cors');
+const nodeMailer = require('nodemailer');
 
 const apiRouter = require('./routes/api');
 

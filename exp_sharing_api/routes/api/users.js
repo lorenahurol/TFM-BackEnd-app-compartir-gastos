@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require ('bcryptjs')
 
-const { getAll, getAllbyGroup, getById, updateById, deleteById, updatePassword } = require('../../models/user.model');
+const { getAll, getAllbyGroup, getById, updateById, deleteById, updatePassword, getAllMemberbyGroup } = require('../../models/user.model');
 
 /**
  * GET /
@@ -30,6 +30,26 @@ router.get("/bygroup/:groupId", (req, res) => {
     })
     .catch((err) => {
       return res.json(err);
+    });
+});
+
+router.get("/members/bygroup/:groupId", (req, res) => {
+  getAllMemberbyGroup(req.params.groupId)
+    .then((data) => {
+      return res.json(data[0]);
+    })
+    .catch((err) => {
+      return res.json(err);
+    });
+});
+
+router.get("/members/bygroup/:groupId", (req, res) => {
+  getAllMemberbyGroup(req.params.groupId)
+    .then((data) => {
+      res.json(data[0]);
+    })
+    .catch((err) => {
+      res.json(err);
     });
 });
 

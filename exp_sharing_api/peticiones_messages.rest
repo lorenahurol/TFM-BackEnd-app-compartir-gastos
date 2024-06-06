@@ -1,0 +1,61 @@
+
+@PORT = 3000
+
+@HOST = http://127.0.0.1:{{PORT}}
+
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
+
+
+### Mensajes ##################################################################################################
+
+###
+## Buscar mensaje por id
+## param1: idexpense
+GET {{HOST}}/api/messages/1
+Authorization : {{TOKEN}}
+
+###
+## Crear mensaje asociado a un grupo y un pagador
+POST {{HOST}}/api/messages/
+Authorization : {{TOKEN}}
+Content-Type: application/json
+
+{
+    "group_id": "11",
+    "user_id": "2",
+    "message": "Hola mundo 3"
+}
+
+###
+## Editar un mensaje
+PUT {{HOST}}/api/messages/1
+Authorization : {{TOKEN}}
+Content-Type: application/json
+
+{
+    "group_id": "11",
+    "user_id": "2",
+    "message": "Hola mundo modificado"
+}
+
+
+###
+## Eliminar un mensaje
+DELETE  {{HOST}}/api/messages/5
+Authorization : {{TOKEN}}
+
+
+
+### Peticiones relacionadas por grupos
+
+## Buscar todos los mensajes de un usuario en un grupo ordenados por fecha
+## param1:idGroup, param2: idUser
+GET {{HOST}}/api/messages/bygroup/byuser/11/2
+Authorization : {{TOKEN}}
+
+###
+## Buscar todos los mensajes de un grupo
+## param1: idGroup
+GET {{HOST}}/api/messages/bygroup/11
+Authorization : {{TOKEN}}
+
