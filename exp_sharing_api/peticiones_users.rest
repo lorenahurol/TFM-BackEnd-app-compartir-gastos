@@ -79,7 +79,6 @@ Content-Type: application/json
 DELETE {{HOST}}/api/users/4
 Authorization : {{TOKEN}}
 
-
-###
+####
 GET {{HOST}}/api/users/members/bygroup/3
 Authorization : {{TOKEN}}

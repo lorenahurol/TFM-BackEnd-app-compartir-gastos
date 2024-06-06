@@ -3,7 +3,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg4Njk2NDcsImlkIjoxMDEsInVzZXJuYW1lIjoiZW1pbGlvamNoZWNhIiwibmFtZSI6IkVtaWxpbyBKb3PDqSIsImlhdCI6MTcxNzY2MDA0N30.8GH__hOPZQRssAKEzvG2VegPC0qN2UjSS4iN0885GYs
 
 
 ### Expenses ##################################################################################################
@@ -31,7 +31,6 @@ Content-Type: application/json
 
 ###
 ## Editar un gasto
-PUT {{HOST}}/api/expenses/52
 PUT {{HOST}}/api/expenses/53
 Authorization : {{TOKEN}}
 Content-Type: application/json
@@ -50,8 +49,6 @@ Content-Type: application/json
 
 ###
 ## Eliminar un gasto
-DELETE  {{HOST}}/api/expenses/52
-Authorization : {{TOKEN}}
 DELETE  {{HOST}}/api/expenses/53
 Authorization : {{TOKEN}}
 
