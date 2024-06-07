@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const Invitation = require("../../models/invitation.model");
+const { checkIsAdmin } = require("../../common/middlewares");
 
 // Requests for /api/invitations:
 
@@ -39,7 +40,7 @@ router.get("/bygroupanduser/:groupId/:userId", async (req, res, next) => {
 
 
 // Create an invitation (By Group Admin):
-router.post("/", async (req, res, next) => {
+router.post("/", checkIsAdmin, async (req, res, next) => {
     try {
 
         const { group_id, user_id, message } = req.body;
@@ -109,7 +110,7 @@ router.put("/:invitationId/reject", async (req, res, next) => {
 })
 
 // Deactivate an invitation (By Group Admin):
-router.delete("/:invitationId", async (req, res, next) => {
+router.delete("/:invitationId", checkIsAdmin, async (req, res, next) => {
     try {
         const { invitationId } = req.params;
 

@@ -25,8 +25,8 @@ Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "group_id": 9,
-    "user_id": 20,
+    "group_id": 12,
+    "user_id": 3,
     "message": "Hola, acepta mi invitacion"
 
 }
@@ -52,5 +52,5 @@ Content-Type: application/json
 }
 
 ### DELETE INVITATION:
-DELETE {{HOST}}/api/invitations/13
+DELETE {{HOST}}/api/invitations/28
 Authorization : {{TOKEN}}

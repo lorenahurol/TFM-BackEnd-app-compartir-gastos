@@ -3,7 +3,7 @@
 @HOST = http://127.0.0.1:{{PORT}}
 
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg2MzI3NDksImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc0MjMxNDl9.tqf_iSwfqBV8BKN4jUe1X0sdbAzXCGU_ZCtGIKMkbcQ
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg4ODM5MTEsImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc2NzQzMTF9.BhaWIPn5Cn7_Rsh0lTMLsF8_NV9NvnnxRCgj0Bli0lI
 
 
 ### PETICIONES GROUPS:
@@ -23,23 +23,24 @@ Content-Type: application/json
 
 {
      
-    "description": "Cena en la playa",
-    "category_id": 2
+    "description": "Cena de empresa",
+    "category_id": 1
 }
 
 ### UPDATE GROUP
-PUT {{HOST}}/api/groups/12
+PUT {{HOST}}/api/groups/21
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "description": "Viaje de fin de curso",
+    "description": "Comida de empresa",
     "category_id": 2
 }
 
 ### DELETE GROUP
-DELETE {{HOST}}/api/groups/12
+DELETE {{HOST}}/api/groups/22
 Authorization : {{TOKEN}}
+
 
 
 

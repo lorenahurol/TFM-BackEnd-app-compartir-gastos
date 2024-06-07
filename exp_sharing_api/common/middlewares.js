@@ -34,8 +34,9 @@ const checkBelongsToGroup = async (req, res, next) => {
 };
 
 /* Valida si es admin del grupo, cuando se hace un post o un put de gasto (viene en el body el grupo) */
+// Valida si es admin del grupo, al actualizar o eliminar un grupo (group.id viene en la url)
 const checkIsAdmin = async (req, res, next) => {
-  const [result] = await Group.userIsAdmin(req.body.group_id, req.user.id);
+  const [result] = await Group.userIsAdmin(req.params.group_id || req.body.group_id, req.user.id);
 
   if (result.length === 0) {
     return res.status(401).json({ error: "El usuario no es admin del grupo" });

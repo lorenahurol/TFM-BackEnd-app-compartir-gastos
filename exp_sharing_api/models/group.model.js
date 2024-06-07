@@ -8,7 +8,7 @@ const getById = (groupId) => {
   return db.query("SELECT * FROM groups_app WHERE id = ?", [groupId]);
 };
 
-const getByDesCatUser = (description, category_id, userId) => {
+const getByDescriptionCategoryUser = (description, category_id, userId) => {
   return db.query(
     "SELECT * FROM groups_app WHERE description = ? AND category_id = ? AND creator_user_id = ?",
     [description, category_id, userId]
@@ -76,7 +76,7 @@ const getAllUserGroupsAsAdmin = (userId) => {
 module.exports = {
   getAll,
   getById,
-  getByDesCatUser,
+  getByDescriptionCategoryUser,
   insert,
   updateById,
   deleteById,
