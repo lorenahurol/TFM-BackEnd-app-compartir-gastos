@@ -109,7 +109,7 @@ router.put("/:invitationId/reject", async (req, res, next) => {
     }
 })
 
-// Deactivate an invitation (By Group Admin):
+// Deactivate an invitation (By Group Admin): // ** REVISAR ** //
 router.delete("/:invitationId", checkIsAdmin, async (req, res, next) => {
     try {
         const { invitationId } = req.params;
