@@ -3,7 +3,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg4ODM5MTEsImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc2NzQzMTF9.BhaWIPn5Cn7_Rsh0lTMLsF8_NV9NvnnxRCgj0Bli0lI
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkwMDIzNTAsImlkIjoxNiwidXNlcm5hbWUiOiJtaWtfY2VydmFudGVzIiwibmFtZSI6Ik1pZ3VlbCIsImlhdCI6MTcxNzc5Mjc1MH0.vJJaj7v06SmEYRWGQB6Mxzz6df4lPPAwIq8l0btVDHg
 
 ### Login
 POST {{HOST}}/api/login
