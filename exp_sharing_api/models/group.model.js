@@ -10,7 +10,7 @@ const getById = (groupId) => {
 
 const getByDescriptionCategoryUser = (description, category_id, userId) => {
   return db.query(
-    "SELECT * FROM groups_app WHERE description = ? AND category_id = ? AND creator_user_id = ?",
+    "SELECT * FROM groups_app WHERE description = ? AND category_id = ? AND creator_user_id = ? AND active = 1",
     [description, category_id, userId]
   );
 };

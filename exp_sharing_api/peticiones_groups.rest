@@ -13,7 +13,7 @@ GET {{HOST}}/api/groups
 Authorization : {{TOKEN}}
 
 ### GET BY ID:
-GET {{HOST}}/api/groups/12
+GET {{HOST}}/api/groups/11
 Authorization : {{TOKEN}}
 
 ### CREATE NEW GROUP
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ### DELETE GROUP
-DELETE {{HOST}}/api/groups/22
+DELETE {{HOST}}/api/groups/13
 Authorization : {{TOKEN}}
 
 
