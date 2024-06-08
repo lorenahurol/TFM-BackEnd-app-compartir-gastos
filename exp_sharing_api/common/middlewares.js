@@ -3,7 +3,7 @@ const Group = require("../models/group.model");
 
 const checkToken = (req, res, next) => {
   if (!req.headers["authorization"])
-    res.status(403).json({ error: "Invalid API key" });
+    return res.status(403).json({ error: "Invalid API key" });
 
   const token = req.headers["authorization"];
 
@@ -11,7 +11,7 @@ const checkToken = (req, res, next) => {
   try {
     payload = Jwt.verify(token, process.env.PRIVATE_KEY);
   } catch (error) {
-    return res.json({ error: error });
+    return res.status(500).json(error)
   }
 
   req.user = payload;
@@ -48,7 +48,7 @@ const checkIsAdmin = async (req, res, next) => {
 /* Valida si el usuario es admin, pero sólo tenemos id_gasto (delete) */
 const checkIsAdminIdExpense = async (req, res, next) => {
   const [result] = await Group.userIsAdminIdExpense(req.params.id, req.user.id);
-
+  
   if (result.length === 0) {
     return res.status(401).json({ error: "El usuario no es admin del grupo" });
   }

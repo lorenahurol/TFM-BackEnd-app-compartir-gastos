@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs')
 
-const { create , getById, getByUsername} = require("../../models/user.model");
+const { create , getById, getFirstUsername} = require("../../models/user.model");
 const {createToken} = require('../../common/JWTLogin')
 
 /**
@@ -17,7 +17,7 @@ const {createToken} = require('../../common/JWTLogin')
 router.get("/checkUsername/:username", async (req, res) => {
   const username = req.params.username
 try {
-    const [result] = await getByUsername(username)
+    const [result] = await getFirstUsername(username)
     return (result.length !== 0) ? res.json({ exists: true }) : res.json({exists: false})
 } catch (err) {
     res.json({err})
