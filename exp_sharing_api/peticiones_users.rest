@@ -10,7 +10,7 @@ POST {{HOST}}/api/login
 Content-Type: application/json
 
 {
-    "mail": "miguelon_1547@pigeonmail.com",
+    "mail": "emilioj.checa@gmail.com",
     "password" : "123456",
     "rememberMe" : true
 }

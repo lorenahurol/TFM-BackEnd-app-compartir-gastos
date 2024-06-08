@@ -26,6 +26,21 @@ router.get("/roles", async (req, res) => {
   }
 });
 
+/*Para obtener la información de un grupo a la que pertenece un ususario*/
+
+router.get("/getallbyuser", async (req, res) => {
+  try {
+    console.log("pasa por getall")
+    const [result] = await Group.gellAllInfoGruopsUser(req.user.id);
+    console.log(result);
+    res.json(result);
+
+  } catch (error) {
+    console.log(error);
+    res.json(error);
+  }
+});
+
 // Obtener todos los grupos existentes (activos e inactivos):
 router.get("/", async (req, res, next) => {
   try {
@@ -110,21 +125,6 @@ router.delete("/:group_id", checkIsAdmin, async (req, res, next) => {
     res.json({ message: "Group eliminado correctamente" });
   } catch (error) {
     next(error);
-  }
-});
-
-/*Para obtener la información de un grupo a la que pertenece un ususario*/
-
-router.get("/getallbyuser", async (req, res) => {
-  try {
-    console.log("pasa por getall")
-    const [result] = await Group.gellAllInfoGruopsUser(req.user.id);
-    console.log(result);
-    res.json(result);
-
-  } catch (error) {
-    console.log(error);
-    res.json(error);
   }
 });
 
