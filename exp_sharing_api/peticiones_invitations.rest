@@ -26,18 +26,18 @@ Content-Type: application/json
 
 {
     "group_id": 13,
-    "user_id": 5,
+    "user_id": 7,
     "message": "Hola, acepta mi invitacion"
 
 }
 
 ### ACCEPT INVITATION:
-PUT {{HOST}}/api/invitations/1/accept
+PUT {{HOST}}/api/invitations/8/accept
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "user_id": 3,
+    "user_id": 7,
     "accepted": 1
 }
 
@@ -52,5 +52,5 @@ Content-Type: application/json
 }
 
 ### DELETE INVITATION:
-DELETE {{HOST}}/api/invitations/7
+DELETE {{HOST}}/api/invitations/9
 Authorization : {{TOKEN}}
