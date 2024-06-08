@@ -49,6 +49,19 @@ router.get("/:group_id", async (req, res, next) => {
   }
 });
 
+//Obtener todos los grupos en los que se encuentra un usuario
+router.get("/all/byuserid/:user_id", async (req, res, next) => {
+  try {
+    const [result] = await Group.getAllUserGroups (req.params.user_id);
+    if (result.length === 0) {
+      return res.status(404).json({ error: "Grupo no encontrado" });
+    }
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Create Group:
 router.post("/", async (req, res, next) => {
   try {
