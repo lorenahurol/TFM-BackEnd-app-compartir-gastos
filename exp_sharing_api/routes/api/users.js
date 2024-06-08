@@ -18,7 +18,7 @@ router.get('/', async(req, res) => {
         const [result] = await getAll();
         return res.json(result);
     } catch (error) {
-        return res.json(error);
+        next(error);
 }
 });
 
@@ -40,7 +40,7 @@ router.get("/bygroup/:groupId", (req, res) => {
       return res.json(data[0]);
     })
     .catch((err) => {
-      return res.json(err);
+      next(err);
     });
 });
 
@@ -61,7 +61,7 @@ router.get("/members/bygroup/:groupId", (req, res) => {
       return res.json(data[0]);
     })
     .catch((err) => {
-      return res.json(err);
+      next(err);
     });
 });
 
@@ -88,7 +88,7 @@ router.get("/:userId", async (req, res) => {
     result.phone = phone.substring(separatorIndex+1)
     return res.json(result);
   } catch (error) {
-    return res.json(error);
+    next(error);
   }
 });
 
@@ -109,7 +109,7 @@ router.get("/byusername/:username", async (req, res) => {
     if (!result) return res.status(404).json({ error: "Selected username does not exist" })
     return res.json(result);
   } catch (error) {
-    return res.json(error);
+    next(error);
   }
 });
 
@@ -134,7 +134,7 @@ router.put('/update', async (req, res) => {
 
     return res.json ({success: true})
   } catch (error) {
-    return res.json(error);
+    next(error);
   }
 });
 
@@ -157,7 +157,7 @@ router.put("/updatePwd", async (req, res) => {
 
     return res.json({ success: true });
   } catch (error) {
-    return res.json(error);
+    next(error);
   }
 });
 
