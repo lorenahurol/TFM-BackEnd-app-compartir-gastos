@@ -73,6 +73,18 @@ const getAllUserGroupsAsAdmin = (userId) => {
   ]);
 };
 
+const gellAllInfoGruopsUser = (userId)=>{
+  return db.query(
+    `SELECT gm.group_id, ga.description, gc.description as category
+    FROM group_members gm 
+    inner join groups_app ga on ga.id = gm.group_id
+    inner join group_categories gc on gc.id = ga.category_id
+    where gm.user_id=?`, [
+    userId,
+  ]);
+}
+
+
 module.exports = {
   getAll,
   getById,
@@ -85,4 +97,5 @@ module.exports = {
   userIsAdminIdExpense,
   getAllUserGroupsAsMember,
   getAllUserGroupsAsAdmin,
+  gellAllInfoGruopsUser
 };
