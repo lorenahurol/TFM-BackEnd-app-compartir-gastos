@@ -26,6 +26,21 @@ router.get("/roles", async (req, res) => {
   }
 });
 
+/*Para obtener la información de un grupo a la que pertenece un ususario*/
+
+router.get("/getallbyuser", async (req, res) => {
+  try {
+    console.log("pasa por getall")
+    const [result] = await Group.gellAllInfoGruopsUser(req.user.id);
+    console.log(result);
+    res.json(result);
+
+  } catch (error) {
+    console.log(error);
+    res.json(error);
+  }
+});
+
 // Obtener todos los grupos existentes (activos e inactivos):
 router.get("/", async (req, res, next) => {
   try {
@@ -44,6 +59,19 @@ router.get("/:group_id", async (req, res, next) => {
       return res.status(404).json({ error: "Grupo no encontrado" });
     }
     res.json(result[0]);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//Obtener todos los grupos en los que se encuentra un usuario
+router.get("/all/byuserid/:user_id", async (req, res, next) => {
+  try {
+    const [result] = await Group.getAllUserGroups (req.params.user_id);
+    if (result.length === 0) {
+      return res.status(404).json({ error: "Grupo no encontrado" });
+    }
+    res.json(result);
   } catch (error) {
     next(error);
   }

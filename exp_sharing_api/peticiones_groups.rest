@@ -3,7 +3,7 @@
 @HOST = http://127.0.0.1:{{PORT}}
 
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg4ODM5MTEsImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc2NzQzMTF9.BhaWIPn5Cn7_Rsh0lTMLsF8_NV9NvnnxRCgj0Bli0lI
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkwNDM3NzAsImlkIjoxMDMsInVzZXJuYW1lIjoiZW1pbGlvY2hlY2EiLCJuYW1lIjoiRW1pbGlvIiwiaWF0IjoxNzE3ODM0MTcwfQ.WIY2Wj7z_91SmXPCtqJJ8x1SFhy0D5Nop8jKCweGRLo
 
 
 ### PETICIONES GROUPS:
@@ -13,7 +13,7 @@ GET {{HOST}}/api/groups
 Authorization : {{TOKEN}}
 
 ### GET BY ID:
-GET {{HOST}}/api/groups/12
+GET {{HOST}}/api/groups/11
 Authorization : {{TOKEN}}
 
 ### CREATE NEW GROUP
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ### DELETE GROUP
-DELETE {{HOST}}/api/groups/22
+DELETE {{HOST}}/api/groups/13
 Authorization : {{TOKEN}}
 
 
@@ -50,3 +50,6 @@ Authorization : {{TOKEN}}
 GET {{HOST}}/api/groups/roles
 Authorization : {{TOKEN}}
 
+###
+GET {{HOST}}/api/groups/getallbyuser
+Authorization : {{TOKEN}}

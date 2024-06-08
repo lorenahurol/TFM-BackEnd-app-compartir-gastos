@@ -19,6 +19,10 @@ const getByMail = (userMail) => {
     return db.query('select * from users where mail = ? ',[userMail]);
 }
 
+const getFirstUsername = (username) => {
+    return db.query('select * from users where username = ? limit 1',[username]);
+}
+
 const getByUsername = (username) => {
     return db.query('select * from users where username = ? ',[username]);
 }
@@ -47,5 +51,5 @@ const deleteById = (userId) => {
 }
 
 module.exports = {
-    getAll, getAllbyGroup, getAllMemberbyGroup, getById, getByMail, getByUsername, create, updateById, updatePassword, deleteById
+    getAll, getAllbyGroup, getAllMemberbyGroup, getById, getByMail, getByUsername, create, updateById, updatePassword, deleteById, getFirstUsername
 }
