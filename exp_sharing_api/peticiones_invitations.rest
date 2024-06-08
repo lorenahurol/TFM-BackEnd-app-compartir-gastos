@@ -12,11 +12,11 @@ GET {{HOST}}/api/invitations
 Authorization : {{TOKEN}}
 
 ### GET BY ID:
-GET {{HOST}}/api/invitations/12
+GET {{HOST}}/api/invitations/1
 Authorization : {{TOKEN}}
 
 ### GET PENDING INVITATIONS BY GROUP AND USER:
-GET {{HOST}}/api/invitations/bygroupanduser/2/3
+GET {{HOST}}/api/invitations/bygroupanduser/13/2
 Authorization : {{TOKEN}}
 
 ### CREATE INVITATION
@@ -26,7 +26,7 @@ Content-Type: application/json
 
 {
     "group_id": 13,
-    "user_id": 2,
+    "user_id": 5,
     "message": "Hola, acepta mi invitacion"
 
 }
@@ -52,5 +52,5 @@ Content-Type: application/json
 }
 
 ### DELETE INVITATION:
-DELETE {{HOST}}/api/invitations/1
+DELETE {{HOST}}/api/invitations/7
 Authorization : {{TOKEN}}

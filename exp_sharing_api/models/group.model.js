@@ -33,6 +33,8 @@ const deleteById = (groupId) => {
   return db.query("UPDATE groups_app SET active = 0 where id = ?", [groupId]);
 };
 
+// -- Queries de permisos: -- //
+
 // Devuelve un registro si el usuario pertenece al grupo
 const userBelongsToGroup = (groupId, userId) => {
   return db.query(
@@ -50,6 +52,17 @@ const userIsAdmin = (groupId, userId) => {
   );
 };
 
+const userIsAdminIdInvitation = (invitationId, userId) => {
+  return db.query(
+    `select *
+    from invitations as inv
+    inner join groups_app as gro on gro.id = inv.group_id
+    where inv.id = ?
+    and gro.creator_user_id = ?`,
+    [invitationId, userId]
+  )
+}
+
 const userIsAdminIdExpense = (expenseId, userId) => {
   return db.query(
     `select * 
@@ -60,6 +73,7 @@ const userIsAdminIdExpense = (expenseId, userId) => {
     [expenseId, userId]
   );
 };
+
 
 const getAllUserGroupsAsMember = (userId) => {
   return db.query("select group_id from group_members where user_id = ?", [
@@ -100,6 +114,7 @@ module.exports = {
   deleteById,
   userBelongsToGroup,
   userIsAdmin,
+  userIsAdminIdInvitation,
   userIsAdminIdExpense,
   getAllUserGroupsAsMember,
   getAllUserGroupsAsAdmin,

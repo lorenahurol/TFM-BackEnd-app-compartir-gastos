@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const Invitation = require("../../models/invitation.model");
-const { checkIsAdmin } = require("../../common/middlewares");
+const { checkIsAdmin, checkIsAdminIdInvitation } = require("../../common/middlewares");
 
 // Requests for /api/invitations:
 
@@ -110,7 +110,7 @@ router.put("/:invitationId/reject", async (req, res, next) => {
 })
 
 // Deactivate an invitation (By Group Admin):
-router.delete("/:invitationId", checkIsAdmin, async (req, res, next) => {
+router.delete("/:invitationId", checkIsAdminIdInvitation, async (req, res, next) => {
     try {
         const { invitationId } = req.params;
 
