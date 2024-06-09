@@ -19,22 +19,15 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGr
 // Desactivar todos los gastos de un grupo
 router.delete('/bygroup/desactive/:group_id', desactiveExpensesByGroupId);
 
-// Obtener, crear, editar y borrar gasto individual -----------------------------------------
 
-// Obtener gasto individual
+// CRUD de gasto ----------------------------------------------------------------------------
 router.get("/:id", getExpenseById);
-
-// Creacion nuevo gasto
 router.post('/', checkIsAdmin, createExpense);
-
-// edicion por id
 router.put('/:id', checkIsAdmin, updateExpense);
-
-// delete por id
 router.delete('/:id', checkIsAdminIdExpense, deleteExpense);
 
 
-// Pagos -------------------------------------------------------------------------------
+// Pagos -------------------------------------------------------------------------------------
 router.get('/payments/:groupId', getAllPaymentsByGroup);
 
 

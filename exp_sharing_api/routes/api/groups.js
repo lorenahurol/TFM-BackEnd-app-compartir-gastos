@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const Group = require("../../models/group.model");
 const {getRoles, getAllInfoGroupByUser, getAllGroups, getGroupById, getAllGroupsByUser,
   createGroup, updateGroup, deleteGroupById } = require("../../controllers/groups.controller");
 const { checkIsAdmin } = require("../../common/middlewares");
