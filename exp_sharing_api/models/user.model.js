@@ -27,6 +27,12 @@ const getByUsername = (username) => {
     return db.query('select * from users where username = ? ',[username]);
 }
 
+const getUsernamesList = (filter) => {
+  const formattedFilter = `%${filter}%`;
+  return db.query("SELECT username FROM users WHERE username LIKE ? LIMIT 10", [formattedFilter]);
+};
+
+
 
 const create = ({mail, username, password, firstname, lastname, phone, image}) => {
     return db.query('insert into users (mail, username, password, firstname, lastname, phone, image) values (?, ?, ?, ?, ?, ?, ?)',
@@ -51,5 +57,5 @@ const deleteById = (userId) => {
 }
 
 module.exports = {
-    getAll, getAllbyGroup, getAllMemberbyGroup, getById, getByMail, getByUsername, create, updateById, updatePassword, deleteById, getFirstUsername
+    getAll, getAllbyGroup, getAllMemberbyGroup, getById, getByMail, getByUsername, getUsernamesList, create, updateById, updatePassword, deleteById, getFirstUsername
 }

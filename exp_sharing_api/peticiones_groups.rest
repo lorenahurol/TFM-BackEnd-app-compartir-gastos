@@ -3,7 +3,7 @@
 @HOST = http://127.0.0.1:{{PORT}}
 
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkwNDM3NzAsImlkIjoxMDMsInVzZXJuYW1lIjoiZW1pbGlvY2hlY2EiLCJuYW1lIjoiRW1pbGlvIiwiaWF0IjoxNzE3ODM0MTcwfQ.WIY2Wj7z_91SmXPCtqJJ8x1SFhy0D5Nop8jKCweGRLo
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg5NjQzNTksImlkIjoxMDIsInVzZXJuYW1lIjoiYW51YXJraGFuIiwibmFtZSI6IkFudWFyIiwiaWF0IjoxNzE3NzU0NzU5fQ.SL5W98p4OIGUKLKP-lRPse7-QYL_rKWYZob2OICN21s
 
 
 ### PETICIONES GROUPS:
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 {
      
-    "description": "Cena de empresa",
+    "description": "Cena de empresa Anuar 2",
     "category_id": 1
 }
 

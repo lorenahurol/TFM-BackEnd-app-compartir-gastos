@@ -1,33 +1,10 @@
 const router = require('express').Router();
-const Categories = require('../../models/categories.model');
+const { getAllCategories, getCategoryById} = require('../../controllers/categories.controller');
 
 //Obtener todas las caterogias
-router.get('/', async(req, res) => {
-    try {
-        const [result] = await Categories.getAll();
-        if (!result[0]) 
-        {
-            return res.status (404).json({error:"No data"});
-        }
-        res.json(result);
-    } catch (error) {
-        res.json(error);
-    }
-});
+router.get('/', getAllCategories);
 
 //Obtener la caterogia por id
-router.get("/:id", async (req, res) => {
-    try {
-        const [[result]] = await Categories.getById(req.params.id);
-        if (!result) 
-        {
-            return res.status (404).json({error:"Selected Id does not exist"});
-        }
-        res.json(result);
-    } catch (error) {
-      res.json(error);
-    }
-  });
-
+router.get("/:id", getCategoryById);
 
 module.exports = router;
