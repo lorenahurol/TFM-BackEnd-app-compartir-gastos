@@ -42,7 +42,7 @@ const createInvitation = async (req, res, next) => {
 
         // Check that the fields are filled in:
         if (!group_id || !user_id) {
-            return res.json({ error: "Campos obligatorios" });
+            return res.json({ error: "Todos los campos son obligatorios" });
         }
 
         // Check if the invitation for the user already exists:

@@ -112,23 +112,6 @@ const createGroup = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-
-    // Check if the group already exists for the logged user:
-    const [[groupExists]] = await Group.getByDescriptionCategoryUser(
-      description,
-      category_id,
-      userId
-    );
-    if (groupExists) {
-      return res.status(409).json({ error: "El grupo ya existe" });
-    }
-
-    const groupData = { description, category_id, creator_user_id: userId };
-
-    const [result] = await Group.insert(groupData);
-    // Res: New group data
-    const [[newGroup]] = await Group.getById(result.insertId);
-    res.json(newGroup);
 };
 
 const updateGroup = async (req, res, next) => {
