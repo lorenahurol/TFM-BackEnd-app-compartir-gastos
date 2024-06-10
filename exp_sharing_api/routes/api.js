@@ -12,6 +12,7 @@ const apiPaymentsRouter = require('./api/payments');
 const apiMailingRouter = require('./api/mails');
 const apiMessagesgRouter = require('./api/messages');
 const apiCategoriesgRouter = require('./api/categories');
+const apiMembersgRouter = require('./api/members');
 
 router.use('/login', apiLogin);
 router.use('/register', apiRegister);
@@ -23,6 +24,6 @@ router.use("/payments", checkToken, apiPaymentsRouter);
 router.use("/mails", checkToken, apiMailingRouter);
 router.use("/messages", checkToken, apiMessagesgRouter);
 router.use("/categories", checkToken, apiCategoriesgRouter);
-
+router.use("/members", checkToken, apiMembersgRouter);
 
 module.exports = router;

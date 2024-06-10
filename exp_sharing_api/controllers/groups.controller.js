@@ -1,4 +1,5 @@
 const Group = require("../models/group.model");
+const Member = require("../models/members.model");
 
 /* Obtiene un objeto con dos arrays: grupos de admin y grupos como miembro (
     el usuario lo obtiene del token a través del middelware checktoken */
@@ -100,6 +101,17 @@ const createGroup = async (req, res, next) => {
         const [result] = await Group.insert(groupData);
         // Res: New group data
         const [[newGroup]] = await Group.getById(result.insertId);
+        if([newGroup])
+        {
+            const memberNew = 
+            {
+                "group_id": result.insertId,
+                "user_id": userId,
+                "percent": 0,
+                "equitable": 1
+            }
+            await Member.create(memberNew);
+        }
         res.json(newGroup);
     } catch (error) {
         next(error);
