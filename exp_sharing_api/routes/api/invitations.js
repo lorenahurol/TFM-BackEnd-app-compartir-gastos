@@ -46,18 +46,20 @@ router.post("/", checkIsAdmin, async (req, res, next) => {
         const { group_id, user_id, message } = req.body;
 
         // Check that the fields are filled in:
-        if (!group_id || !user_id || !message) {
+        if (!group_id || !user_id) {
             return res.json({ error: "Todos los campos son obligatorios" });
         }
 
         // Check if the invitation for the user already exists:
-        console.log(`group_id: ${group_id}, user_id: ${user_id}`);
         const pendingInvitation = await Invitation.getByGroupAndUser(group_id, user_id);
             if (pendingInvitation[0].length > 0) {
                 return res.json({ error: "La invitación ya existe" });
-            }
+        }
         
-        const [result] = await Invitation.insert(req.body);
+        // Message field can be null:
+        const invitationData = { group_id, user_id, message: message || null }
+        
+        const [result] = await Invitation.insert(invitationData);
         res.json(result);
     } catch (error) {
         next(error);

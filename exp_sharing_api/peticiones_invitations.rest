@@ -52,5 +52,5 @@ Content-Type: application/json
 }
 
 ### DELETE INVITATION:
-DELETE {{HOST}}/api/invitations/7
+DELETE {{HOST}}/api/invitations/13
 Authorization : {{TOKEN}}
