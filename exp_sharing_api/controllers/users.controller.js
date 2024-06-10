@@ -1,5 +1,5 @@
 const bcrypt = require ('bcryptjs')
-const { getAll, getAllbyGroup, getById, getByUsername, updateById, deleteById, 
+const { getAll, getAllbyGroup, getById, getByUsername, getUsernamesList,  updateById, deleteById, 
     updatePassword, getAllMemberbyGroup } = require('../models/user.model');
 
 /**
@@ -12,12 +12,12 @@ const { getAll, getAllbyGroup, getById, getByUsername, updateById, deleteById,
  * 
  * @async
  */
-const getAllUser = async(req, res) => {
+const getAllUser = async(req, res, next) => {
     try {
         const [result] = await getAll();
         return res.json(result);
     } catch (error) {
-        next(error);
+        return next(error);
     }
 };
 
@@ -33,13 +33,13 @@ const getAllUser = async(req, res) => {
  * 
  * @async
  */
-const getAllActiveUsersByGroup = (req, res) => {
+const getAllActiveUsersByGroup = (req, res, next) => {
   getAllbyGroup(req.params.groupId)
     .then((data) => {
       return res.json(data[0]);
     })
     .catch((err) => {
-      next(err);
+      return next(err);
     });
 };
 
@@ -54,13 +54,13 @@ const getAllActiveUsersByGroup = (req, res) => {
  * 
  * @async
  */
-const getAllUsersByGroup = (req, res) => {
+const getAllUsersByGroup = (req, res, next) => {
   getAllMemberbyGroup(req.params.groupId)
     .then((data) => {
       return res.json(data[0]);
     })
     .catch((err) => {
-      next(err);
+      return next(err);
     });
 };
 
@@ -76,7 +76,7 @@ const getAllUsersByGroup = (req, res) => {
  * 
  * @async
  */
-const getUserById = async (req, res) => {
+const getUserById = async (req, res, next) => {
   try {
     const [[result]] = await getById(req.params.userId);
     if (!result) return res.status(404).json({ error: "Selected Id does not exist" })
@@ -87,7 +87,7 @@ const getUserById = async (req, res) => {
     result.phone = phone.substring(separatorIndex+1)
     return res.json(result);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -102,10 +102,29 @@ const getUserById = async (req, res) => {
  * 
  * @async
  */
-const getUserByUsername = async (req, res) => {
+const getUserByUsername = async (req, res, next) => {
   try {
     const [[result]] = await getByUsername(req.params.username);
     if (!result) return res.status(404).json({ error: "Selected username does not exist" })
+    return res.json(result);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+/**
+ * GET /filteredusernames/:username
+ * 
+ * Endpoint to retrieve a list of usernames containing the given partial username.
+ * 
+ * @param {string} req.params.username - Part of a username of the user to be retrieved.
+ * @returns {Promise<object>} - Returns a JSON response containing an array of usernames (if found).
+ * 
+ * @async
+ */
+const getFilteredUsernames = async (req, res, next) => {
+  try {
+    const [result] = await getUsernamesList(req.params.username);
     return res.json(result);
   } catch (error) {
     next(error);
@@ -122,7 +141,7 @@ const getUserByUsername = async (req, res) => {
  * @throws {Error} - If an error occurs during user update or password hashing.
  *
  */
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
   try {
     const userId = req.user.id;
 
@@ -143,7 +162,7 @@ const updateUser = async (req, res) => {
  * @returns {void} - Returns a json object with a boolean {success : true}  
  * @throws {Error} - If an error occurs during password hashing or user update.
  */
-const updatePass = async (req, res) => {
+const updatePass = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const newPassword = req.body.password
@@ -160,7 +179,7 @@ const updatePass = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res, next) => {
     try {
         const [result] = await deleteById(req.params.id);
         res.json(result);
@@ -170,12 +189,13 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
-    getAllUser,
-    getAllActiveUsersByGroup,
-    getAllUsersByGroup,
-    getUserById,
-    getUserByUsername,
-    updateUser,
-    updatePass,
-    deleteUser
+  getAllUser,
+  getAllActiveUsersByGroup,
+  getAllUsersByGroup,
+  getUserById,
+  getUserByUsername,
+  getFilteredUsernames,
+  updateUser,
+  updatePass,
+  deleteUser
 }
