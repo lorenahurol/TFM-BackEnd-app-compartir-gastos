@@ -23,7 +23,7 @@ Content-Type: application/json
 
 {
      
-    "description": "Cena de empresa Anuar",
+    "description": "Cena de empresa Anuar 2",
     "category_id": 1
 }
 

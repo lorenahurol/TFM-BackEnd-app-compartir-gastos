@@ -60,8 +60,8 @@ const userIsAdminIdInvitation = (invitationId, userId) => {
     where inv.id = ?
     and gro.creator_user_id = ?`,
     [invitationId, userId]
-  )
-}
+  );
+};
 
 const userIsAdminIdExpense = (expenseId, userId) => {
   return db.query(
@@ -73,7 +73,6 @@ const userIsAdminIdExpense = (expenseId, userId) => {
     [expenseId, userId]
   );
 };
-
 
 const getAllUserGroupsAsMember = (userId) => {
   return db.query("select group_id from group_members where user_id = ?", [
@@ -88,22 +87,23 @@ const getAllUserGroupsAsAdmin = (userId) => {
 };
 
 const getAllUserGroups = (userId) => {
-  return db.query("SELECT  group_id, groups_app.description, groups_app.category_id, groups_app.creator_user_id, groups_app.active    FROM expenses_sharing.group_members INNER JOIN groups_app on group_id = groups_app.id WHERE user_id = ?", [
-    userId,
-  ]);
+  return db.query(
+    "SELECT  group_id, groups_app.description, groups_app.category_id, groups_app.creator_user_id, groups_app.active    FROM expenses_sharing.group_members INNER JOIN groups_app on group_id = groups_app.id WHERE user_id = ?",
+    [userId]
+  );
 };
 
-const gellAllInfoGruopsUser = (userId)=>{
+const gellAllInfoGruopsUser = (userId) => {
   return db.query(
-    `SELECT gm.group_id, ga.description, gc.description as category
+    `SELECT gm.group_id, ga.description, gc.description as category, CONCAT(u.firstname, ' ', u.lastname) creator_user
     FROM group_members gm 
     inner join groups_app ga on ga.id = gm.group_id
     inner join group_categories gc on gc.id = ga.category_id
-    where gm.user_id=?`, [
-    userId,
-  ]);
-}
-
+    inner join users u on u.id = ga.creator_user_id
+    where gm.user_id = ?`,
+    [userId]
+  );
+};
 
 module.exports = {
   getAll,
@@ -119,5 +119,5 @@ module.exports = {
   getAllUserGroupsAsMember,
   getAllUserGroupsAsAdmin,
   getAllUserGroups,
-  gellAllInfoGruopsUser
+  gellAllInfoGruopsUser,
 };
