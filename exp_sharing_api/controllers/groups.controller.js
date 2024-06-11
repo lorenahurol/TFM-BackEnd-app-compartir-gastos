@@ -39,7 +39,7 @@ const getAllInfoGroupByUser = async (req, res) => {
 const getAllInfoGroupById = async (req, res) => {
   try {
     console.log(req.params.group_id);
-    const [result] = await Group.gellAllInfoGruopById(req.params.group_id);
+    const [[result]] = await Group.gellAllInfoGruopById(req.params.group_id);
     res.json(result);
   } catch (error) {
     console.log(error);
