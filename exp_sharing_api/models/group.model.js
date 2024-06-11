@@ -105,6 +105,17 @@ const gellAllInfoGruopsUser = (userId) => {
   );
 };
 
+const gellAllInfoGruopById = (groupId) => {
+  return db.query(
+    `SELECT ga.id, ga.description, gc.description as category, CONCAT(u.firstname, ' ', u.lastname) creator_user
+    FROM groups_app ga
+    inner join group_categories gc on gc.id = ga.category_id
+    inner join users u on u.id = ga.creator_user_id
+    where ga.id = ?`,
+    [groupId]
+  );
+};
+
 module.exports = {
   getAll,
   getById,
@@ -120,4 +131,5 @@ module.exports = {
   getAllUserGroupsAsAdmin,
   getAllUserGroups,
   gellAllInfoGruopsUser,
+  gellAllInfoGruopById
 };

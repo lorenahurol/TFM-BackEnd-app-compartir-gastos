@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {getRoles, getAllInfoGroupByUser, getAllGroups, getGroupById, getAllGroupsByUser,
+const {getRoles, getAllInfoGroupByUser, getAllInfoGroupById, getAllGroups, getGroupById, getAllGroupsByUser,
   createGroup, updateGroup, deleteGroupById } = require("../../controllers/groups.controller");
 const { checkIsAdmin } = require("../../common/middlewares");
 
@@ -9,6 +9,9 @@ router.get("/roles", getRoles);
 
 // Para obtener la información de un grupo a la que pertenece un ususario
 router.get("/getallbyuser", getAllInfoGroupByUser);
+
+// Para obtener la información de un grupo por su id
+router.get("/getallinfobyid/:group_id", getAllInfoGroupById);
 
 // Obtener todos los grupos existentes (activos e inactivos):
 router.get("/", getAllGroups);

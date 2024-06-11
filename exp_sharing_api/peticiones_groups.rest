@@ -3,7 +3,7 @@
 @HOST = http://127.0.0.1:{{PORT}}
 
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg5NjQzNTksImlkIjoxMDIsInVzZXJuYW1lIjoiYW51YXJraGFuIiwibmFtZSI6IkFudWFyIiwiaWF0IjoxNzE3NzU0NzU5fQ.SL5W98p4OIGUKLKP-lRPse7-QYL_rKWYZob2OICN21s
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkyNDU5MDAsImlkIjoxMDMsInVzZXJuYW1lIjoiZW1pbGlvY2hlY2EiLCJuYW1lIjoiRW1pbGlvIiwiaWF0IjoxNzE4MDM2MzAwfQ.OsjOEqKKpN83SpFUmI9I1ys4fYoUlsiZCbg08sybqOw
 
 
 ### PETICIONES GROUPS:
@@ -52,4 +52,8 @@ Authorization : {{TOKEN}}
 
 ###
 GET {{HOST}}/api/groups/getallbyuser
+Authorization : {{TOKEN}}
+
+###
+GET {{HOST}}/api/groups/getallinfobyid/12
 Authorization : {{TOKEN}}
