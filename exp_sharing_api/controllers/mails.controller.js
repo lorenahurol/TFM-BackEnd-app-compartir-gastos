@@ -23,7 +23,7 @@ const sendMail = (req, res) => {
           from: 'explitapp@gmail.com',
           to: 'explitapp@gmail.com',
           subject: 'Explit email subject',
-          html :string  = 'Hi from your nodemailer project #2'
+          html : 'Hi from your nodemailer project #2'
       };
       mailOptions.to = req.body.to;
       mailOptions.subject = req.body.subject;
@@ -32,14 +32,13 @@ const sendMail = (req, res) => {
       try {
           transporter.sendMail(mailOptions, function(err, data) {
               if (err) {
-                  console.log("Error " + err);
-                  res.send("Error " + err)
+                console.log("Error " + err);
+                return res.send("Error " + err)
               } else {
-                  console.log("Email sent successfully");
-                  res.send("Email sent successfully");
+                console.log("Email sent successfully");
+                return res.json ({success: true})
               }
           });
-          return res.json ({success: true})
       } catch (error) {
           return res.json({
               success: false,
