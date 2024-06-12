@@ -24,7 +24,7 @@ router.put("/:invitationId/accept", acceptInvitation);
 // Reject an invitation (By invited user): URL: /api/invitation/invitationId/reject
 router.put("/:invitationId/reject", rejectInvitation);
 
-// Deactivate an invitation (By Group Admin):
+// Delete an invitation (By Group Admin):
 router.delete("/:invitationId", checkIsAdminIdInvitation, deleteInvitationById);
 
 module.exports = router;

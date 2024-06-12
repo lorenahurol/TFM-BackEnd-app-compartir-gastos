@@ -1,6 +1,8 @@
 const nodeMailer = require('nodemailer');
 require('dotenv').config();
 
+require('dotenv').config()
+
 //Transporter para nodemailer con OAuth2
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -21,7 +23,7 @@ const transporter = nodeMailer.createTransport({
 const sendMail = (req, res) => {
     const mailOptions = {
           from: 'explitapp@gmail.com',
-          to: 'explitapp@gmail.com',
+          bcc: 'explitapp@gmail.com',
           subject: 'Explit email subject',
           html: 'Hi from your nodemailer project #2'
     };

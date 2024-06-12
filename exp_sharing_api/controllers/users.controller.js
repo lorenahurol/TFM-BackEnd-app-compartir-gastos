@@ -115,10 +115,10 @@ const getUserByUsername = async (req, res, next) => {
 /**
  * GET /filteredusernames/:username
  * 
- * Endpoint to retrieve a list of usernames containing the given partial username.
+ * Endpoint to retrieve a list of active users usernames containing the given partial string.
  * 
  * @param {string} req.params.username - Part of a username of the user to be retrieved.
- * @returns {Promise<object>} - Returns a JSON response containing an array of usernames (if found).
+ * @returns {Promise<object>} - Returns a JSON response containing an array of usernames and corresponding id (if found).
  * 
  * @async
  */
