@@ -48,7 +48,7 @@ const sendMail = async (req, res) => {
       
       const personalizedTemplate = replacePlaceholders(template, placeholders);
 
-      const currentHtml = (html.length > 0) ? html : personalizedTemplate.html
+      const currentHtml = (html) ? html : personalizedTemplate.html
 
       const mailOptions = {
         from: 'explitapp@gmail.com',
