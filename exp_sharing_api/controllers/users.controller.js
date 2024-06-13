@@ -180,12 +180,15 @@ const updatePass = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, next) => {
-    try {
-        const [result] = await deleteById(req.params.id);
-        res.json(result);
-    } catch (err) {
-        res.json(err);
-    }
+  // Verifies that the user requesting the action is the same to be deleted
+  if (req.params.userId !== req.user.id.toString())
+    return res.status(401).json({ error: "Unauthorized" })
+  try {
+      const [result] = await deleteById(req.params.userId);
+      res.json(result);
+  } catch (err) {
+      res.json(err);
+  }
 };
 
 module.exports = {
