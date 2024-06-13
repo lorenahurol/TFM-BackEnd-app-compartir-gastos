@@ -3,15 +3,15 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg5OTg4MTksImlkIjoxMDEsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTc3ODkyMTl9.ugirhG_CEwXaOMUNrrqiX1484L8aJRiTlMXwSxoN8LY
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTk0Njc0NTIsImlkIjoxMTAsInVzZXJuYW1lIjoiZ29uIiwibmFtZSI6IkdvbiIsImlhdCI6MTcxODI1Nzg1Mn0.n8CCAPJ43vPKGX44XIiQL1zR2z8WcahG28PislaVsmU
 
 ### Login
 POST {{HOST}}/api/login
 Content-Type: application/json
 
 {
-    "mail": "miguelon_1547@pigeonmail.com",
-    "password" : "123456",
+    "mail": "gonzalo.scanferla@gmail.com",
+    "password" : "12345",
     "rememberMe" : true
 }
 
@@ -31,17 +31,21 @@ Authorization : {{TOKEN}}
 GET {{HOST}}/api/users/byusername/blavens2o
 Authorization : {{TOKEN}}
 
+### Get Filtered Usernames
+GET {{HOST}}/api/users/filteredusernames/mi
+Authorization : {{TOKEN}}
+
 ### Create (register)
 POST {{HOST}}/api/register
 Content-Type: application/json
 
 //mail, username, password, firstname, lastname, phone, image
 {
-    "mail": "miguelon_1547@pigeonmail.com",
-    "username": "mik_cervantes",
+    "mail": "g_scanferla@yahoo.it",
+    "username": "scanferla_yah",
     "password": "123456",
-    "firstname": "Miguel",
-    "lastname": "De Cervantes Saavedra",
+    "firstname": "Gonyah",
+    "lastname": "Yahferla",
     "phone": "123456789",
     "image": ""
 }
