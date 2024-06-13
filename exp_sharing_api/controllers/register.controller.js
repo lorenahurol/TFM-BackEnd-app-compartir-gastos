@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const { create , getById, getFirstUsername} = require("../models/user.model");
+const { create , getById, getFirstUsername, getActiveByMail} = require("../models/user.model");
 const {createToken} = require('../common/JWTLogin')
 
 
@@ -22,6 +22,30 @@ const existUsername = async (req, res) => {
   } catch (err) {
       res.json({err})
   }
+};
+
+/**
+ * GET /checkMail/:mail
+ * 
+ * Endpoint to check if an email adress already exists and the user is active.
+ * Fetches the user email from the database and returns whether it exists and it's active.
+ * 
+ * @param {string} req.params.mail - The email to be checked.
+ * @returns {Promise<void>} - Returns a JSON response assigning the following values:
+ *      {active : null} -> the email does not exist.
+ *      {active : treu} -> the email exists and the user is active.
+ *      {active : false} -> the email exists but the user has unsubscribed.
+ */
+const existMail = async (req, res) => {
+    const mail = req.params.mail
+    try {
+        const [[result]] = await getActiveByMail(mail)
+        if (!result) return res.json({ active: null })
+        if (result.active === 0) return res.json({ active: false })
+        if (result.active === 1) return res.json({ active: true })
+    } catch (err) {
+        res.json({err})
+    }
 };
   
 /**
@@ -56,5 +80,6 @@ const createNewUser = async (req, res) => {
 
 module.exports = {
     existUsername,
+    existMail,
     createNewUser
 }

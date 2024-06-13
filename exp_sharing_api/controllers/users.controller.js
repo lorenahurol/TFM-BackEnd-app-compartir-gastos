@@ -184,8 +184,8 @@ const deleteUser = async (req, res, next) => {
   if (req.params.userId !== req.user.id.toString())
     return res.status(401).json({ error: "Unauthorized" })
   try {
-      const [result] = await deleteById(req.params.userId);
-      res.json(result);
+    const [result] = await deleteById(req.params.userId);
+    return res.json({ success: true })
   } catch (err) {
       res.json(err);
   }
