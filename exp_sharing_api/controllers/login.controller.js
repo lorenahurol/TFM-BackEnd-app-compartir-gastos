@@ -25,7 +25,10 @@ const login = async (req, res) => {
       // Checks if selected mail exists
       const [[user]] = await getByMail(mail);
       if (!user) throw new Error();
-  
+      
+      // Checks if the user has unsuscribed
+      if (!user.active) throw new Error();
+      
       // Checks if the password is correct
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) throw new Error();

@@ -15,7 +15,7 @@ router.get("/byusername/:username", getUserByUsername);
 router.get("/filteredusernames/:username", getFilteredUsernames);
 router.put('/update', updateUser);
 router.put("/updatePwd", updatePass);
-router.delete('/:id', deleteUser);
+router.delete('/:userId', deleteUser);
 
 
 module.exports = router;

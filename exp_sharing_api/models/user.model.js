@@ -27,6 +27,10 @@ const getByUsername = (username) => {
     return db.query('select * from users where username = ? ',[username]);
 }
 
+const getActiveByMail = (userMail) => {
+    return db.query('select active from users where mail = ? ',[userMail]);
+}
+
 const getUsernamesList = (filter) => {
   const formattedFilter = `%${filter}%`;
   return db.query("SELECT username, id FROM users WHERE username LIKE ? and active = 1 LIMIT 10", [formattedFilter]);
@@ -57,5 +61,5 @@ const deleteById = (userId) => {
 }
 
 module.exports = {
-    getAll, getAllbyGroup, getAllMemberbyGroup, getById, getByMail, getByUsername, getUsernamesList, create, updateById, updatePassword, deleteById, getFirstUsername
+    getAll, getAllbyGroup, getAllMemberbyGroup, getById, getByMail, getByUsername, getUsernamesList, create, updateById, updatePassword, deleteById, getFirstUsername, getActiveByMail
 }
