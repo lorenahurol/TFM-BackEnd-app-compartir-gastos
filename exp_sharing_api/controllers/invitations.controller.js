@@ -25,7 +25,6 @@ const getInvitationById = async (req, res, next) => {
 const getInvationByGroupAnduser = async (req, res, next) => {
   try {
       const { groupId, userId } = req.params;
-      console.log(req.params);
     const [result] = await Invitation.getByGroupAndUser(groupId, userId);
     res.json(result);
   } catch (error) {

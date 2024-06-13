@@ -30,7 +30,7 @@ const updateStatus = (invitationId, accepted) => {
 
 // Delete invitation (deactivate invitation):
 const deleteById = (invitationId) => {
-    return db.query("UPDATE invitations SET active = 0 WHERE id = ?", [invitationId]);
+    return db.query("delete from invitations WHERE id = ?", [invitationId]);
 
 }
 

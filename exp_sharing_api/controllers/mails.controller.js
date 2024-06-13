@@ -1,6 +1,9 @@
 const nodeMailer = require('nodemailer');
 require('dotenv').config();
 
+const {getById} = require ('../models/user.model')
+const { EMAIL_TEMPLATES } = require ('../common/db/emailTemplates.db')
+
 //Transporter para nodemailer con OAuth2
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -16,35 +19,89 @@ const transporter = nodeMailer.createTransport({
     },
 });
 
-  
-// Creacion nuevo email
-const sendMail = (req, res) => {
-    const mailOptions = {
-          from: 'explitapp@gmail.com',
-          to: 'explitapp@gmail.com',
-          subject: 'Explit email subject',
-          html: 'Hi from your nodemailer project #2'
-    };
-    mailOptions.to = req.body.to;
-    mailOptions.subject = req.body.subject;
-    mailOptions.html = req.body.html;
-  
-    try {
-        transporter.sendMail(mailOptions, function(err, data) {
-              if (err) {
-                console.log("Error " + err);
-                return res.send("Error " + err)
-              } else {
-                console.log("Email sent successfully");
-                return res.json ({success: true})
-              }
-        });
-    } catch (error) {
-          return res.json({
-              success: false,
-              error: error
-          })
-    }
+
+/**
+ * Sends emails to a list of recipients with personalized content.
+ *
+ * @param {string[]} req.body.bcc - An array of recipient user IDs.
+ * @param {string} req.body.subject - Subject of the email.
+ * @param {string} req.body.selectedTemplate - The selected email template to be used (key value in file ../common/db/emailTemplates.db.js).
+ * @returns {Promise<void>} - A promise that resolves when the emails have been sent.
+ */
+const sendMail = async (req, res) => {
+
+  const { bcc, subject, selectedTemplate } = req.body
+  let template = EMAIL_TEMPLATES[selectedTemplate]
+  const { name, mail } = req.user
+
+  // Para cada destinatario elabora el texto y envia el email
+  let responses = await Promise.all(
+    bcc.map(async userId => {
+      // Recoge los datos de usuario y destinatarios y personaliza los mensajes
+      const [[recipient]] = await getById(userId)
+
+      // Crea un template personalizado remplazando los placeholders por sus valores
+      const placeholders = {
+        $name : name,
+        $friendsName: recipient.firstname,
+      };
+      const personalizedTemplate = replacePlaceholders(template, placeholders);
+      
+      const mailOptions = {
+        from: 'explitapp@gmail.com',
+        bcc: recipient.mail,
+        subject: personalizedTemplate.subject,
+        html: personalizedTemplate.html,
+      };
+      const response = await emailHandler(mailOptions)
+      // Almacena las respuestas en un array de objetos
+      let responseObj = {}
+      responseObj [recipient.firstname] = response
+      return responseObj
+      })
+      )
+    res.json (responses)
+}
+
+
+/**
+ * Replaces placeholders in the template with the corresponding values.
+ *
+ * @param {Object} template - The template object containing subject and html strings.
+ * @param {string} template.subject - The subject string with placeholders.
+ * @param {string} template.html - The HTML string with placeholders.
+ * @param {Object} placeholders - An object where keys are placeholders and values are the replacement strings.
+ * @returns {Object} - The updated template with placeholders replaced.
+ */
+const replacePlaceholders = (template, placeholders) => {
+  let updatedTemplate = { ...template };
+  for (const [key, value] of Object.entries(placeholders)) {
+    const regex = new RegExp(`\\${key}`, 'g');
+    updatedTemplate.subject = updatedTemplate.subject.replace(regex, value);
+    updatedTemplate.html = updatedTemplate.html.replace(regex, value);
+  }
+  return updatedTemplate;
 };
-  
+
+/**
+ * Sends an email using the provided mail options.
+ *
+ * @param {Object} mailOptions - The mail options object.
+ * @param {string} mailOptions.from - The sender's email address.
+ * @param {string} mailOptions.bcc - The recipient's email address.
+ * @param {string} mailOptions.subject - The subject of the email.
+ * @param {string} mailOptions.html - The HTML content of the email.
+ * @returns {Promise<Object>} - A promise that resolves to an object indicating success or failure.
+ */
+async function emailHandler(mailOptions) {
+  try {
+    const response = await transporter.sendMail(mailOptions);
+    console.log("Email sent successfully");
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return { success: false, error };
+  }
+}
+
 module.exports = { sendMail };

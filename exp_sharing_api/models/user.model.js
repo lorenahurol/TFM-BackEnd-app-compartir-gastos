@@ -29,7 +29,7 @@ const getByUsername = (username) => {
 
 const getUsernamesList = (filter) => {
   const formattedFilter = `%${filter}%`;
-  return db.query("SELECT username FROM users WHERE username LIKE ? LIMIT 10", [formattedFilter]);
+  return db.query("SELECT username, id FROM users WHERE username LIKE ? and active = 1 LIMIT 10", [formattedFilter]);
 };
 
 
