@@ -50,7 +50,7 @@ const updateMember = async (req, res) => {
 // delete por id
 const deleteMember = async (req, res) => {
     try {
-        const [result] = await Members.deleteById(req.params.id);
+        const [result] = await Members.deleteByIds(req.params.groupid, req.params.userid);
         res.json(result);
     } catch (err) {
         res.json(err);

@@ -12,5 +12,7 @@ router.get('/bygroup/:groupId', MembersController.getAllMembersByGroup);
 router.post('/', checkIsAdmin, MembersController.createMember);
 router.put('/:groupid/:userid', checkIsAdmin, MembersController.updateMember);
 
+//necesario meter validacion de admin
+router.delete('/:groupid/:userid', MembersController.deleteMember);
 
 module.exports = router;

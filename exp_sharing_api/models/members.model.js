@@ -20,8 +20,8 @@ const update = (groupid, userid, {group_id, user_id, percent, equitable}) => {
 }
 
 //Borrar miembro por id
-const deleteById = (id) => {
-    return db.query('delete from group_members where id = ?', [id]);
+const deleteByIds = (groupid, userid) => {
+    return db.query('delete from group_members where group_id = ? and user_id = ?', [groupid, userid]);
 }
 
 
@@ -30,5 +30,5 @@ module.exports = {
     getAllOfGroup,
     create,
     update,
-    deleteById
+    deleteByIds
 }
