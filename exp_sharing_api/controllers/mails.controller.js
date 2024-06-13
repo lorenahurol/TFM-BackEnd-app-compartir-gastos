@@ -30,9 +30,9 @@ const transporter = nodeMailer.createTransport({
  */
 const sendMail = async (req, res) => {
 
-  const { bcc, subject, selectedTemplate } = req.body
+  const { bcc, html, selectedTemplate } = req.body
   let template = EMAIL_TEMPLATES[selectedTemplate]
-  const { name, mail } = req.user
+  const { name } = req.user
 
   // Para cada destinatario elabora el texto y envia el email
   let responses = await Promise.all(
@@ -45,13 +45,16 @@ const sendMail = async (req, res) => {
         $name : name,
         $friendsName: recipient.firstname,
       };
-      const personalizedTemplate = replacePlaceholders(template, placeholders);
       
+      const personalizedTemplate = replacePlaceholders(template, placeholders);
+
+      const currentHtml = (html.length > 0) ? html : personalizedTemplate.html
+
       const mailOptions = {
         from: 'explitapp@gmail.com',
         bcc: recipient.mail,
         subject: personalizedTemplate.subject,
-        html: personalizedTemplate.html,
+        html: currentHtml,
       };
       const response = await emailHandler(mailOptions)
       // Almacena las respuestas en un array de objetos
