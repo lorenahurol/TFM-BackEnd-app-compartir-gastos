@@ -5,7 +5,7 @@ const getAllMsgsByGroup = async(req, res) => {
         const [result] = await Messages.getAllOfGroup(req.params.groupId);
         if (!result[0]) 
         {
-                return res.status (404).json({error:"Selected Id does not exist"});
+            return res.status(404).json({error:"No hay mensajes"});
         }
         res.json(result);
     } catch (error) {

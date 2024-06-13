@@ -3,7 +3,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc5ODk1OTQsImlkIjoxMDYsInVzZXJuYW1lIjoibWlrX2NlcnZhbnRlcyIsIm5hbWUiOiJNaWd1ZWwiLCJpYXQiOjE3MTY3Nzk5OTR9.TKCHSfm3vBtnon11gimBRODdEqr02Z9xmDfXDHTv8aY
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg4ODI5ODIsImlkIjoxMDEsInVzZXJuYW1lIjoiZW1pbGlvamNoZWNhIiwibmFtZSI6IkVtaWxpbyBKb3PDqSIsImlhdCI6MTcxNzY3MzM4Mn0.Y-fmdBql2ZoUMuJ8sSXoGi8IbIABpcfGogZX1nvvPkk
 
 
 ### Mensajes ##################################################################################################
@@ -56,6 +56,6 @@ Authorization : {{TOKEN}}
 ###
 ## Buscar todos los mensajes de un grupo
 ## param1: idGroup
-GET {{HOST}}/api/messages/bygroup/11
+GET {{HOST}}/api/messages/bygroup/3
 Authorization : {{TOKEN}}
 
