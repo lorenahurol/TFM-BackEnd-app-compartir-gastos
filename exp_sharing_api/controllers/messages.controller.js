@@ -34,6 +34,7 @@ const getAllMsgsByGroupAndUser = async(req, res) => {
 
 const getMsgByID = async (req, res) => {
     try {
+        console.log('req.params.id en getMsgByID: ', req.params.id);
         const [[result]] = await Messages.getById(req.params.id);
         if (!result) 
         {
@@ -50,7 +51,16 @@ const getMsgByID = async (req, res) => {
 const createMsg = async (req, res) => {
     try {
         const [result] = await Messages.create(req.body);
-        res.json(result);
+        // si ha ido bien, devolvemos el mensaje insertado:
+        if (result.affectedRows) {
+            const [[result2]] = await Messages.getById(result.insertId);
+            if (!result2) {
+                return res.status(404).json({error: "No se ha podido recuperar el mensaje tras insertar en BD"});
+            }
+            res.json(result2);
+        } else {
+            res.json({error: "No se ha podido insertar el mensaje"});
+        }
     } catch (err) { 
         res.json(err);
     }
