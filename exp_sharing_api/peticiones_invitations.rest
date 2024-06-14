@@ -15,6 +15,10 @@ Authorization : {{TOKEN}}
 GET {{HOST}}/api/invitations/1
 Authorization : {{TOKEN}}
 
+### GET INVITATIONS BY USER:
+GET {{HOST}}/api/invitations/byuser/2
+Authorization : {{TOKEN}}
+
 ### GET PENDING INVITATIONS BY GROUP AND USER:
 GET {{HOST}}/api/invitations/bygroupanduser/13/2
 Authorization : {{TOKEN}}

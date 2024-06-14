@@ -21,8 +21,19 @@ const getInvitationById = async (req, res, next) => {
     }
 };
 
+// Get by User:
+const getInvitationsByUser = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const [result] = await Invitation.getByUser(userId);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 // Get by Group and User:
-const getInvationByGroupAnduser = async (req, res, next) => {
+const getInvitationsByGroupAnduser = async (req, res, next) => {
   try {
       const { groupId, userId } = req.params;
     const [result] = await Invitation.getByGroupAndUser(groupId, userId);
@@ -116,7 +127,8 @@ const deleteInvitationById = async (req, res, next) => {
 module.exports = {
     getAllInvitations,
     getInvitationById,
-    getInvationByGroupAnduser,
+    getInvitationsByUser,
+    getInvitationsByGroupAnduser,
     createInvitation,
     handleInvitation,
     deleteInvitationById

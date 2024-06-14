@@ -8,7 +8,7 @@ const getById = (invitationId) => {
 }
 
 const getByUser = (userId) => {
-    return db.query("SELECT * FROM invitations WHERE user_id = ? AND (active = 1 OR accepted = 1)", [userId]);
+    return db.query("SELECT * FROM invitations WHERE user_id = ? AND (active = 1 OR accepted = 0)", [userId]);
 }
 
 // Active and pending invitations for validation:
