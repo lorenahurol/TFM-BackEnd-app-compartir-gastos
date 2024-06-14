@@ -7,6 +7,11 @@ const getAllOfGroup = (groupId) => {
     return db.query('SELECT  *   FROM group_members WHERE group_id = ?', [groupId]);
 }
 
+//Obtener miembro por groupId y userID
+const get = (groupId, userId) => {
+    return db.query('SELECT  *   FROM group_members WHERE group_id = ? and user_id = ?', [groupId, userId]);
+}
+
 
 //Crear nuevo miembro
 const create = ({group_id, user_id, percent, equitable}) => {
@@ -26,6 +31,7 @@ const deleteByIds = (groupid, userid) => {
 
 
 module.exports = {
+    get,
     getAll,
     getAllOfGroup,
     create,

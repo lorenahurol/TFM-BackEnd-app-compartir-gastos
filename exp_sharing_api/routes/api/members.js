@@ -9,6 +9,7 @@ router.get('/bygroup/:groupId', MembersController.getAllMembersByGroup);
 
 
 // CRUD de Miembros ----------------------------------------------------------------------------
+router.get('/:groupid/:userid', MembersController.getMember);
 router.post('/', checkIsAdmin, MembersController.createMember);
 router.put('/:groupid/:userid', checkIsAdmin, MembersController.updateMember);
 

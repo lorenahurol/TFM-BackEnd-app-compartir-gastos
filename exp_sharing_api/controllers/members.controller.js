@@ -25,6 +25,19 @@ const getAllMembersByGroup = async(req, res) => {
 // ----------- CRUD DE MIEMBROS ---------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
 
+// Get member by GroupId by UserId
+const getMember = async(req, res) => {
+    try {
+        const [result] = await Members.get(req.params.groupid, req.params.userid);
+        if (!result[0]) 
+        {
+            return res.status (404).json({error:"Selected Id does not exist"});
+        }
+        res.json(result[0]);
+    } catch (error) {
+        res.json(error);
+    }
+};
 
 // Creacion nuevo gasto
 const createMember = async (req, res) => {
@@ -60,6 +73,7 @@ const deleteMember = async (req, res) => {
 
 
 module.exports = {
+    getMember,
     getAllMembersByGroup,
     createMember,
     updateMember,
