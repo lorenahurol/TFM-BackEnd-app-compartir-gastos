@@ -28,7 +28,7 @@ const getAllMembersByGroup = async(req, res) => {
 // Get member by GroupId by UserId
 const getMember = async(req, res) => {
     try {
-        const [result] = await Members.get(req.params.groupid, req.params.userid);
+        const [result] = await Members.get(req.params.group_id, req.params.userid);
         if (!result[0]) 
         {
             return res.status (404).json({error:"Selected Id does not exist"});
@@ -53,7 +53,7 @@ const createMember = async (req, res) => {
 // edicion por id
 const updateMember = async (req, res) => {
     try {
-        const [result] = await Members.update(req.params.groupid, req.params.userid, req.body);
+        const [result] = await Members.update(req.params.group_id, req.params.userid, req.body);
         res.json(result);
     } catch (err) {
         res.json(err);
@@ -63,7 +63,7 @@ const updateMember = async (req, res) => {
 // delete por id
 const deleteMember = async (req, res) => {
     try {
-        const [result] = await Members.deleteByIds(req.params.groupid, req.params.userid);
+        const [result] = await Members.deleteByIds(req.params.group_id, req.params.userid);
         res.json(result);
     } catch (err) {
         res.json(err);

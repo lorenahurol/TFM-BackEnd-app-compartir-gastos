@@ -3,7 +3,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg4Njk2NDcsImlkIjoxMDEsInVzZXJuYW1lIjoiZW1pbGlvamNoZWNhIiwibmFtZSI6IkVtaWxpbyBKb3PDqSIsImlhdCI6MTcxNzY2MDA0N30.8GH__hOPZQRssAKEzvG2VegPC0qN2UjSS4iN0885GYs
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkyNDU5MDAsImlkIjoxMDMsInVzZXJuYW1lIjoiZW1pbGlvY2hlY2EiLCJuYW1lIjoiRW1pbGlvIiwiaWF0IjoxNzE4MDM2MzAwfQ.OsjOEqKKpN83SpFUmI9I1ys4fYoUlsiZCbg08sybqOw
 
 
 ### Expenses ##################################################################################################
@@ -15,13 +15,17 @@ GET {{HOST}}/api/expenses/54
 Authorization : {{TOKEN}}
 
 ###
+DELETE {{HOST}}/api/members/6/86
+Authorization : {{TOKEN}}
+
+###
 ## Crear gasto asociado a un grupo y un pagador
 POST {{HOST}}/api/expenses/
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "group_id": "11",
+    "group_id": "2",
     "description": "Gasto de prueba",
     "amount": "13.33",
     "date": "2033-12-31 11:11:11",
@@ -31,12 +35,12 @@ Content-Type: application/json
 
 ###
 ## Editar un gasto
-PUT {{HOST}}/api/expenses/53
+PUT {{HOST}}/api/expenses/68
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "group_id": "11",
+    "group_id": "12",
     "description": "Gasto de prueba MODIFICADO",
     "amount": "13.33",
     "date": "2033-12-31 11:11:11",
@@ -49,7 +53,7 @@ Content-Type: application/json
 
 ###
 ## Eliminar un gasto
-DELETE  {{HOST}}/api/expenses/53
+DELETE  {{HOST}}/api/expenses/68
 Authorization : {{TOKEN}}
 
 
