@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const {getAllInvitations, getInvitationById, getInvationByGroupAnduser, createInvitation,
-    acceptInvitation, rejectInvitation, deleteInvitationById } = require('../../controllers/invitations.controller');
+const {getAllInvitations, getInvitationById, getInvationByGroupAnduser, createInvitation, handleInvitation, deleteInvitationById } = require('../../controllers/invitations.controller');
 const { checkIsAdmin, checkIsAdminIdInvitation } = require("../../common/middlewares");
 
 
@@ -18,11 +17,8 @@ router.get("/bygroupanduser/:groupId/:userId", getInvationByGroupAnduser);
 // Create an invitation (By Group Admin):
 router.post("/", checkIsAdmin, createInvitation);
 
-// Accept an invitation (By invited user): URL: /api/invitation/invitationId/accept
-router.put("/:invitationId/accept", acceptInvitation);
-
-// Reject an invitation (By invited user): URL: /api/invitation/invitationId/reject
-router.put("/:invitationId/reject", rejectInvitation);
+// Handle invitation (By invited user): Accept ot Reject
+router.put("/:invitationId/:action(accept|reject)", handleInvitation);
 
 // Delete an invitation (By Group Admin):
 router.delete("/:invitationId", checkIsAdminIdInvitation, deleteInvitationById);

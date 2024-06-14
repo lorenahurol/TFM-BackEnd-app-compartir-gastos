@@ -2,7 +2,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkzMTQ0MTUsImlkIjoxMTAsInVzZXJuYW1lIjoiMTIzNDUiLCJuYW1lIjoiRnJlZGRpZSIsImlhdCI6MTcxODEwNDgxNX0.GwFJU3Qfgn_yDPE_52Wptgav-CX72B8vFPJ3VPfjkGI
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg0NTAzNDgsImlkIjoxMDQsInVzZXJuYW1lIjoic2NhbmZlcmxhX3lhaCIsIm5hbWUiOiJHb255YWgiLCJpYXQiOjE3MTgzNjM5NDh9.rboCp9tkZTu5lN5wzgkDjKN-hht9U0i5-3c8iD9lbTk
 
 
 ### PETICIONES INVITATIONS:
@@ -25,30 +25,19 @@ Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "group_id": 12,
-    "user_id": 110,
+    "group_id": 20,
+    "user_id": 18,
     "message": "Hola, acepta mi invitacion"
 
 }
 
-### ACCEPT INVITATION:
-PUT {{HOST}}/api/invitations/8/accept
+### ACCEPT/REJECT INVITATION:
+PUT {{HOST}}/api/invitations/34/accept
 Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "user_id": 7,
-    "accepted": 1
-}
-
-### REJECT INVITATION:
-PUT {{HOST}}/api/invitations/1/reject
-Authorization : {{TOKEN}}
-Content-Type: application/json
-
-{
-    "user_id": 3,
-    "accepted": 0
+    "user_id": 18
 }
 
 ### DELETE INVITATION:

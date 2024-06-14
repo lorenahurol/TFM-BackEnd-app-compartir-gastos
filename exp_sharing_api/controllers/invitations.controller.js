@@ -60,35 +60,20 @@ const createInvitation = async (req, res, next) => {
     } 
 };
 
-// Accept an invitation (By invited user): URL: /api/invitation/invitationId/accept
-const acceptInvitation = async (req, res, next) => {
+// Handle invitation (By invited user):
+const handleInvitation = async (req, res, next) => {
     try {
-        const { invitationId } = req.params;
+        const { invitationId, action } = req.params;
         const { user_id } = req.body;
+        let accepted;
 
-        // Check if the invitation exists for user_id
-        const [invitation] = await Invitation.getById(invitationId);
-
-            if (invitation.length === 0 || invitation[0].user_id !== user_id) {
-            return res.json({ error: "Invitación no encontrada" });
-            }
-
-        // Accept invitation:
-        const [updateResult] = await Invitation.updateStatus(invitationId, 1); // 1 === accepted
-        res.json({ message: "Invitación aceptada", updateResult });
-
-    } catch (error) {
-        console.error(error); // Imprimir el error
-        next(error);
-    }
-};
-
-
-// Reject an invitation (By invited user): URL: /api/invitation/invitationId/reject
-const rejectInvitation = async (req, res, next) => {
-    try {
-        const { invitationId } = req.params;
-        const { user_id } = req.body;
+        if (action === "accept") {
+            accepted = true;
+        } else if (action === "reject") {
+            accepted = false;
+        } else {
+            return res.json({ error: "Acción no válida " });
+        }
 
         // Check if the invitation exists for user_id
         const [invitation] = await Invitation.getById(invitationId);
@@ -97,13 +82,20 @@ const rejectInvitation = async (req, res, next) => {
             return res.json({ error: "Invitación no encontrada" });
         }
         
-        const [updateResult] = await Invitation.updateStatus(invitationId, 0); // 0 === rejected
-        res.json({ message: "Invitation rechazada", updateResult });
+        // Update invitation status:
+        const [updateResult] = await Invitation.updateStatus(invitationId, accepted);
+
+        const statusMessage = accepted ? "Invitación aceptada" : "Invitación rechazada";
+
+        res.json({ statusMessage, updateResult });
+
 
     } catch (error) {
+        console.error(error); // Imprimir el error
         next(error);
     }
-};
+}
+
 
 // Deactivate an invitation (By Group Admin):
 const deleteInvitationById = async (req, res, next) => {
@@ -119,14 +111,13 @@ const deleteInvitationById = async (req, res, next) => {
         
         next(error);
     }
-};
+}; 
 
 module.exports = {
     getAllInvitations,
     getInvitationById,
     getInvationByGroupAnduser,
     createInvitation,
-    acceptInvitation,
-    rejectInvitation,
+    handleInvitation,
     deleteInvitationById
 }
