@@ -60,7 +60,7 @@ const checkIsAdminIdInvitation = async (req, res, next) => {
 
 /* Valida si el usuario es admin, pero sólo tenemos id_gasto (delete) */
 const checkIsAdminIdExpense = async (req, res, next) => {
-  const [result] = await Group.userIsAdminIdExpense(req.params.invitationId, req.user.id);
+  const [result] = await Group.userIsAdminIdExpense(req.params.id, req.user.id);
   
   if (result.length === 0) {
     return res.status(401).json({ error: "El usuario no es admin del grupo" });

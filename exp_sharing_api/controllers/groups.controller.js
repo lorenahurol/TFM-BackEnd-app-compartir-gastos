@@ -34,6 +34,19 @@ const getAllInfoGroupByUser = async (req, res) => {
   }
 };
 
+
+/*Para obtener la información de un grupo a la que pertenece un ususario*/
+const getAllInfoGroupById = async (req, res) => {
+  try {
+    console.log(req.params.group_id);
+    const [[result]] = await Group.gellAllInfoGruopById(req.params.group_id);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+    res.json(error);
+  }
+};
+
 // Obtener todos los grupos existentes (activos e inactivos):
 const getAllGroups = async (req, res, next) => {
   try {
@@ -153,4 +166,5 @@ module.exports = {
   createGroup,
   updateGroup,
   deleteGroupById,
+  getAllInfoGroupById
 };

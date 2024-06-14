@@ -21,7 +21,7 @@ const getById = (id) => {
 
 //Crear nuevo mensaje
 const create = ({group_id, user_id, message}) => {
-    return db.query('insert into messages (group_id, user_id, message) values (?, ?, ?)',[group_id, user_id, message]);
+    return db.query('insert into messages (timestamp, group_id, user_id, message) values (NOW(), ?, ?, ?)',[group_id, user_id, message]);
 }
 
 //Actualizar gasto por id

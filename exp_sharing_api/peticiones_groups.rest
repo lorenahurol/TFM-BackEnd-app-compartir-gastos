@@ -53,3 +53,19 @@ Authorization : {{TOKEN}}
 ###
 GET {{HOST}}/api/groups/getallbyuser
 Authorization : {{TOKEN}}
+
+###
+GET {{HOST}}/api/groups/getallinfobyid/12
+Authorization : {{TOKEN}}
+
+###
+POST {{HOST}}/api/mails/
+Content-Type: application/json
+Authorization : {{TOKEN}}
+
+{
+    "from": "explitapp@gmail.com",
+    "to": "explitapp@gmail.com",
+    "subject": "Explit email subject",
+    "html" : "<h2>Hola mundo</h2> <body>Esto es una prueba</body>"
+}
