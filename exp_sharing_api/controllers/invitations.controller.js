@@ -1,4 +1,5 @@
 const Invitation = require("../models/invitation.model");
+const Member = require("../models/members.model");
 
 // Get all existing (active) invitations:
 const getAllInvitations = async (req, res, next) => {
@@ -107,11 +108,29 @@ const handleInvitation = async (req, res, next) => {
     }
 }
 
+// Update invitation by Id
 const updateInvitation = async (req, res) => {
     try {
-        console.log(req.body);
         const [result] = await Invitation.updateById(req.body);
-        res.json(result);
+        const memberCreated = false;
+        
+        if (result.affectedRows === 0) {
+            return res.json({ error: "Error al actualizar la invitación" });
+        } else {
+            let statusMessage = "";
+            // if is accepted, create a new member
+            if (req.body.accepted === 1) {
+                statusMessage = "Invitación aceptada correctamente";
+                const { group_id, user_id } = req.body;
+                const [result2] = await Member.create({group_id, user_id, percent: 0, equitable: 1});
+                if (result2.affectedRows === 1) {
+                    memberCreated = true;
+                }
+            } else if (req.body.active === 0) {
+                statusMessage = "Invitación rechazada correctamente";
+            }
+            res.json({ result, statusMessage, memberCreated });
+        }
     } catch (err) {
         res.json(err);
     }
@@ -131,7 +150,7 @@ const deleteInvitationById = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}; 
+};
 
 module.exports = {
     getAllInvitations,
