@@ -8,7 +8,7 @@ const getById = (invitationId) => {
 }
 
 const getByUser = (userId) => {
-    return db.query("SELECT * FROM invitations WHERE user_id = ? AND (active = 1 OR accepted = 0)", [userId]);
+    return db.query("SELECT * FROM invitations WHERE user_id = ? AND active = 1 AND accepted = 0", [userId]);
 }
 
 // Active and pending invitations for validation:
@@ -28,6 +28,14 @@ const updateStatus = (invitationId, accepted) => {
     return db.query("UPDATE invitations SET accepted = ? WHERE id = ?", [accepted, invitationId]);
 }
 
+// Update invitation status (accept or reject):
+const updateById = ({accepted, active, id}) => {
+    console.log("accepted", accepted);
+    console.log("active", active);
+    console.log("id", id);
+    return db.query("UPDATE invitations SET accepted = ?, active = ? WHERE id = ?", [accepted, active, id]);
+}
+
 // Delete invitation (deactivate invitation):
 const deleteById = (invitationId) => {
     return db.query("delete from invitations WHERE id = ?", [invitationId]);
@@ -35,5 +43,5 @@ const deleteById = (invitationId) => {
 }
 
 module.exports = {
-    getAll, getById, getByUser, getByGroupAndUser, insert, updateStatus, deleteById
+    getAll, getById, getByUser, getByGroupAndUser, insert, updateStatus, updateById, deleteById
 }

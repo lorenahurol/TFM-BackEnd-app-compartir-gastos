@@ -107,6 +107,16 @@ const handleInvitation = async (req, res, next) => {
     }
 }
 
+const updateInvitation = async (req, res) => {
+    try {
+        console.log(req.body);
+        const [result] = await Invitation.updateById(req.body);
+        res.json(result);
+    } catch (err) {
+        res.json(err);
+    }
+}
+
 
 // Deactivate an invitation (By Group Admin):
 const deleteInvitationById = async (req, res, next) => {
@@ -119,7 +129,6 @@ const deleteInvitationById = async (req, res, next) => {
         }
         res.json({ message: "Invitación eliminada correctamente" })
     } catch (error) {
-        
         next(error);
     }
 }; 
@@ -131,5 +140,6 @@ module.exports = {
     getInvitationsByGroupAnduser,
     createInvitation,
     handleInvitation,
+    updateInvitation,
     deleteInvitationById
 }
