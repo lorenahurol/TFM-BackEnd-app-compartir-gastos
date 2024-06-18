@@ -30,9 +30,6 @@ const updateStatus = (invitationId, accepted) => {
 
 // Update invitation status (accept or reject):
 const updateById = ({accepted, active, id}) => {
-    console.log("accepted", accepted);
-    console.log("active", active);
-    console.log("id", id);
     return db.query("UPDATE invitations SET accepted = ?, active = ? WHERE id = ?", [accepted, active, id]);
 }
 

@@ -41,7 +41,6 @@ const getMember = async(req, res) => {
 
 // Creacion nuevo gasto
 const createMember = async (req, res) => {
-    console.log("paso por aqui");
     try {
         const [result] = await Members.create(req.body);
         res.json(result);

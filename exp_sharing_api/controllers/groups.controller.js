@@ -29,7 +29,6 @@ const getAllInfoGroupByUser = async (req, res) => {
     const [result] = await Group.gellAllInfoGruopsUser(req.user.id);
     res.json(result);
   } catch (error) {
-    console.log(error);
     res.json(error);
   }
 };
@@ -38,11 +37,9 @@ const getAllInfoGroupByUser = async (req, res) => {
 /*Para obtener la información de un grupo a la que pertenece un ususario*/
 const getAllInfoGroupById = async (req, res) => {
   try {
-    console.log(req.params.group_id);
     const [[result]] = await Group.gellAllInfoGruopById(req.params.group_id);
     res.json(result);
   } catch (error) {
-    console.log(error);
     res.json(error);
   }
 };

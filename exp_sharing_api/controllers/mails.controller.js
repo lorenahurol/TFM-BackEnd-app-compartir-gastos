@@ -109,7 +109,6 @@ const replacePlaceholders = (template, placeholders) => {
 async function emailHandler(mailOptions) {
   try {
     const response = await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully");
     return { success: true };
   } catch (error) {
     console.error("Error sending email:", error);

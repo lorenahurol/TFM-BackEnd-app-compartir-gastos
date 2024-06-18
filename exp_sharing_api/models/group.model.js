@@ -44,8 +44,6 @@ const userBelongsToGroup = (groupId, userId) => {
 };
 
 const userIsAdmin = (groupId, userId) => {
-  console.log("groupId", groupId);
-  console.log("userId", userId);
   return db.query(
     "select * from groups_app where id = ? and creator_user_id = ?",
     [groupId, userId]

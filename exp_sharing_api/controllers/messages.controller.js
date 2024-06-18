@@ -18,7 +18,6 @@ const getAllMsgsByGroup = async(req, res) => {
 const getAllMsgsByGroupAndUser = async(req, res) => {
     try {
         const [result] = await Messages.getAllOfUserofGroup(req.params.groupId, req.params.userId);
-        console.log(result);
         if (!result[0]) 
         {
                 return res.status (404).json({error:"Any selected Ids do not exist"});
@@ -34,7 +33,6 @@ const getAllMsgsByGroupAndUser = async(req, res) => {
 
 const getMsgByID = async (req, res) => {
     try {
-        console.log('req.params.id en getMsgByID: ', req.params.id);
         const [[result]] = await Messages.getById(req.params.id);
         if (!result) 
         {
