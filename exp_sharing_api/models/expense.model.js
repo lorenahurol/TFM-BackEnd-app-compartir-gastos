@@ -54,7 +54,7 @@ const desactiveById = (id) => {
 }
 
 //Desactivar todos los gastos de un grupo
-const desactiveByGroupId = (group_id) => {
+const deactivateByGroupId = (group_id) => {
     return db.query('update expenses set active = 0 where group_id = ?', [group_id]);
 }
 
@@ -78,6 +78,6 @@ module.exports = {
     update,
     deleteById,
     desactiveById,
-    desactiveByGroupId,
+    deactivateByGroupId,
     getTotalExpensesOfGroupByUser
 }

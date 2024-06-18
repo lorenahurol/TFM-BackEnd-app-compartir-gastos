@@ -63,12 +63,16 @@ const getTotalExpensesOfGroupByUser = async(req, res) => {
 };
 
 // Desactivar todos los gastos de un grupo
-const desactiveExpensesByGroupId = async (req, res) => {
+const deactivateExpensesByGroupId = async (req, res) => {
     try {
-        const [result] = await Expenses.desactiveByGroupId(req.params.group_id);
-        res.json(result);
+        const [result] = await Expenses.deactivateByGroupId(req.body.groupId);
+        if (result.changedRows !== 0) {
+            return res.json({ success: true })
+        } else {
+            return res.json({ success: false })
+        };
     } catch (err) {
-        res.json(err);
+        res.json(err.error);
     }
 };
 
@@ -147,7 +151,7 @@ module.exports = {
     getAllActiveExpensesByGroup, 
     getAllActiveExpensesByGroupAndUser, 
     getTotalExpensesOfGroupByUser, 
-    desactiveExpensesByGroupId,
+    deactivateExpensesByGroupId,
     getExpenseById, 
     createExpense, 
     updateExpense, 

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getAllExpensesByGroup, getAllActiveExpensesByGroup, getAllActiveExpensesByGroupAndUser, getTotalExpensesOfGroupByUser, desactiveExpensesByGroupId,
+const { getAllExpensesByGroup, getAllActiveExpensesByGroup, getAllActiveExpensesByGroupAndUser, getTotalExpensesOfGroupByUser, deactivateExpensesByGroupId,
     getExpenseById, createExpense, updateExpense, deleteExpense, getAllPaymentsByGroup  } = require('../../controllers/expenses.controller');
 const { checkBelongsToGroup, checkIsAdmin, checkIsAdminIdExpense } = require('../../common/middlewares');
 
@@ -17,7 +17,7 @@ router.get('/bygroup/byuser/actives/:groupId/:userId', checkBelongsToGroup, getA
 router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGroupByUser);
 
 // Desactivar todos los gastos de un grupo
-router.delete('/bygroup/desactive/:group_id', desactiveExpensesByGroupId);
+router.put('/bygroup/deactivate', deactivateExpensesByGroupId);
 
 
 // CRUD de gasto ----------------------------------------------------------------------------
