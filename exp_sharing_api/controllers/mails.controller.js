@@ -42,11 +42,11 @@ const sendMail = async (req, res) => {
 
       // Busca el valor del saldo del usuario en el array
       let userBalance
-      for (const data of balance) {
-        if (data.user_id === userId)
-          userBalance  = data.credit.toFixed(2)
-
-      }
+      if (balance)
+        for (const data of balance) {
+          if (data.user_id === userId)
+            userBalance  = data.credit.toFixed(2)
+        }
 
       // Crea un template personalizado remplazando los placeholders por sus valores
       const placeholders = {
