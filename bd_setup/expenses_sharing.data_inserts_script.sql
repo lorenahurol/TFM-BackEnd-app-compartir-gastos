@@ -241,3 +241,5 @@ insert into expenses (id, group_id, description, amount, date, payer_user_id, ac
 insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (49, 11, 'quam fringilla rhoncus mauris', 705.79, '2023-11-25 16:54:46', 84, true);
 insert into expenses (id, group_id, description, amount, date, payer_user_id, active) values (50, 11, 'eu nibh quisque id justo sit amet', 650.89, '2023-12-21 17:07:31', 31, true);
 
+-- actualización de la pass para que todos los usuarios entren con '123456'
+update expenses_sharing.users set password = '$2a$10$mW/KU0DD.GzGKAGGaPa6LebjRD3QxhyED1keIiO3wZ4qNvFZrlWyC' WHERE id BETWEEN 1 AND 100;
