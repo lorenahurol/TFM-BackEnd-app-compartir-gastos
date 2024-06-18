@@ -15,6 +15,10 @@ const EMAIL_TEMPLATES = {
     subject: '¡Que pena verte marchar $name!',
     html: '<p><span style="font-family: Verdana;">Hola </span><strong style="font-family: Verdana;">$name</strong><span style="font-family: Verdana;">,</span></p><p><br></p><p><span style="font-family: Verdana;">¡</span><em style="font-family: Verdana;">¡Estamos muy tristes por verte marchar! </em><span style="font-family: Verdana;">! </span></p><p><br></p><p><span style="font-family: Verdana;">Igualmente agradecemos la confianza que has depositado en nuestra app y esperamos verte pronto de vuelta.</span></p><p><br></p><p><span style="font-family: Verdana;">¡Ya sabes </span><a href="http://localhost:4200/landing" target="_blank" style="font-family: Verdana;">adonde encontrarnos</a><span style="font-family: Verdana;">!</span></p><p><br></p><p><span style="font-family: Verdana;">El equipo de </span><strong style="font-family: Verdana;">Explitapp</strong></p>',
   },
+  settleExpenses: {
+    subject: "Hola $friendsName, es hora de saldar cuentas",
+    html: '<p><span style="font-family: verdana, geneva;">Hola <em><strong>$friendsName</strong></em>:</span></p><p><span style="font-family: verdana, geneva;">&nbsp;</span></p><p><span style="font-family: verdana, geneva;">Ha llegado la hora de saldar las cuentas del grupo <span style="font-family: verdana, geneva;"><strong>$grupName</strong></span>.</span></p><p><span style="font-family: verdana, geneva;">Nuestros incre&iacute;bles algoritmos nos dicen que tu saldo es de:</span></p><p><strong><span style="font-family: verdana, geneva;">$balance &euro;</span></strong><span style="font-family: verdana, geneva;">.</span></p><p>&nbsp;</p><p>&iexcl;Gracias por seguir compartiendo con <a href="http://localhost:4200/landing">ExplitApp</a>!</p>'
+  }
 };
 
 module.exports = {

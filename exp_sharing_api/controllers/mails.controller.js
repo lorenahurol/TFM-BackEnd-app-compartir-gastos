@@ -30,7 +30,7 @@ const transporter = nodeMailer.createTransport({
  */
 const sendMail = async (req, res) => {
 
-  const { bcc, html, selectedTemplate } = req.body
+  const { bcc, html, selectedTemplate, groupName = null, balance = null } = req.body
   let template = EMAIL_TEMPLATES[selectedTemplate]
   const { name } = req.user
 
@@ -40,10 +40,20 @@ const sendMail = async (req, res) => {
       // Recoge los datos de usuario y destinatarios y personaliza los mensajes
       const [[recipient]] = await getById(userId)
 
+      // Busca el valor del saldo del usuario en el array
+      let userBalance
+      for (const data of balance) {
+        if (data.user_id === userId)
+          userBalance  = data.credit.toFixed(2)
+
+      }
+
       // Crea un template personalizado remplazando los placeholders por sus valores
       const placeholders = {
         $name : name,
         $friendsName: recipient.firstname,
+        $grupName: groupName,
+        $balance: userBalance
       };
       
       const personalizedTemplate = replacePlaceholders(template, placeholders);
