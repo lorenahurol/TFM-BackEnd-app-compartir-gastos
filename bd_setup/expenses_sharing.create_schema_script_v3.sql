@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `expenses_sharing`.`payments` (
   `groups_id` INT UNSIGNED NOT NULL,
   `users_id` INT UNSIGNED NOT NULL,
   `amount` DOUBLE NOT NULL,
-  `date` DATETIME NOT NULL,
+  `date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`, `groups_id`, `users_id`),
   INDEX `fk_payments_groups1_idx` (`groups_id` ASC) VISIBLE,
   INDEX `fk_payments_users1_idx` (`users_id` ASC) VISIBLE,

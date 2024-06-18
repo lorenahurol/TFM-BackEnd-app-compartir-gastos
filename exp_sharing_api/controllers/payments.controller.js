@@ -26,9 +26,13 @@ const getPaymentById = (req, res) => {
 const createPayment = async (req, res) => {
     try {
         const [result] = await Payments.create(req.body);
-        res.json(result);
+        if (result.affectedRows > 0) {
+            return res.json({ success: true })
+            } else{
+            return res.json({ success: false })
+            };
     } catch (err) { 
-        res.json(err);
+        res.json(err.message);
     }
 };
 
