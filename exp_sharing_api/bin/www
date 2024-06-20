@@ -3,6 +3,9 @@ const http = require('node:http');
 
 const app = require('../app');
 
+//Swagger
+const {swaggerDocs} = require('../swagger');
+
 // Configuramos las variables de entorno
 require('dotenv').config();
 
@@ -17,4 +20,5 @@ server.listen(PORT);
 
 server.on('listening', () => {
     console.log(`Servidor escuchando en puerto ${PORT}`);
+    swaggerDocs(app, PORT);
 })
