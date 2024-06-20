@@ -19,7 +19,7 @@ USE `expenses_sharing` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `expenses_sharing`.`users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `mail` VARCHAR(45) NOT NULL,
+  `mail` VARCHAR(60) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(80) NOT NULL,
   `firstname` VARCHAR(45) NULL,
