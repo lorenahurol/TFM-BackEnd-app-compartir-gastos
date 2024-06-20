@@ -17,28 +17,28 @@ const { createToken } = require('../common/JWTLogin');
  * 
  * @async
  */
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     try {
       const { mail, password, rememberMe } = req.body;
       if (!mail || !password) throw new Error();
   
       // Checks if selected mail exists
       const [[user]] = await getByMail(mail);
-      if (!user) throw new Error();
+      if (!user) res.status(401).json({ error: "User not exists" });
       
       // Checks if the user has unsuscribed
-      if (!user.active) throw new Error();
+      if (!user.active) res.status(401).json({ error: "User is not active" });
       
       // Checks if the password is correct
       const validPassword = bcrypt.compareSync(password, user.password);
-      if (!validPassword) throw new Error();
+      if (!validPassword) res.status(401).json({ error: "Incorrect email, or password" });
   
       res.json({
         success: "Login successfull",
         token: createToken(user, rememberMe)
       });
     } catch (error) {
-      res.status(401).json({ error: "Incorrect email, or password" });
+      next(error);
     }
   };
   

@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const { create , getById, getFirstUsername, getActiveByMail} = require("../models/user.model");
+const User = require("../models/user.model");
 const {createToken} = require('../common/JWTLogin')
 
 
@@ -14,13 +14,13 @@ const {createToken} = require('../common/JWTLogin')
  * @returns {Promise<void>} - Returns a JSON response indicating whether the username exists or an error if the request fails.
  * 
  */
-const existUsername = async (req, res) => {
+const existUsername = async (req, res, next) => {
     const username = req.params.username
   try {
-      const [result] = await getFirstUsername(username)
+      const [result] = await User.getFirstUsername(username)
       return (result.length !== 0) ? res.json({ exists: true }) : res.json({exists: false})
   } catch (err) {
-      res.json({err})
+      next(err)
   }
 };
 
@@ -36,15 +36,15 @@ const existUsername = async (req, res) => {
  *      {active : treu} -> the email exists and the user is active.
  *      {active : false} -> the email exists but the user has unsubscribed.
  */
-const existMail = async (req, res) => {
+const existMail = async (req, res, next) => {
     const mail = req.params.mail
     try {
-        const [[result]] = await getActiveByMail(mail)
+        const [[result]] = await User.getActiveByMail(mail)
         if (!result) return res.json({ active: null })
         if (result.active === 0) return res.json({ active: false })
         if (result.active === 1) return res.json({ active: true })
     } catch (err) {
-        res.json({err})
+        next(err)
     }
 };
   
@@ -59,13 +59,13 @@ const existMail = async (req, res) => {
  * 
  * @async
  */
-const createNewUser = async (req, res) => {
+const createNewUser = async (req, res, next) => {
     // Password encryption
     req.body.password = bcrypt.hashSync(req.body.password)
     try {
-    const [result] = await create(req.body);
+    const [result] = await User.create(req.body);
     const newUserId = result.insertId
-    const [[newUser]] = await getById(newUserId)
+    const [[newUser]] = await User.getById(newUserId)
 
     let rememberMe = false
     res.json({
@@ -74,7 +74,7 @@ const createNewUser = async (req, res) => {
     });
     
     } catch (err) { 
-        res.json(err);
+        next(err);
     }
 };
 

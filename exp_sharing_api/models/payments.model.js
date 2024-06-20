@@ -1,6 +1,6 @@
 // Buscar todos los pagos de un grupo ordenados
 const getAllOfGroup = (groupId) => {
-    return db.query('SELECT  *   FROM payments WHERE group_id = ? ORDER BY date asc', [groupId]);
+    return db.query('SELECT  *   FROM payments WHERE groups_id = ? ORDER BY date asc', [groupId]);
 }
 
 // Buscar pago por id

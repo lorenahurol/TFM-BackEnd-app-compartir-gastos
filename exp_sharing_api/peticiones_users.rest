@@ -3,7 +3,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg0NTAzNDgsImlkIjoxMDQsInVzZXJuYW1lIjoic2NhbmZlcmxhX3lhaCIsIm5hbWUiOiJHb255YWgiLCJpYXQiOjE3MTgzNjM5NDh9.rboCp9tkZTu5lN5wzgkDjKN-hht9U0i5-3c8iD9lbTk
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg5OTEzOTUsImlkIjoxLCJ1c2VybmFtZSI6ImZtaWRkbGUwIiwibmFtZSI6IkZyYW5jb2lzZSIsImlhdCI6MTcxODkwNDk5NX0.T_g-Y3IgcqNupJTqbliIeK-jf3d8XU2Y0NTWfnwtaLw
 
 ### Login
 POST {{HOST}}/api/login
@@ -85,4 +85,8 @@ Authorization : {{TOKEN}}
 
 ####
 GET {{HOST}}/api/users/members/bygroup/3
+Authorization : {{TOKEN}}
+
+###
+GET {{HOST}}/api/users/bygroup/3
 Authorization : {{TOKEN}}
