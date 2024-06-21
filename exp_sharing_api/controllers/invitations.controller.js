@@ -41,12 +41,8 @@ const getInvitationsByUser = async (req, res, next) => {
 // Get by Group and User:
 const getInvitationsByGroupAnduser = async (req, res, next) => {
   try {
-      const { groupId, userId } = req.params;
+    const { groupId, userId } = req.params;
     const [result] = await Invitation.getByGroupAndUser(groupId, userId);
-
-    if (result.length === 0) {
-        return res.status(404).json({ error: "Invitación no encontrada" });
-    }
 
     res.json(result);
   } catch (error) {
