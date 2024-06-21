@@ -173,9 +173,6 @@ const updatePass = async (req, res, next) => {
 
     const result = await Users.updatePassword(userId, hashPassword);
 
-    if (!result)
-      return res.status(404).json({ error: "Selected Id does not exist" });
-
     return res.json({ success: true });
   } catch (error) {
     next(error);
@@ -192,7 +189,7 @@ const deleteUser = async (req, res, next) => {
     if (result.affectedRows === 1) {
       res.json({ success: true })
     } else {
-        res.status(404).json({ message: 'El paciente no existe' });
+        res.status(404).json({ message: 'El usuario no existe' });
     }
   } catch (err) {
       next(err);
