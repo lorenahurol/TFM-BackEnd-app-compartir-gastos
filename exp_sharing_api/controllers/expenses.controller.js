@@ -115,7 +115,8 @@ const deleteExpense = async (req, res, next) => {
         const [result] = await Expenses.deleteById(req.params.id);
 
         if (result.affectedRows === 1) {
-            res.json({ message: 'Se ha borrado el gasto' });
+            // añadir mensaje de borrado a objeto result
+            result.message = 'Se ha borrado el gasto';
         } else {
             res.status(404).json({ message: 'El gasto no existe' });
         }
