@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     Authorization:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Group:
  *       type: object
@@ -53,6 +58,8 @@ const { checkIsAdmin } = require("../../common/middlewares");
 *   get:
 *     summary: Gets an object with two arrays - groups from admin and groups as member
 *     tags: [Group]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The groups a user belongs to
@@ -77,6 +84,8 @@ router.get("/roles", getRoles);
 *   get:
 *     summary: Get all information of the groups by user logged
 *     tags: [Group]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The groups with all information
@@ -101,6 +110,8 @@ router.get("/getallbyuser", getAllInfoGroupByUser);
 *   get:
 *     summary: Get all information of the group by Id
 *     tags: [Group]
+*     security:
+*       - Authorization: []
 *     parameters:
 *       - in: path
 *         name: id
@@ -130,6 +141,8 @@ router.get("/getallinfobyid/:group_id", getAllInfoGroupById);
 *   get:
 *     summary: Lists all groups (including inactive)
 *     tags: [Group]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of groups (including inactive)
@@ -154,6 +167,8 @@ router.get("/", getAllGroups);
 *   get:
 *     summary: Get a group by Id
 *     tags: [Group]
+*     security:
+*       - Authorization: []
 *     parameters:
 *       - in: path
 *         name: id
@@ -184,6 +199,8 @@ router.get("/:group_id", getGroupById);
 *   get:
 *     summary: Get all the groups a user belongs to
 *     tags: [Group]
+*     security:
+*       - Authorization: []
 *     parameters:
 *       - in: path
 *         name: user_id
@@ -216,6 +233,8 @@ router.get("/all/byuserid/:user_id", getAllGroupsByUser);
  *   post:
  *     summary: Create a new group
  *     tags: [Group]
+ *     security:
+ *       - Authorization: []
  *     requestBody:
  *       required: true
  *       content:
@@ -245,6 +264,8 @@ router.post("/", createGroup);
  *   put:
  *     summary: Update a group by id
  *     tags: [Group]
+ *     security:
+ *       - Authorization: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -281,6 +302,8 @@ router.put("/:group_id", checkIsAdmin, updateGroup);
  *   delete:
  *     summary: Delete a group by id (desactive)
  *     tags: [Group]
+ *     security:
+ *       - Authorization: []
  *     parameters:
  *       - in: path
  *         name: id
