@@ -83,7 +83,7 @@ const createInvitation = async (req, res, next) => {
 const updateInvitation = async (req, res, next) => {
     try {
         const [result] = await Invitation.updateById(req.body);
-        const memberCreated = false;
+        let memberCreated = false;
         
         if (result.affectedRows === 0) {
             return res.json({ error: "Error al actualizar la invitación" });
@@ -103,6 +103,7 @@ const updateInvitation = async (req, res, next) => {
             res.json({ result, statusMessage, memberCreated });
         }
     } catch (error) {
+        console.log(error);
         next(error);
     }
 }
