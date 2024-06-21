@@ -10,7 +10,7 @@
  *       properties:
  *         id:
  *           type: int
- *           description: The auto-generated id of the book
+ *           description: The auto-generated id of the category
  *         description:
  *           type: string
  *           description: The description of the category
@@ -58,19 +58,17 @@ router.get('/', getAllCategories);
 *     tags: [Category]
 *     parameters:
 *       - in: path
- *         name: id
- *         schema:
- *           type: number
- *         required: true
- *         description: The category id
+*         name: id
+*         schema:
+*           type: number
+*         required: true
+*         description: The category id
 *     responses:
 *       200:
-*         description: Get a category by Id
+*         description: The category with specific Id
 *         content:
 *           application/json:
 *             schema:
-*               type: array
-*               items:
 *                 $ref: '#/components/schemas/Category'
 */
 router.get("/:id", getCategoryById);
