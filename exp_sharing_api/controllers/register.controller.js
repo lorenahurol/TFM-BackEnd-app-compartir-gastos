@@ -33,7 +33,7 @@ const existUsername = async (req, res, next) => {
  * @param {string} req.params.mail - The email to be checked.
  * @returns {Promise<void>} - Returns a JSON response assigning the following values:
  *      {active : null} -> the email does not exist.
- *      {active : treu} -> the email exists and the user is active.
+ *      {active : true} -> the email exists and the user is active.
  *      {active : false} -> the email exists but the user has unsubscribed.
  */
 const existMail = async (req, res, next) => {

@@ -44,11 +44,11 @@ router.get("/checkUsername/:username", existUsername);
  *     tags: [Register]
  *     parameters:
  *       - in: path
- *         name: mail
+ *         name: token
  *         schema:
  *           type: string
- *         required: true
- *         description: email
+*          required: true
+ *         description: auth token
  *     responses:
  *       200:
  *         description: Success
