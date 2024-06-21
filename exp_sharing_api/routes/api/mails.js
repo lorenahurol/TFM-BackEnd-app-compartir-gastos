@@ -36,7 +36,7 @@ const { sendMail } = require('../../controllers/mails.controller');
  * tags:
  *   name: Email
  *   description: The Email managing API
- * /mails:
+ * /api/mails:
  *   post:
  *     summary: Create a new email
  *     tags: [Email]

@@ -212,7 +212,7 @@ router.get("/all/byuserid/:user_id", getAllGroupsByUser);
  * tags:
  *   name: Group
  *   description: The Group managing API
- * /groups:
+ * /api/groups:
  *   post:
  *     summary: Create a new group
  *     tags: [Group]
@@ -241,7 +241,7 @@ router.post("/", createGroup);
  * tags:
  *   name: Group
  *   description: The Group managing API
- * /groups/{id}:
+ * /api/groups/{id}:
  *   put:
  *     summary: Update a group by id
  *     tags: [Group]
@@ -277,7 +277,7 @@ router.put("/:group_id", checkIsAdmin, updateGroup);
  * tags:
  *   name: Group
  *   description: The Group managing API
- * /groups/{id}:
+ * /api/groups/{id}:
  *   delete:
  *     summary: Delete a group by id (desactive)
  *     tags: [Group]
