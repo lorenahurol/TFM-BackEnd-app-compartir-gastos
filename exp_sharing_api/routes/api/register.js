@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { existUsername, createNewUser, existMail } = require('../../controllers/register.controller');
 
-  /**
+/**
  * @swagger
  * tags:
  *   name: Register
@@ -33,7 +33,7 @@ const { existUsername, createNewUser, existMail } = require('../../controllers/r
  */
 router.get("/checkUsername/:username", existUsername);
 
-  /**
+/**
  * @swagger
  * tags:
  *   name: Register
@@ -47,7 +47,7 @@ router.get("/checkUsername/:username", existUsername);
  *         name: token
  *         schema:
  *           type: string
-*          required: true
+ *         required: true
  *         description: auth token
  *     responses:
  *       200:
