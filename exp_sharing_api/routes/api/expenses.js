@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     Authorization:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Expense:
  *       type: object
@@ -77,6 +82,8 @@ const { checkBelongsToGroup, checkIsAdmin, checkIsAdminIdExpense } = require('..
 *   get:
 *     summary: Lists all expenses by group (including inactive)
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of expenses by group (including inactive)
@@ -86,6 +93,8 @@ const { checkBelongsToGroup, checkIsAdmin, checkIsAdminIdExpense } = require('..
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Expense'
+*       500:
+*         description: Some server error
 */
 router.get('/bygroup/all/:groupId', checkBelongsToGroup, getAllExpensesByGroup);
 
@@ -99,6 +108,8 @@ router.get('/bygroup/all/:groupId', checkBelongsToGroup, getAllExpensesByGroup);
 *   get:
 *     summary: Lists all active expenses by group
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of active expenses by group
@@ -121,6 +132,8 @@ router.get('/bygroup/actives/:groupId', checkBelongsToGroup, getAllActiveExpense
 *   get:
 *     summary: Lists all active expenses by group and user
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of active expenses by group and user
@@ -143,6 +156,8 @@ router.get('/bygroup/byuser/actives/:groupId/:userId', checkBelongsToGroup, getA
 *   get:
 *     summary: Lists all active expenses in a group by user
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: Lists all active expenses in a group by user
@@ -165,6 +180,8 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGr
 *   put:
 *     summary: Deactivate all expenses by group
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     requestBody:
 *       required: true
 *       content:
@@ -198,6 +215,8 @@ router.put('/bygroup/deactivate', deactivateExpensesByGroupId);
 *   get:
 *     summary: Get a expense by Id
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     parameters:
 *       - in: path
 *         name: id
@@ -224,6 +243,8 @@ router.get("/:id", getExpenseById);
  *   post:
  *     summary: Create a new expense
  *     tags: [Expense]
+ *     security:
+ *       - Authorization: []
  *     requestBody:
  *       required: true
  *       content:
@@ -252,6 +273,8 @@ router.post('/', checkIsAdmin, createExpense);
  *   put:
  *     summary: Update a expense by id
  *     tags: [Expense]
+ *     security:
+ *       - Authorization: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -289,6 +312,8 @@ router.put('/:id', checkIsAdmin, updateExpense);
  *   delete:
  *     summary: Delete a expense by id
  *     tags: [Expense]
+ *     security:
+ *       - Authorization: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -325,6 +350,8 @@ router.delete('/:id', checkIsAdminIdExpense, deleteExpense);
 *   get:
 *     summary: Lists all payments by group
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of payments by group
