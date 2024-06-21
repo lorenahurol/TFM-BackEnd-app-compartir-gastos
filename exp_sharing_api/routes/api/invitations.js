@@ -192,7 +192,7 @@ router.get("/bygroupanduser/:groupId/:userId", getInvitationsByGroupAnduser);
  *   post:
  *     summary: Create a new invitation
  *     tags: [Invitation]
- *      security:
+ *     security:
  *       - Authorization: []
  *     requestBody:
  *       required: true
