@@ -161,7 +161,7 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGr
 * tags:
 *   name: Expense
 *   description: The Expense managing API
-* /api/expenses/bygroup/deactivate
+* /api/expenses/bygroup/deactivate:
 *   put:
 *     summary: Deactivate all expenses by group
 *     tags: [Expense]
@@ -171,9 +171,10 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGr
 *         application/json:
 *           schema:
 *             type: object
-*               properties:
-*                 groupId:
-*                   type: integer
+*             properties:
+*               groupId:
+*                 type: int
+*                 description: The group id
 *     responses:
 *       200:
 *         description: Deactivate all expenses by group
@@ -181,9 +182,11 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGr
 *           application/json:
 *             schema:
 *               type: object
-*                 properties:
-*                   success:
-*                     type: string
+*               properties:
+*                 success:
+*                   type: boolean
+*                 error:
+*                   type: string
 */
 router.put('/bygroup/deactivate', deactivateExpensesByGroupId);
 
