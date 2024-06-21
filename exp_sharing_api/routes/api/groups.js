@@ -42,6 +42,29 @@ const { checkIsAdmin } = require("../../common/middlewares");
 
 // Peticiones que llegan a /api/groups:
 
+/* Obtiene un objeto con dos arrays: grupos de admin y grupos como miembro (
+    el usuario lo obtiene del token a través del middelware checktoken */
+/**
+* @swagger
+* tags:
+*   name: Group
+*   description: The Group managing API
+* /api/groups/roles:
+*   get:
+*     summary: Gets an object with two arrays - groups from admin and groups as member
+*     tags: [Group]
+*     responses:
+*       200:
+*         description: The groups a user belongs to
+*         content:
+*           application/json:
+*             schema:
+*               type: array
+*               items:
+*                 $ref: '#/components/schemas/Group'
+*       500:
+*         description: Some server error
+*/
 router.get("/roles", getRoles);
 
 // Para obtener la información de un grupo a la que pertenece un ususario
@@ -63,6 +86,8 @@ router.get("/roles", getRoles);
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Group'
+*       500:
+*         description: Some server error
 */
 router.get("/getallbyuser", getAllInfoGroupByUser);
 
@@ -90,6 +115,8 @@ router.get("/getallbyuser", getAllInfoGroupByUser);
 *           application/json:
 *             schema:
 *                 $ref: '#/components/schemas/Group'
+*       500:
+*         description: Some server error
 */
 router.get("/getallinfobyid/:group_id", getAllInfoGroupById);
 
@@ -112,6 +139,8 @@ router.get("/getallinfobyid/:group_id", getAllInfoGroupById);
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Group'
+*       500:
+*         description: Some server error
 */
 router.get("/", getAllGroups);
 
@@ -139,8 +168,11 @@ router.get("/", getAllGroups);
 *           application/json:
 *             schema:
 *                 $ref: '#/components/schemas/Group'
+*       500:
+*         description: Some server error
 */
 router.get("/:group_id", getGroupById);
+
 
 // Obtener todos los grupos en los que se encuentra un usuario
 /**
@@ -168,12 +200,108 @@ router.get("/:group_id", getGroupById);
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Group'
+*       500:
+*         description: Some server error
 */
 router.get("/all/byuserid/:user_id", getAllGroupsByUser);
 
+
 // Create-update-delete Group:
+/**
+ * @swagger
+ * tags:
+ *   name: Group
+ *   description: The Group managing API
+ * /groups:
+ *   post:
+ *     summary: Create a new group
+ *     tags: [Group]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Group'
+ *     responses:
+ *       200:
+ *         description: The created group.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Group'
+ *       500:
+ *         description: Some server error
+ *
+ */
 router.post("/", createGroup);
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Group
+ *   description: The Group managing API
+ * /groups/{id}:
+ *   put:
+ *     summary: Update a group by id
+ *     tags: [Group]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: number
+ *         required: true
+ *         description: The group id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Group'
+ *     responses:
+ *       200:
+ *         description: The created group.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Group'
+ *       500:
+ *         description: Some server error
+ *
+ */
 router.put("/:group_id", checkIsAdmin, updateGroup);
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Group
+ *   description: The Group managing API
+ * /groups/{id}:
+ *   delete:
+ *     summary: Delete a group by id (desactive)
+ *     tags: [Group]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: number
+ *         required: true
+ *         description: The group id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Group'
+ *     responses:
+ *       200:
+ *         description: The group has been deleted successfully.
+ *       500:
+ *         description: Some server error
+ *
+ */
 router.delete("/:group_id", checkIsAdmin, deleteGroupById);
+
 
 module.exports = router;
