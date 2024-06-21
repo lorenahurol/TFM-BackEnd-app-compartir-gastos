@@ -161,7 +161,7 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGr
 * tags:
 *   name: Expense
 *   description: The Expense managing API
-* /api/expenses/bygroup/byuser/actives/{groupId}/{userId}:
+* /api/expenses/bygroup/deactivate
 *   put:
 *     summary: Deactivate all expenses by group
 *     tags: [Expense]
