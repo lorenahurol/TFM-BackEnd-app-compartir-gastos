@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     Authorization:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Expense:
  *       type: object
@@ -77,6 +82,8 @@ const { checkBelongsToGroup, checkIsAdmin, checkIsAdminIdExpense } = require('..
 *   get:
 *     summary: Lists all expenses by group (including inactive)
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of expenses by group (including inactive)
@@ -86,6 +93,8 @@ const { checkBelongsToGroup, checkIsAdmin, checkIsAdminIdExpense } = require('..
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Expense'
+*       500:
+*         description: Some server error
 */
 router.get('/bygroup/all/:groupId', checkBelongsToGroup, getAllExpensesByGroup);
 
@@ -99,6 +108,8 @@ router.get('/bygroup/all/:groupId', checkBelongsToGroup, getAllExpensesByGroup);
 *   get:
 *     summary: Lists all active expenses by group
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of active expenses by group
@@ -121,6 +132,8 @@ router.get('/bygroup/actives/:groupId', checkBelongsToGroup, getAllActiveExpense
 *   get:
 *     summary: Lists all active expenses by group and user
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of active expenses by group and user
@@ -143,6 +156,8 @@ router.get('/bygroup/byuser/actives/:groupId/:userId', checkBelongsToGroup, getA
 *   get:
 *     summary: Lists all active expenses in a group by user
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: Lists all active expenses in a group by user
@@ -165,6 +180,8 @@ router.get('/bygroup/actives/totalexpensesbyuser/:groupId', getTotalExpensesOfGr
 *   put:
 *     summary: Deactivate all expenses by group
 *     tags: [Expense]
+*     security:
+*       - Authorization: []
 *     requestBody:
 *       required: true
 *       content:
@@ -192,14 +209,160 @@ router.put('/bygroup/deactivate', deactivateExpensesByGroupId);
 
 
 // CRUD de gasto ----------------------------------------------------------------------------
-
+/**
+* @swagger
+* /api/expenses/{id}:
+*   get:
+*     summary: Get a expense by Id
+*     tags: [Expense]
+*     security:
+*       - Authorization: []
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: number
+*         required: true
+*         description: The expense id
+*     responses:
+*       200:
+*         description: The expense with specific Id
+*         content:
+*           application/json:
+*             schema:
+*                 $ref: '#/components/schemas/Expense'
+*/
 router.get("/:id", getExpenseById);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Expense
+ *   description: The Expenses managing API
+ * /api/expenses:
+ *   post:
+ *     summary: Create a new expense
+ *     tags: [Expense]
+ *     security:
+ *       - Authorization: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Expense'
+ *     responses:
+ *       200:
+ *         description: The created expense.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Expense'
+ *       500:
+ *         description: Some server error
+ *
+ */
 router.post('/', checkIsAdmin, createExpense);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Expense
+ *   description: The Expense managing API
+ * /api/expenses/{id}:
+ *   put:
+ *     summary: Update a expense by id
+ *     tags: [Expense]
+ *     security:
+ *       - Authorization: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: number
+ *         required: true
+ *         description: The expense id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Expense'
+ *     responses:
+ *       200:
+ *         description: The created expense.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Expense'
+ *       400:
+ *         description: Se ha producido un error al actualizar
+ *       500:
+ *         description: Some server error
+ *
+ */
 router.put('/:id', checkIsAdmin, updateExpense);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Expense
+ *   description: The Expense managing API
+ * /api/expenses/{id}:
+ *   delete:
+ *     summary: Delete a expense by id
+ *     tags: [Expense]
+ *     security:
+ *       - Authorization: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: number
+ *         required: true
+ *         description: The expense id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Expense'
+ *     responses:
+ *       200:
+ *         description: Se ha borrado el gasto
+ *       404:
+ *        description: l gasto no existe
+ *       500:
+ *         description: Some server error
+ *
+ */
 router.delete('/:id', checkIsAdminIdExpense, deleteExpense);
 
 
 // Pagos -------------------------------------------------------------------------------------
+
+/**
+* @swagger
+* tags:
+*   name: Expense
+*   description: The Expense managing API
+* /api/expenses/payments/{groupId}:
+*   get:
+*     summary: Lists all payments by group
+*     tags: [Expense]
+*     security:
+*       - Authorization: []
+*     responses:
+*       200:
+*         description: The list of payments by group
+*         content:
+*           application/json:
+*             schema:
+*               type: array
+*               items:
+*                 $ref: '#/components/schemas/Expense'
+*/
+
 router.get('/payments/:groupId', getAllPaymentsByGroup);
 
 

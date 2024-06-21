@@ -45,6 +45,8 @@ const { getAllCategories, getCategoryById} = require('../../controllers/categori
 *               type: array
 *               items:
 *                 $ref: '#/components/schemas/Category'
+*       500:
+*         description: Some server error
 */
 router.get('/', getAllCategories);
 
@@ -70,6 +72,10 @@ router.get('/', getAllCategories);
 *           application/json:
 *             schema:
 *                 $ref: '#/components/schemas/Category'
+*       404:
+*         description: The category with specific Id was not found
+*       500:
+*         description: Some server error
 */
 router.get("/:id", getCategoryById);
 
