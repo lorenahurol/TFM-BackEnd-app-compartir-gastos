@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     Authorization:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Invitation:
  *       type: object
@@ -60,6 +65,8 @@ const { checkIsAdmin, checkIsAdminIdInvitation } = require("../../common/middlew
 *   get:
 *     summary: Lists all invitations
 *     tags: [Invitation]
+*     security:
+*       - Authorization: []
 *     responses:
 *       200:
 *         description: The list of invitations
@@ -84,6 +91,8 @@ router.get("/", getAllInvitations);
 *   get:
 *     summary: Get a Invitation by Id
 *     tags: [Invitation]
+*     security:
+*       - Authorization: []
 *     parameters:
 *       - in: path
 *         name: id
@@ -113,6 +122,8 @@ router.get("/:invitationId", getInvitationById);
 *   get:
 *     summary: Get the Invitations by userId
 *     tags: [Invitation]
+*     security:
+*       - Authorization: []
 *     parameters:
 *       - in: path
 *         name: id
@@ -144,6 +155,8 @@ router.get("/byuser/:userId", getInvitationsByUser);
 *   get:
 *     summary: Get a Invitation by Id
 *     tags: [Invitation]
+*     security:
+*       - Authorization: []
 *     parameters:
 *       - in: path
 *         name: groupId
@@ -179,6 +192,8 @@ router.get("/bygroupanduser/:groupId/:userId", getInvitationsByGroupAnduser);
  *   post:
  *     summary: Create a new invitation
  *     tags: [Invitation]
+ *      security:
+ *       - Authorization: []
  *     requestBody:
  *       required: true
  *       content:
@@ -209,6 +224,8 @@ router.post("/", checkIsAdmin, createInvitation);
  *   put:
  *     summary: Update a group by id
  *     tags: [Invitation]
+ *     security:
+ *       - Authorization: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -246,6 +263,8 @@ router.put("/", updateInvitation);
  *   delete:
  *     summary: Delete a invitation by id (desactive)
  *     tags: [Invitation]
+ *     security:
+ *       - Authorization: []
  *     parameters:
  *       - in: path
  *         name: id

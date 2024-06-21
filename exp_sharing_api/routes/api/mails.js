@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     Authorization:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Email:
  *       type: object
@@ -57,6 +62,8 @@ const { sendMail } = require('../../controllers/mails.controller');
  *   post:
  *     summary: Create a new email
  *     tags: [Email]
+ *     security:
+ *       - Authorization: []
  *     requestBody:
  *       required: true
  *       content:
