@@ -37,6 +37,9 @@ const { getAllMsgsByGroup, getAllMsgsByGroupAndUser, getMsgByID, createMsg,
 //Obtener todos los mensajes de un grupo
 /**
 * @swagger
+* tags:
+*   name: Message
+*   description: The Message managing API
 * /api/messages/bygroup/{groupId}:
 *   get:
 *     summary: Get all messages by group
@@ -67,6 +70,9 @@ router.get('/bygroup/:groupId', getAllMsgsByGroup);
 //Obtener todos los mensajes por grupo y por usuario
 /**
 * @swagger
+* tags:
+*   name: Message
+*   description: The Message managing API
 * /api/messages/bygroup/byuser/{groupId}/{userId}:
 *  get:
 *    summary: Get all messages by group and user
@@ -103,6 +109,9 @@ router.get('/bygroup/byuser/:groupId/:userId', getAllMsgsByGroupAndUser);
 // CRUD mensajes --------------------------------------------------------------------------
 /**
 * @swagger
+* tags:
+*   name: Message
+*   description: The Message managing API
 * /api/messages/{id}:
 *  get:
 *    summary: Get a message by id
@@ -132,6 +141,9 @@ router.get("/:id", getMsgByID);
 
 /**
 * @swagger
+* tags:
+*   name: Message
+*   description: The Message managing API
 * /api/messages:
 *  post:
 *    summary: Create a new message
@@ -162,6 +174,9 @@ router.post('/', createMsg);
 
 /**
 * @swagger
+* tags:
+*   name: Message
+*   description: The Message managing API
 * /api/messages/{id}:
 *  put:
 *    summary: Update a message by id
@@ -195,6 +210,9 @@ router.put('/:id', updateMsg);
 
 /**
 * @swagger
+* tags:
+*   name: Message
+*   description: The Message managing API
 * /api/messages/{id}:
 *  delete:
 *    summary: Delete a message by id

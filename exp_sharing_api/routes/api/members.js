@@ -73,7 +73,7 @@ const { checkIsAdmin } = require('../../common/middlewares');
 /**
 * @swagger
 * tags:
-*   name: Expense
+*   name: Member
 *   description: The Member managing API
 * /api/members/bygroup/{groupId}:
 *   get:
