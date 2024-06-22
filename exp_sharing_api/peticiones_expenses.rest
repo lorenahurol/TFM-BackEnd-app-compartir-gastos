@@ -3,7 +3,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkyNDU5MDAsImlkIjoxMDMsInVzZXJuYW1lIjoiZW1pbGlvY2hlY2EiLCJuYW1lIjoiRW1pbGlvIiwiaWF0IjoxNzE4MDM2MzAwfQ.OsjOEqKKpN83SpFUmI9I1ys4fYoUlsiZCbg08sybqOw
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg5OTEzOTUsImlkIjoxLCJ1c2VybmFtZSI6ImZtaWRkbGUwIiwibmFtZSI6IkZyYW5jb2lzZSIsImlhdCI6MTcxODkwNDk5NX0.T_g-Y3IgcqNupJTqbliIeK-jf3d8XU2Y0NTWfnwtaLw
 
 
 ### Expenses ##################################################################################################
@@ -80,4 +80,9 @@ Authorization : {{TOKEN}}
 ## Buscar el total de los gastos Activos de un grupo por usuario
 ## param1: idGroup
 GET {{HOST}}/api/expenses/bygroup/actives/totalexpensesbyuser/3
+Authorization : {{TOKEN}}
+
+
+### Peticiones de pagos 
+GET {{HOST}}/api/payments/bygroup/3
 Authorization : {{TOKEN}}

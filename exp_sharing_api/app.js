@@ -5,7 +5,6 @@ const cors = require('cors');
 
 const apiRouter = require('./routes/api');
 
-
 // Creación de la APP
 const app = express();
 app.use(express.json());

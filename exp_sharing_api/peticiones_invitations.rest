@@ -2,7 +2,7 @@
 
 @HOST = http://127.0.0.1:{{PORT}}
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg3NDUyMDEsImlkIjoxMiwidXNlcm5hbWUiOiJhdmlyZ29iIiwibmFtZSI6IkFtYWxpdGEiLCJpYXQiOjE3MTg2NTg4MDF9.uS6JkENaF0xQt6D76VPx5SMnekcRpljdW3xK4enaxq0
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkwNjM5NzUsImlkIjoxMDMsInVzZXJuYW1lIjoicGVwaXRvcGVyZXoiLCJuYW1lIjoiUGVwaXRvIiwiaWF0IjoxNzE4OTc3NTc1fQ.7fMfwNzpB9QIGCOf6ZXMyBzYUWNgFHs3-fx_4V0w_W8
 
 
 ### PETICIONES INVITATIONS:
@@ -29,8 +29,8 @@ Authorization : {{TOKEN}}
 Content-Type: application/json
 
 {
-    "group_id": 20,
-    "user_id": 18,
+    "group_id": 13,
+    "user_id": 1,
     "message": "Hola, acepta mi invitacion"
 
 }

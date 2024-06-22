@@ -1,6 +1,5 @@
 const bcrypt = require ('bcryptjs')
-const { getAll, getAllbyGroup, getById, getByUsername, getUsernamesList,  updateById, deleteById, 
-    updatePassword, getAllMemberbyGroup } = require('../models/user.model');
+const Users = require('../models/user.model');
 
 /**
  * GET /
@@ -14,10 +13,10 @@ const { getAll, getAllbyGroup, getById, getByUsername, getUsernamesList,  update
  */
 const getAllUser = async(req, res, next) => {
     try {
-        const [result] = await getAll();
-        return res.json(result);
+        const [result] = await Users.getAll();
+        res.json(result);
     } catch (error) {
-        return next(error);
+        next(error);
     }
 };
 
@@ -33,14 +32,13 @@ const getAllUser = async(req, res, next) => {
  * 
  * @async
  */
-const getAllActiveUsersByGroup = (req, res, next) => {
-  getAllbyGroup(req.params.groupId)
-    .then((data) => {
-      return res.json(data[0]);
-    })
-    .catch((err) => {
-      return next(err);
-    });
+const getAllActiveUsersByGroup = async (req, res, next) => {
+  try {
+    const [result] = await Users.getAllbyGroup(req.params.groupId);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
@@ -54,14 +52,14 @@ const getAllActiveUsersByGroup = (req, res, next) => {
  * 
  * @async
  */
-const getAllUsersByGroup = (req, res, next) => {
-  getAllMemberbyGroup(req.params.groupId)
-    .then((data) => {
-      return res.json(data[0]);
-    })
-    .catch((err) => {
-      return next(err);
-    });
+const getAllUsersByGroup = async (req, res, next) => {
+  try {
+    const [result] = await Users.getAllMemberbyGroup(req.params.groupId);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+
 };
 
 
@@ -78,16 +76,19 @@ const getAllUsersByGroup = (req, res, next) => {
  */
 const getUserById = async (req, res, next) => {
   try {
-    const [[result]] = await getById(req.params.userId);
-    if (!result) return res.status(404).json({ error: "Selected Id does not exist" })
-    // modifico el valordel teléfono para separar el código internacional
-    const {phone} = result
-    const separatorIndex = phone.indexOf(" ");
-    result.countryCode = phone.substring(0, separatorIndex);
-    result.phone = phone.substring(separatorIndex+1)
-    return res.json(result);
+    const [[result]] = await Users.getById(req.params.userId);
+    if (!result) {
+      return res.status(404).json({ error: "Selected Id does not exist" })
+    } else {
+      // modifico el valordel teléfono para separar el código internacional
+      const {phone} = result
+      const separatorIndex = phone.indexOf(" ");
+      result.countryCode = phone.substring(0, separatorIndex);
+      result.phone = phone.substring(separatorIndex+1)
+      res.json(result);
+    }
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -104,11 +105,11 @@ const getUserById = async (req, res, next) => {
  */
 const getUserByUsername = async (req, res, next) => {
   try {
-    const [[result]] = await getByUsername(req.params.username);
+    const [[result]] = await Users.getByUsername(req.params.username);
     if (!result) return res.status(404).json({ error: "Selected username does not exist" })
-    return res.json(result);
+    res.json(result);
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -124,8 +125,8 @@ const getUserByUsername = async (req, res, next) => {
  */
 const getFilteredUsernames = async (req, res, next) => {
   try {
-    const [result] = await getUsernamesList(req.params.username);
-    return res.json(result);
+    const [result] = await Users.getUsernamesList(req.params.username);
+    res.json(result);
   } catch (error) {
     next(error);
   }
@@ -145,12 +146,14 @@ const updateUser = async (req, res, next) => {
   try {
     const userId = req.user.id;
 
-    const [result] = await updateById(userId, req.body);
+    const [result] = await Users.updateById(userId, req.body);
 
-    if (!result)
-      return res.status(404).json({ error: "Selected Id does not exist" });
+    if (result.changedRows === 1) {
+      res.json ({success: true})
+    } else {
+      return res.status(400).json({ error: 'Se ha producido un error al actualizar' });
+    }
 
-    return res.json ({success: true})
   } catch (error) {
     next(error);
   }
@@ -168,10 +171,7 @@ const updatePass = async (req, res, next) => {
     const newPassword = req.body.password
     const hashPassword = bcrypt.hashSync(newPassword, 10);
 
-    const result = await updatePassword(userId, hashPassword);
-
-    if (!result)
-      return res.status(404).json({ error: "Selected Id does not exist" });
+    const result = await Users.updatePassword(userId, hashPassword);
 
     return res.json({ success: true });
   } catch (error) {
@@ -179,15 +179,20 @@ const updatePass = async (req, res, next) => {
   }
 };
 
-const deleteUser = async (req, res, next) => {
-  // Verifies that the user requesting the action is the same to be deleted
-  if (req.params.userId !== req.user.id.toString())
-    return res.status(401).json({ error: "Unauthorized" })
+const deleteUser = async (req, res, next) => {  
   try {
-    const [result] = await deleteById(req.params.userId);
-    return res.json({ success: true })
+    // Verifies that the user requesting the action is the same to be deleted
+    if (req.params.userId !== req.user.id.toString())
+      return res.status(401).json({ error: "Unauthorized" });
+    const [result] = await Users.deleteById(req.params.userId);
+
+    if (result.affectedRows === 1) {
+      res.json({ success: true })
+    } else {
+        res.status(404).json({ message: 'El usuario no existe' });
+    }
   } catch (err) {
-      res.json(err);
+      next(err);
   }
 };
 
