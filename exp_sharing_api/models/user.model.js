@@ -20,7 +20,7 @@ const getByMail = (userMail) => {
 }
 
 const getFirstUsername = (username) => {
-    return db.query('select * from users where username = ? limit 1',[username]);
+    return db.query('select * from users where username = ? and active = 1 limit 1',[username]);
 }
 
 const getByUsername = (username) => {
