@@ -53,18 +53,17 @@ const sendMail = async (req, res) => {
         $name : name,
         $friendsName: recipient.firstname,
         $grupName: groupName,
-        $balance: userBalance
+        $balance: userBalance,
+        $html : html
       };
       
       const personalizedTemplate = replacePlaceholders(template, placeholders);
-
-      const currentHtml = (html) ? html : personalizedTemplate.html
 
       const mailOptions = {
         from: 'explitapp@gmail.com',
         bcc: recipient.mail,
         subject: personalizedTemplate.subject,
-        html: currentHtml,
+        html: personalizedTemplate.html,
       };
       const response = await emailHandler(mailOptions)
       // Almacena las respuestas en un array de objetos
