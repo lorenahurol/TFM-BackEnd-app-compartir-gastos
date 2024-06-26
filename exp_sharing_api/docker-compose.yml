@@ -1,0 +1,31 @@
+services:
+  exp-sharing-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: exp-sharing-api
+    ports:
+      - "3930:3000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - PORT=${PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_DATABASE=${DB_DATABASE}
+      - PRIVATE_KEY=${PRIVATE_KEY}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - OAUTH_CLIENTID=${OAUTH_CLIENTID}
+      - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+      - OAUTH_REDIRECT_URI=${OAUTH_REDIRECT_URI}
+      - OAUTH_REFRESH_TOKEN=${OAUTH_REFRESH_TOKEN}
+      - CORS_ORIGIN=${CORS_ORIGIN}
+    networks:
+      - exp-sharing-network
+
+networks:
+  exp-sharing-network:
+    driver: bridge
