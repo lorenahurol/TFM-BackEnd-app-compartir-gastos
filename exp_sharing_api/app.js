@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Middleware de CORS
 app.use(cors({
-  origin: process.env.CORS_ORIGIN,
+  origin: 'http://localhost:4200',
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
