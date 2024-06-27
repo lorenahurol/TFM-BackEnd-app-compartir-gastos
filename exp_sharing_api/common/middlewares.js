@@ -27,7 +27,7 @@ const checkBelongsToGroup = async (req, res, next) => {
   );
 
   if (result.length === 0) {
-    return res.status(401).json({ error: "El usuario no pertenece al grupo" });
+    return res.status(403).json({ error: "El usuario no pertenece al grupo" });
   }
 
   next();
@@ -39,7 +39,7 @@ const checkIsAdmin = async (req, res, next) => {
   const [result] = await Group.userIsAdmin(req.params.group_id || req.body.group_id, req.user.id);
 
   if (result.length === 0) {
-    return res.status(401).json({ error: "El usuario no es admin del grupo" });
+    return res.status(403).json({ error: "El usuario no es admin del grupo" });
   }
 
   next();
@@ -52,7 +52,7 @@ const checkIsAdminIdInvitation = async (req, res, next) => {
   const [result] = await Group.userIsAdminIdInvitation(invitationId, req.user.id);
 
   if (result.length === 0) {
-    return res.status(401).json({ error: "El usuario no es admin del grupo" });
+    return res.status(403).json({ error: "El usuario no es admin del grupo" });
   }
   
   next();
@@ -63,7 +63,7 @@ const checkIsAdminIdExpense = async (req, res, next) => {
   const [result] = await Group.userIsAdminIdExpense(req.params.id, req.user.id);
   
   if (result.length === 0) {
-    return res.status(401).json({ error: "El usuario no es admin del grupo" });
+    return res.status(403).json({ error: "El usuario no es admin del grupo" });
   }
 
   next();
