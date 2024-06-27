@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: exp-sharing-api
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "3930:3000"
     volumes:
